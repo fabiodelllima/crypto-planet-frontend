@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -14,8 +15,6 @@ const Header = () => {
     { name: "Portfolio", href: "/portfolio", disabled: false },
     { name: "Learn", href: null, disabled: true },
   ];
-
-  const navigate = useNavigate();
 
   return (
     <header className="flex flex-col gap-6 p-8 border-b-2 border-black">
