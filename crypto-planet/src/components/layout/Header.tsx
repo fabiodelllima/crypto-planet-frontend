@@ -9,10 +9,10 @@ const Header = () => {
   };
 
   const navigation = [
-    { name: "Market", href: "/market" },
-    { name: "Watchlist", href: "/error" },
-    { name: "Portfolio", href: "/portfolio" },
-    { name: "Learn", href: "/error" },
+    { name: "Market", href: "/market", disabled: false },
+    { name: "Watchlist", href: null, disabled: true },
+    { name: "Portfolio", href: "/portfolio", disabled: false },
+    { name: "Learn", href: null, disabled: true },
   ];
 
   const navigate = useNavigate();
@@ -29,7 +29,16 @@ const Header = () => {
           <ul className="flex flex-col gap-0.5">
             {navigation.map((item) => (
               <li key={item.name}>
-                <Link to={item.href}>{item.name}</Link>
+                {!item.disabled && item.href ? (
+                  <Link to={item.href}>{item.name}</Link>
+                ) : (
+                  <span
+                    className="text-gray-500"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    {item.name}
+                  </span>
+                )}
               </li>
             ))}
           </ul>
