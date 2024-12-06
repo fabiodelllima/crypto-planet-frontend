@@ -1,5 +1,5 @@
-import { Market } from "../../interfaces/market.interface";
-import { randomId } from "../../utils/helpers.util";
+import { Market } from "../../interfaces/market.interfaces";
+import { randomId } from "../../utils/helpers.utils";
 
 export const cryptoCardsData = [
   {

@@ -7,9 +7,9 @@ import {
   SortingState,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { Market } from "../../interfaces/market.interface";
+import { Market } from "../../interfaces/market.interfaces";
 import { tableData } from "./MarketData";
-import { formatNumber } from "../../utils/helpers.util";
+import { formatNumber } from "../../utils/helpers.utils";
 
 import StarIcon from "../../assets/icons/star.svg";
 
