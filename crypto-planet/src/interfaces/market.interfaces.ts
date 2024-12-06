@@ -1,4 +1,4 @@
-export interface Market {
+export interface IMarket {
   id: string;
   rank: number;
   favorite: boolean;
@@ -11,7 +11,7 @@ export interface Market {
   chart: number[];
 }
 
-export type QuickFilterType =
+export type TQuickFilter =
   | "gainers"
   | "losers"
   | "new"
@@ -19,8 +19,8 @@ export type QuickFilterType =
   | "volume"
   | "all";
 
-export interface MarketFilters {
-  quickFilter: QuickFilterType;
+export interface IMarketFilters {
+  quickFilter: TQuickFilter;
   category?: string;
   algorithm?: string;
   platform?: string;
