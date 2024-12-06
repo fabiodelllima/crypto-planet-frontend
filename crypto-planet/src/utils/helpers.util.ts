@@ -6,3 +6,8 @@ export const randomId = (): string => {
 
   return `${Date.now() + randomNumber}`;
 };
+
+export const formatNumber = (value: number | undefined): string => {
+  if (value === undefined) return "-";
+  return value.toLocaleString();
+};
