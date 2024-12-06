@@ -2,9 +2,9 @@ import { Routes, Route } from "react-router-dom";
 
 import DefaultLayout from "../components/layout/DefaultLayout";
 import MarketPage from "../pages/Market/MarketPage";
-import PortfolioPage from "../pages/PortfolioPage";
-import LoginPage from "../pages/LoginPage";
-import ErrorPage from "../pages/ErrorPage";
+import PortfolioPage from "../pages/Portfolio/PortfolioPage";
+import LoginPage from "../pages/Login/LoginPage";
+import ErrorPage from "../pages/Error/ErrorPage";
 
 export function Router() {
   return (
