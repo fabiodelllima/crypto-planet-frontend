@@ -1,151 +1,88 @@
+import { useState, useMemo } from "react";
 import {
-  createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
   getSortedRowModel,
   SortingState,
 } from "@tanstack/react-table";
-import { useState } from "react";
-import { Market } from "../../interfaces/market.interfaces";
 import { tableData } from "./MarketData";
-import { formatNumber } from "../../utils/helpers.utils";
+import columns from "./MarketTableColumns";
+import { IMarketFilters } from "../../interfaces/market.interfaces";
 
-import StarIcon from "../../assets/icons/star.svg";
+interface MarketTableProps {
+  filters: IMarketFilters;
+}
 
-const MarketTable = () => {
+const MarketTable = ({ filters }: MarketTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
-  const columnHelper = createColumnHelper<Market>();
 
-  const columns = [
-    columnHelper.accessor("favorite", {
-      header: "",
-      cell: () => (
-        <div className="w-[45px] px-4">
-          <img src={StarIcon} alt="Favorite" />
-        </div>
-      ),
-    }),
-    columnHelper.accessor("rank", {
-      header: "#",
-      cell: (info) => (
-        <div className="w-[40px] px-4">{info.getValue() ?? "-"}</div>
-      ),
-    }),
-    columnHelper.accessor("name", {
-      header: "Name",
-      cell: (info) => (
-        <div className="min-w-[200px] px-4">
-          <div className="flex items-center gap-2">
-            <span>{info.getValue() ?? "-"}</span>
-            <span>{info.row.original.symbol ?? "-"}</span>
-          </div>
-        </div>
-      ),
-    }),
-    columnHelper.accessor("price", {
-      header: "Price",
-      cell: (info) => (
-        <div className="min-w-[120px] px-4">
-          ${formatNumber(info.getValue())}
-        </div>
-      ),
-    }),
-    columnHelper.accessor("change24h", {
-      header: "24h Change",
-      cell: (info) => {
-        const value = info.getValue();
-        if (value === undefined) return "-";
-        return (
-          <div className="min-w-[100px] px-4">
-            <span className={value >= 0 ? "text-green-500" : "text-red-500"}>
-              {value > 0 ? "+" : ""}
-              {value.toFixed(2)}%
-            </span>
-          </div>
-        );
-      },
-    }),
-    columnHelper.accessor("highPrice24h", {
-      header: "24h High",
-      cell: (info) => (
-        <div className="min-w-[120px] px-4">
-          ${formatNumber(info.getValue())}
-        </div>
-      ),
-    }),
-    columnHelper.accessor("lowPrice24h", {
-      header: "24h Low",
-      cell: (info) => (
-        <div className="min-w-[120px] px-4">
-          ${formatNumber(info.getValue())}
-        </div>
-      ),
-    }),
-    columnHelper.accessor("chart", {
-      header: "Chart",
-      cell: (info) => {
-        const data = info.getValue();
-        const change = info.row.original.change24h;
-        if (!data?.length) return null;
-        return (
-          <div className="min-w-[100px] px-4">
-            <svg width="100" height="40" viewBox="0 0 100 40">
-              <path
-                d={`M0,20 ${data
-                  .map(
-                    (value, index) =>
-                      `L${(index + 1) * (100 / data.length)},${40 - value}`
-                  )
-                  .join(" ")}`}
-                fill="none"
-                stroke={change >= 0 ? "#22c55e" : "#ef4444"}
-                strokeWidth="2"
-              />
-            </svg>
-          </div>
-        );
-      },
-    }),
-  ];
+  const filteredData = useMemo(() => {
+    let data = [...tableData];
+
+    switch (filters.quickFilter) {
+      case "gainers":
+        data = data
+          .sort((a, b) => (b.change24h || 0) - (a.change24h || 0))
+          .slice(0, 20);
+        break;
+      case "losers":
+        data = data
+          .sort((a, b) => (a.change24h || 0) - (b.change24h || 0))
+          .slice(0, 20);
+        break;
+    }
+
+    if (filters.search) {
+      const searchLower = filters.search.toLowerCase();
+      data = data.filter(
+        (item) =>
+          item.name.toLowerCase().includes(searchLower) ||
+          item.symbol.toLowerCase().includes(searchLower)
+      );
+    }
+
+    return data.slice(0, filters.itemsPerPage);
+  }, [filters]);
 
   const table = useReactTable({
-    data: tableData,
+    data: filteredData,
     columns,
-    state: {
-      sorting,
-    },
+    state: { sorting },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
 
   return (
-    <div className="w-full overflow-x-auto">
-      <table className="w-full min-w-[640px]">
+    <div className="overflow-x-auto">
+      <table className="w-full">
         <thead>
-          <tr>
-            {table.getHeaderGroups().map((headerGroup) =>
-              headerGroup.headers.map((header) => (
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id} className="border-b border-[#1a1a1a]">
+              {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
                   onClick={header.column.getToggleSortingHandler()}
-                  className="py-4 text-left"
+                  className="py-3 px-4 text-left text-sm font-normal cursor-pointer"
                 >
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext()
                   )}
                 </th>
-              ))
-            )}
-          </tr>
+              ))}
+            </tr>
+          ))}
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
-            <tr key={row.id} className="py-4">
+            <tr
+              key={row.id}
+              className="border-b border-[#1a1a1a] hover:bg-[#1a1a1a] transition-colors"
+            >
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td key={cell.id} className="py-4">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

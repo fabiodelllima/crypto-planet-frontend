@@ -1,5 +1,5 @@
-import { Market } from "../../interfaces/market.interfaces";
-import { randomId } from "../../utils/helpers.utils";
+import { IMarket } from "../../interfaces/market.interfaces";
+import { generateChartData, randomId } from "../../utils/helpers.utils";
 
 export const cryptoCardsData = [
   {
@@ -8,7 +8,7 @@ export const cryptoCardsData = [
     name: "Ethereum",
     price: 38405.4,
     change: 7.65,
-    chartData: [25, 27, 30, 28, 35, 32, 40],
+    chartData: generateChartData(38405.4, 39000, 37000, 7.65),
   },
   {
     id: randomId(),
@@ -16,27 +16,27 @@ export const cryptoCardsData = [
     name: "Binance",
     price: 38405.4,
     change: -5.12,
-    chartData: [40, 35, 30, 25, 28, 32, 35],
+    chartData: generateChartData(38405.4, 39000, 37000, -5.12),
   },
   {
     id: randomId(),
     icon: "X",
     name: "Litecoin",
-    price: 38405.4,
+    price: 138.61,
     change: 3.45,
-    chartData: [20, 25, 22, 30, 28, 32, 35],
+    chartData: generateChartData(138.61, 140, 135, 3.45),
   },
   {
     id: randomId(),
     icon: "X",
     name: "Polygon",
-    price: 38405.4,
+    price: 1.88,
     change: -2.78,
-    chartData: [30, 28, 25, 22, 20, 18, 15],
+    chartData: generateChartData(1.88, 2.0, 1.7, -2.78),
   },
 ];
 
-export const tableData: Market[] = [
+export const tableData: IMarket[] = [
   {
     id: randomId(),
     rank: 1,
@@ -47,7 +47,7 @@ export const tableData: Market[] = [
     change24h: 0.8,
     highPrice24h: 44727.8,
     lowPrice24h: 43318.64,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(43975.72, 44727.8, 43318.64, 0.8),
   },
   {
     id: randomId(),
@@ -59,7 +59,7 @@ export const tableData: Market[] = [
     change24h: -2.75,
     highPrice24h: 3263.16,
     lowPrice24h: 3077.03,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(3187.62, 3263.16, 3077.03, -2.75),
   },
   {
     id: randomId(),
@@ -71,7 +71,7 @@ export const tableData: Market[] = [
     change24h: 1.4,
     highPrice24h: 0.9091,
     lowPrice24h: 0.8484,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(0.8721, 0.9091, 0.8484, 1.4),
   },
   {
     id: randomId(),
@@ -83,7 +83,7 @@ export const tableData: Market[] = [
     change24h: 0.38,
     highPrice24h: 140.79,
     lowPrice24h: 136.92,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(138.61, 140.79, 136.92, 0.38),
   },
   {
     id: randomId(),
@@ -95,7 +95,7 @@ export const tableData: Market[] = [
     change24h: -1.46,
     highPrice24h: 2.06,
     lowPrice24h: 1.81,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(1.88, 2.06, 1.81, -1.46),
   },
   {
     id: randomId(),
@@ -107,7 +107,7 @@ export const tableData: Market[] = [
     change24h: 0.78,
     highPrice24h: 42164.54,
     lowPrice24h: 42164.54,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(42164.54, 42164.54, 42164.54, 0.78),
   },
   {
     id: randomId(),
@@ -119,7 +119,7 @@ export const tableData: Market[] = [
     change24h: 1.06,
     highPrice24h: 116.83,
     lowPrice24h: 110.66,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(112.13, 116.83, 110.66, 1.06),
   },
   {
     id: randomId(),
@@ -131,7 +131,7 @@ export const tableData: Market[] = [
     change24h: -0.33,
     highPrice24h: 1.21,
     lowPrice24h: 1.17,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(1.18, 1.21, 1.17, -0.33),
   },
   {
     id: randomId(),
@@ -143,7 +143,7 @@ export const tableData: Market[] = [
     change24h: 0.76,
     highPrice24h: 42164.54,
     lowPrice24h: 42164.54,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(42164.54, 42164.54, 42164.54, 0.76),
   },
   {
     id: randomId(),
@@ -155,7 +155,7 @@ export const tableData: Market[] = [
     change24h: -2.44,
     highPrice24h: 91.93,
     lowPrice24h: 87.38,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(89.62, 91.93, 87.38, -2.44),
   },
   {
     id: randomId(),
@@ -167,7 +167,7 @@ export const tableData: Market[] = [
     change24h: 0.98,
     highPrice24h: 22.21,
     lowPrice24h: 21.42,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(21.71, 22.21, 21.42, 0.98),
   },
   {
     id: randomId(),
@@ -179,7 +179,7 @@ export const tableData: Market[] = [
     change24h: -0.08,
     highPrice24h: 0.1607,
     lowPrice24h: 0.1557,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(0.1568, 0.1607, 0.1557, -0.08),
   },
   {
     id: randomId(),
@@ -191,7 +191,7 @@ export const tableData: Market[] = [
     change24h: -1.52,
     highPrice24h: 427.39,
     lowPrice24h: 412.9,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(423.1, 427.39, 412.9, -1.52),
   },
   {
     id: randomId(),
@@ -203,7 +203,7 @@ export const tableData: Market[] = [
     change24h: 0.2,
     highPrice24h: 31.43,
     lowPrice24h: 29.97,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(30.45, 31.43, 29.97, 0.2),
   },
   {
     id: randomId(),
@@ -215,7 +215,7 @@ export const tableData: Market[] = [
     change24h: -1.27,
     highPrice24h: 13.06,
     lowPrice24h: 12.33,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(12.65, 13.06, 12.33, -1.27),
   },
   {
     id: randomId(),
@@ -227,7 +227,7 @@ export const tableData: Market[] = [
     change24h: 2.77,
     highPrice24h: 0.07068,
     lowPrice24h: 0.06868,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(0.0704, 0.07068, 0.06868, 2.77),
   },
   {
     id: randomId(),
@@ -239,7 +239,7 @@ export const tableData: Market[] = [
     change24h: 0.43,
     highPrice24h: 1.04,
     lowPrice24h: 1.01,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(1.02, 1.04, 1.01, 0.43),
   },
   {
     id: randomId(),
@@ -251,7 +251,7 @@ export const tableData: Market[] = [
     change24h: -1.97,
     highPrice24h: 347.29,
     lowPrice24h: 335.88,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(345.91, 347.29, 335.88, -1.97),
   },
   {
     id: randomId(),
@@ -263,7 +263,7 @@ export const tableData: Market[] = [
     change24h: -1.2,
     highPrice24h: 0.2434,
     lowPrice24h: 0.2355,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(0.2388, 0.2434, 0.2355, -1.2),
   },
   {
     id: randomId(),
@@ -275,6 +275,6 @@ export const tableData: Market[] = [
     change24h: 2.51,
     highPrice24h: 57.87,
     lowPrice24h: 54.63,
-    chart: [20, 22, 25, 21, 23, 24, 22],
+    chart: generateChartData(55.25, 57.87, 54.63, 2.51),
   },
 ];

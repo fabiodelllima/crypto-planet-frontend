@@ -1,50 +1,65 @@
+import { useState } from "react";
+import Container from "../../components/common/Container";
 import Card from "../../components/common/Card";
-
+import Button from "../../components/common/Button";
 import { cryptoCardsData } from "./MarketData";
 import MarketTable from "./MarketTable";
 
+import { IMarketFilters } from "../../interfaces/market.interfaces";
+import MarketTableFilters from "./MarketTableFilters";
+
 const MarketPage = () => {
+  const [filters, setFilters] = useState<IMarketFilters>({
+    quickFilter: "all",
+    search: "",
+    itemsPerPage: 20,
+  });
+
+  const handleFiltersChange = (newFilters: IMarketFilters) => {
+    setFilters(newFilters);
+  };
+
   return (
-    <section className="flex flex-col gap-6">
-      <section>
-        <h2>Cryptocurrency Prices by Market Cap</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-      </section>
-
-      <section className="flex gap-4">
-        <select
-          defaultValue="filterType"
-          className="w-[50%] px-4 py-2 rounded-lg"
-        >
-          <option value="default">Filter</option>
-        </select>
-        <select
-          defaultValue="filterDate"
-          className="w-[50%] px-4 py-2 rounded-lg"
-        >
-          <option value="default">Today</option>
-        </select>
-      </section>
-
-      <section>
-        <ul className="flex flex-col gap-4">
-          {cryptoCardsData.map((cryptoCard) => (
-            <li key={cryptoCard.id}>
+    <section className="min-h-screen bg-[#131313]">
+      <div className="max-w-7xl mx-auto p-4 lg:p-6 space-y-8">
+        <Container>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+            <header className="space-y-4">
+              <h2 className="text-2xl font-bold text-white">
+                Cryptocurrency Prices by Market Cap
+              </h2>
+              <p className="text-gray-400">
+                Explore the top cryptocurrencies by market cap and their daily
+                performance.
+              </p>
+            </header>
+            <div className="hidden md:flex items-center gap-4">
+              <Button variant="secondary" className="bg-transparent px-4 py-2">
+                Filter
+              </Button>
+              <Button variant="secondary" className="bg-transparent px-4 py-2">
+                Today
+              </Button>
+            </div>
+          </div>
+          <div className="flex flex-wrap justify-center gap-2">
+            {cryptoCardsData.map((crypto) => (
               <Card
-                icon={cryptoCard.icon}
-                name={cryptoCard.name}
-                price={cryptoCard.price}
-                change={cryptoCard.change}
-                chartData={cryptoCard.chartData}
+                key={crypto.id}
+                icon={crypto.icon}
+                name={crypto.name}
+                price={crypto.price}
+                change={crypto.change}
+                chartData={crypto.chartData}
               />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section>
-        <MarketTable />
-      </section>
+            ))}
+          </div>
+        </Container>
+        <Container>
+          <MarketTableFilters onFiltersChange={handleFiltersChange} />
+          <MarketTable filters={filters} />
+        </Container>
+      </div>
     </section>
   );
 };
