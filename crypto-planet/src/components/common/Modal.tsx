@@ -16,7 +16,9 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold">{title}</h2>
             <button onClick={onClose}>
-              <img src="/icons/x.svg" alt="Close" />
+              <div className="border border-gray-400 px-4 py-2 rounded-md mr-0.5 hover:border-white hover:text-white">
+                ✕
+              </div>
             </button>
           </div>
           {children}
