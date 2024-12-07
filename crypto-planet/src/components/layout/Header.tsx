@@ -128,10 +128,10 @@ const Header = () => {
               {isPortfolio ? (
                 <>
                   <Button variant="primary" className="w-full">
-                    ⚡ Wallet
+                    Wallet
                   </Button>
                   <Button variant="secondary" className="w-full">
-                    📄 Wallet
+                    Wallet
                   </Button>
                 </>
               ) : (
