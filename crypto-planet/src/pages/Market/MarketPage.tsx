@@ -1,12 +1,12 @@
 import { useState } from "react";
+import { cryptoCardsData } from "./Data/MarketData";
+import { IMarketFilters } from "../../interfaces/market.interfaces";
+
 import Container from "../../components/common/Container";
 import Card from "../../components/common/Card";
 import Button from "../../components/common/Button";
-import { cryptoCardsData } from "./MarketData";
-import MarketTable from "./MarketTable";
-
-import { IMarketFilters } from "../../interfaces/market.interfaces";
-import MarketTableFilters from "./MarketTableFilters";
+import MarketTable from "./Table/MarketTable";
+import MarketTableFilters from "./Table/MarketTableFilters";
 
 const MarketPage = () => {
   const [filters, setFilters] = useState<IMarketFilters>({

@@ -1,4 +1,6 @@
 import { useState, useMemo } from "react";
+import { tableData } from "../Data/MarketData";
+import { IMarketFilters } from "../../../interfaces/market.interfaces";
 import {
   flexRender,
   getCoreRowModel,
@@ -6,9 +8,8 @@ import {
   getSortedRowModel,
   SortingState,
 } from "@tanstack/react-table";
-import { tableData } from "./MarketData";
-import columns from "./MarketTableColumns";
-import { IMarketFilters } from "../../interfaces/market.interfaces";
+
+import columns from "./MarketTableCols";
 
 interface MarketTableProps {
   filters: IMarketFilters;
