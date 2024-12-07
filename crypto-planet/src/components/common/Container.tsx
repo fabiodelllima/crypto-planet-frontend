@@ -5,7 +5,7 @@ interface ContainerProps {
 
 const Container = ({ children, className = "" }: ContainerProps) => {
   return (
-    <div className={`bg-container p-6 rounded-lg shadow-md ${className}`}>
+    <div className={`bg-container p-8 rounded-lg shadow-md ${className}`}>
       {children}
     </div>
   );
