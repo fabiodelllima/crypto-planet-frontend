@@ -26,7 +26,7 @@ export const generateChartData = (
     const t = i / (points - 1);
 
     let variation = 0;
-    frequencies.forEach((freq, index) => {
+    frequencies.forEach((freq) => {
       const amplitude = Math.random() * 0.5 + 0.5;
       variation +=
         Math.sin(t * Math.PI * freq + (basePrice % freq)) * amplitude;
