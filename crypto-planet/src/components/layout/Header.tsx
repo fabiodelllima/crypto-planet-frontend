@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Button from "../../components/common/Button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,54 +18,118 @@ const Header = () => {
   ];
 
   return (
-    <header className="flex flex-col gap-6 p-8 border-b-2 border-black">
-      <div className="flex justify-between items-center">
-        <h1>Crypto Planet</h1>
-        <button onClick={toggleMenu}>{isMenuOpen ? "X" : "≡"}</button>
-      </div>
+    <header className="bg-[#131313] text-white border-b-2 border-borderGray">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6 py-4">
+        {/* Top bar */}
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <h1 className="text-xl font-bold">Crypto Planet</h1>
 
-      {isMenuOpen && (
-        <nav>
-          <ul className="flex flex-col gap-0.5">
+          {/* Mobile Menu Toggle */}
+          <Button
+            variant="secondary"
+            onClick={toggleMenu}
+            className="lg:hidden bg-transparent border-none px-2"
+          >
+            {isMenuOpen ? "✕" : "☰"}
+          </Button>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
             {navigation.map((item) => (
-              <li key={item.name}>
-                {!item.disabled && item.href ? (
-                  <Link to={item.href}>{item.name}</Link>
-                ) : (
-                  <span
-                    className="text-gray-500"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    {item.name}
-                  </span>
-                )}
-              </li>
+              <Link
+                key={item.name}
+                to={item.href || "#"}
+                className={`${
+                  item.disabled
+                    ? "text-gray-600 pointer-events-none"
+                    : "hover:text-blueAccent"
+                }`}
+              >
+                {item.name}
+              </Link>
             ))}
-          </ul>
-        </nav>
-      )}
+          </nav>
 
-      {isMenuOpen && (
-        <div className="flex flex-col gap-6">
-          <select defaultValue="english-usd" className="px-4 py-2 rounded-lg">
-            <option value="english-usd">English | USD</option>
-          </select>
-          <div className="flex flex-col gap-2">
-            <button
+          {/* Actions (Desktop) */}
+          <div className="hidden lg:flex items-center gap-4">
+            {/* Language Selector */}
+            <select
+              defaultValue="english-usd"
+              className="px-3 py-1 bg-transparent border border-gray-700 rounded text-white"
+            >
+              <option value="english-usd">English | USD</option>
+            </select>
+
+            {/* Buttons */}
+            <Button
+              variant="secondary"
               onClick={() => navigate("/login")}
-              className="py-2 border-2 border-black bg-black text-white rounded-lg hover:bg-white hover:text-black"
+              className="hover:bg-white hover:text-black"
             >
               Sign in
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="primary"
               onClick={() => navigate("/register")}
-              className="py-2 border-2 border-black bg-white text-black rounded-lg hover:bg-black hover:text-white"
+              className="bg-blueAccent text-black"
             >
               Register
-            </button>
+            </Button>
           </div>
         </div>
-      )}
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="mt-6 lg:hidden">
+            {/* Navigation */}
+            <nav>
+              <ul className="flex flex-col gap-4">
+                {navigation.map((item) => (
+                  <li key={item.name}>
+                    {!item.disabled && item.href ? (
+                      <Link
+                        to={item.href}
+                        className="text-white hover:text-blueAccent"
+                      >
+                        {item.name}
+                      </Link>
+                    ) : (
+                      <span className="text-gray-600">{item.name}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            {/* Actions */}
+            <div className="mt-6 flex flex-col gap-4">
+              <select
+                defaultValue="english-usd"
+                className="px-4 py-2 bg-black border border-gray-700 rounded text-white"
+              >
+                <option value="english-usd">English | USD</option>
+              </select>
+
+              <Button
+                variant="secondary"
+                onClick={() => navigate("/login")}
+                className="w-full bg-black hover:bg-white hover:text-black"
+              >
+                Sign in
+              </Button>
+
+              <Button
+                variant="primary"
+                onClick={() => navigate("/register")}
+                className="w-full bg-blueAccent text-black"
+              >
+                Register
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   );
 };
