@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Input from "../../components/common/Input";
-import Select from "../../components/common/Select";
+import Input from "../../../components/common/Input";
+import Select from "../../../components/common/Select";
 import {
   IMarketFilters,
   TQuickFilter,
-} from "../../interfaces/market.interfaces";
+} from "../../../interfaces/market.interfaces";
 
 interface MarketTableFiltersProps {
   onFiltersChange: (filters: IMarketFilters) => void;

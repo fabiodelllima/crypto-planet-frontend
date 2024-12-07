@@ -69,10 +69,10 @@ const PortfolioTableFilters = ({
             options={months}
             value={selectedMonth}
             onChange={handleMonthChange}
-            className="px-4 py-2 bg-container text-white border border-borderGray rounded"
+            className="bg-[#111] text-gray-400 border border-gray-700 rounded px-3 py-2"
           />
           <button className="p-2 rounded-lg bg-container text-textSecondary border border-borderGray hover:text-white">
-            <img src="/icons/more.svg" alt="More" className="w-5 h-5" />
+            <img src="/icons/more.svg" className="w-5 h-5" />
           </button>
         </div>
       )}
