@@ -8,7 +8,7 @@ const NotFoundPage = () => {
       </p>
       <button
         onClick={() => (window.location.href = "/")}
-        className="py-2 px-6 bg-blueAccent text-black rounded-lg font-semibold hover:bg-opacity-80 transition"
+        className="py-2 px-6 bg-blueAccent text-white rounded-lg font-semibold hover:bg-opacity-80 transition"
       >
         Go to Homepage
       </button>
