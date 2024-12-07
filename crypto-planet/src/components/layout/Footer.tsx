@@ -7,9 +7,7 @@ import {
 const Footer = () => {
   return (
     <footer className="p-8 bg-container text-white">
-      {/* Seção Principal */}
       <section className="flex flex-col lg:flex-row lg:justify-between gap-8 border-b border-borderGray pb-8">
-        {/* Coluna Crypto Planet */}
         <section className="flex flex-col gap-4 lg:w-1/4">
           <h2 className="text-lg font-bold">Crypto Planet</h2>
           <p className="text-sm text-textSecondary">
@@ -17,8 +15,6 @@ const Footer = () => {
             dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
             amet consectetur adipisicing elit.
           </p>
-
-          {/* Ícones de Redes Sociais */}
           <section className="flex gap-4">
             <span>X</span>
             <span>X</span>
@@ -27,8 +23,6 @@ const Footer = () => {
             <span>X</span>
           </section>
         </section>
-
-        {/* Links do Footer */}
         <section className="flex flex-col lg:flex-row lg:gap-12 gap-8">
           {footerSections.map((section) => (
             <section key={section.title} className="flex flex-col gap-4">
@@ -42,8 +36,6 @@ const Footer = () => {
           ))}
         </section>
       </section>
-
-      {/* Botões de Download */}
       <section className="flex flex-wrap justify-center gap-4 py-8 border-b border-borderGray">
         {downloadButtons.map((button, index) => (
           <div
@@ -58,8 +50,6 @@ const Footer = () => {
           </div>
         ))}
       </section>
-
-      {/* Rodapé Inferior */}
       <section className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-8">
         <span className="text-xs text-textSecondary">
           2022 dynamic. All rights reserved.

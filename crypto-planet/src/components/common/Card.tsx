@@ -11,17 +11,13 @@ interface CardProps {
 const Card = ({ name, price, change, chartData }: CardProps) => {
   return (
     <div className="bg-[#0A0A0A] rounded-lg px-6 py-4 min-w-[280px] max-w-[300px] flex flex-col gap-4 shadow-md">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          {/* Icon */}
           <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white">
             <span>X</span>
           </div>
-          {/* Name */}
           <span className="text-white font-medium">{name}</span>
         </div>
-        {/* Change */}
         <span
           className={`text-sm font-medium ${
             change >= 0 ? "text-green-500" : "text-red-500"
@@ -31,15 +27,10 @@ const Card = ({ name, price, change, chartData }: CardProps) => {
           {change}% {change >= 0 ? " ↑" : " ↓"}
         </span>
       </div>
-
-      {/* Price and Chart */}
       <div className="flex items-center justify-between">
-        {/* Price */}
         <div className="text-xl text-white font-semibold">
           ${price.toLocaleString("en-US", { minimumFractionDigits: 2 })}
         </div>
-
-        {/* Chart */}
         <div className="w-[100px] h-[40px]">
           <LineChart width={100} height={40} data={chartData}>
             <Line
