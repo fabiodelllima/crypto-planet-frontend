@@ -4,7 +4,6 @@ import DefaultLayout from "../components/layout/DefaultLayout";
 import MarketPage from "../pages/Market/MarketPage";
 import PortfolioPage from "../pages/Portfolio/PortfolioPage";
 import LoginPage from "../pages/Login/LoginPage";
-import RegisterPage from "../pages/Register/RegisterPage";
 import NotFoundPage from "../pages/Error/NotFoundPage";
 
 export function Router() {
@@ -14,10 +13,9 @@ export function Router() {
         <Route index element={<MarketPage />} />
         <Route path="/market" element={<MarketPage />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/notfound" element={<NotFoundPage />} />
       </Route>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
