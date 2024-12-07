@@ -1,17 +1,25 @@
+import {
+  downloadButtons,
+  footerLinks,
+  footerSections,
+} from "../../pages/Portfolio/Data/PortfolioData";
+
 const Footer = () => {
   return (
-    <footer className="flex flex-col p-8 bg-black text-white">
-      <section className="flex flex-wrap justify-center gap-8">
-        <section className="flex flex-col gap-4">
-          <h2>Crypto Planet</h2>
-          <p>
+    <footer className="p-8 bg-container text-white">
+      {/* Seção Principal */}
+      <section className="flex flex-col lg:flex-row lg:justify-between gap-8 border-b border-borderGray pb-8">
+        {/* Coluna Crypto Planet */}
+        <section className="flex flex-col gap-4 lg:w-1/4">
+          <h2 className="text-lg font-bold">Crypto Planet</h2>
+          <p className="text-sm text-textSecondary">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum
             dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Lorem ipsum dolor sit amet
-            consectetur adipisicing elit.
+            amet consectetur adipisicing elit.
           </p>
 
-          <section className="flex gap-4 justify-center">
+          {/* Ícones de Redes Sociais */}
+          <section className="flex gap-4">
             <span>X</span>
             <span>X</span>
             <span>X</span>
@@ -20,125 +28,49 @@ const Footer = () => {
           </section>
         </section>
 
-        <section className="flex flex-col gap-4">
-          <h3>Exchange</h3>
-          <ul>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-          </ul>
-        </section>
-
-        <section className="flex flex-col gap-4">
-          <h3>Support</h3>
-          <ul>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-          </ul>
-        </section>
-
-        <section className="flex flex-col gap-4">
-          <h3>Resources</h3>
-          <ul>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-          </ul>
-        </section>
-
-        <section className="flex flex-col gap-4">
-          <h3>Learn</h3>
-          <ul>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-          </ul>
-        </section>
-
-        <section className="flex flex-col gap-4">
-          <h3>Company</h3>
-          <ul>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-            <li>Link para clicar</li>
-          </ul>
+        {/* Links do Footer */}
+        <section className="flex flex-col lg:flex-row lg:gap-12 gap-8">
+          {footerSections.map((section) => (
+            <section key={section.title} className="flex flex-col gap-4">
+              <h3 className="text-sm font-semibold">{section.title}</h3>
+              <ul className="space-y-2 text-textSecondary">
+                {section.links.map((link, index) => (
+                  <li key={index}>{link}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
         </section>
       </section>
 
-      <section className="flex flex-col gap-12 py-4">
-        <section className="flex justify-center pt-12 pb-6  border-b-[1px] border-white">
-          <button>
+      {/* Botões de Download */}
+      <section className="flex flex-wrap justify-center gap-4 py-8 border-b border-borderGray">
+        {downloadButtons.map((button, index) => (
+          <div
+            key={index}
+            className="flex items-center gap-4 px-4 py-2 bg-white text-black rounded-lg"
+          >
+            <span>{button.icon}</span>
             <div className="flex flex-col">
-              <span>^</span>
-              <span>Subir para o topo da página</span>
-            </div>
-          </button>
-        </section>
-
-        <section className="flex flex-col gap-4">
-          <div className="flex gap-4 pl-4 pr-6 py-2 w-full rounded-lg bg-white text-black">
-            <div className="flex items-center">
-              <span>X</span>
-            </div>
-            <div className="flex flex-col">
-              <span>Download PC-Client</span>
-              <span>Windows</span>
+              <span className="text-sm font-semibold">{button.title}</span>
+              <span className="text-xs">{button.subtitle}</span>
             </div>
           </div>
+        ))}
+      </section>
 
-          <div className="flex gap-4 pl-4 pr-6 py-2 w-full rounded-lg bg-white text-black">
-            <div className="flex items-center">
-              <span>X</span>
-            </div>
-            <div className="flex flex-col">
-              <span>Download for the</span>
-              <span>MacOS</span>
-            </div>
-          </div>
-
-          <div className="flex gap-4 pl-4 pr-6 py-2 w-full rounded-lg bg-white text-black">
-            <div className="flex items-center">
-              <span>X</span>
-            </div>
-            <div className="flex flex-col">
-              <span>Download on the</span>
-              <span>App Store</span>
-            </div>
-          </div>
-
-          <div className="flex gap-4 pl-4 pr-6 py-2 w-full rounded-lg bg-white text-black">
-            <div className="flex items-center">
-              <span>X</span>
-            </div>
-            <div className="flex flex-col">
-              <span>Get in on</span>
-              <span>Google Play</span>
-            </div>
-          </div>
-        </section>
-
-        <section className="flex flex-col gap-4 py-4">
-          <span className="flex justify-center">
-            2022 dynamic. All rights reserved.
-          </span>
-
-          <div className="flex justify-center gap-6">
-            <span className="flex justify-center">Privacy</span>
-            <span className="flex justify-center">Terms</span>
-            <span className="flex justify-center">Sitemap</span>
-          </div>
-        </section>
+      {/* Rodapé Inferior */}
+      <section className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-8">
+        <span className="text-xs text-textSecondary">
+          2022 dynamic. All rights reserved.
+        </span>
+        <div className="flex gap-6 text-xs">
+          {footerLinks.map((link, index) => (
+            <span key={index} className="hover:text-white cursor-pointer">
+              {link}
+            </span>
+          ))}
+        </div>
       </section>
     </footer>
   );
