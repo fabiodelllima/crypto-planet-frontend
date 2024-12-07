@@ -14,7 +14,7 @@ const Card = ({ name, price, change, chartData }: CardProps) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white">
-            <span>X</span>
+            <span>{name.charAt(0).toUpperCase()}</span>
           </div>
           <span className="text-white font-medium">{name}</span>
         </div>
@@ -39,7 +39,7 @@ const Card = ({ name, price, change, chartData }: CardProps) => {
               stroke={change >= 0 ? "#2563eb" : "#ef4444"}
               strokeWidth={1.5}
               dot={false}
-              isAnimationActive={false}
+              isAnimationActive={true}
             />
           </LineChart>
         </div>
