@@ -30,8 +30,11 @@ const Header = () => {
     <header className="bg-[#131313] text-white border-b-2 border-borderGray">
       <div className="max-w-7xl mx-auto px-4 lg:px-6 py-4">
         <div className="flex justify-between items-center">
-          <h1 className="text-xl font-bold">Crypto Planet</h1>
-          <nav className="hidden lg:flex items-center gap-8">
+          <div className="flex items-center">
+            <div className="w-9 h-1 bg-blue-600 rounded-full ml-2"></div>
+            <h1 className="text-xl font-bold ml-4">Crypto Planet</h1>
+          </div>
+          <nav className="hidden lg:flex items-center gap-8 pt-1">
             {navigation.map((item) => (
               <Link
                 key={item.name}
@@ -97,7 +100,7 @@ const Header = () => {
           <Button
             variant="secondary"
             onClick={toggleMenu}
-            className="lg:hidden"
+            className="lg:hidden mr-2"
           >
             {isMenuOpen ? "✕" : "☰"}
           </Button>
