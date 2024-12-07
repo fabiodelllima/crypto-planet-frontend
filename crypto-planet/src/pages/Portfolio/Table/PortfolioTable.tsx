@@ -1,4 +1,10 @@
 import { useMemo, useState } from "react";
+import { IPortfolioTransaction } from "../../../interfaces/portfolio.interfaces";
+
+import Container from "../../../components/common/Container";
+import Input from "../../../components/common/Input";
+import Button from "../../../components/common/Button";
+import Select from "../../../components/common/Select";
 import {
   flexRender,
   getCoreRowModel,
@@ -6,11 +12,10 @@ import {
   getSortedRowModel,
   SortingState,
 } from "@tanstack/react-table";
-import Container from "../../../components/common/Container";
-import Input from "../../../components/common/Input";
-import Button from "../../../components/common/Button";
-import Select from "../../../components/common/Select";
-import { IPortfolioTransaction } from "../../../interfaces/portfolio.interfaces";
+
+interface Info {
+  getValue(): string;
+}
 
 interface PortfolioTableProps {
   data: IPortfolioTransaction[];
@@ -18,18 +23,18 @@ interface PortfolioTableProps {
 
 const months = [
   { value: "all", label: "Month" },
-  { value: "0", label: "January" },
-  { value: "1", label: "February" },
-  { value: "2", label: "March" },
-  { value: "3", label: "April" },
-  { value: "4", label: "May" },
-  { value: "5", label: "June" },
-  { value: "6", label: "July" },
-  { value: "7", label: "August" },
-  { value: "8", label: "September" },
-  { value: "9", label: "October" },
-  { value: "10", label: "November" },
-  { value: "11", label: "December" },
+  { value: "1", label: "January" },
+  { value: "2", label: "February" },
+  { value: "3", label: "March" },
+  { value: "4", label: "April" },
+  { value: "5", label: "May" },
+  { value: "6", label: "June" },
+  { value: "7", label: "July" },
+  { value: "8", label: "August" },
+  { value: "9", label: "September" },
+  { value: "10", label: "October" },
+  { value: "11", label: "November" },
+  { value: "12", label: "December" },
 ];
 
 const PortfolioTable = ({ data }: PortfolioTableProps) => {
@@ -52,7 +57,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
           Action ▲
         </div>
       ),
-      cell: (info: any) => (
+      cell: (info: Info) => (
         <div className="flex items-center gap-3">
           <span>X</span>
           <span className="text-gray-300">{info.getValue()}</span>
@@ -66,7 +71,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
           Amount ▲
         </div>
       ),
-      cell: (info: any) => (
+      cell: (info: Info) => (
         <div className="text-gray-300">${info.getValue().toLocaleString()}</div>
       ),
     },
@@ -77,7 +82,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
           Date/Time ▲
         </div>
       ),
-      cell: (info: any) => (
+      cell: (info: Info) => (
         <div className="text-gray-300">{info.getValue()}</div>
       ),
     },
@@ -88,7 +93,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
           Status ▲
         </div>
       ),
-      cell: (info: any) => (
+      cell: (info: Info) => (
         <div
           className={`px-3 py-1 rounded text-sm inline-block
             ${
