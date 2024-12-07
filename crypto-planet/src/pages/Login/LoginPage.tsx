@@ -59,13 +59,13 @@ const LoginPage = () => {
         </form>
         <div className="mt-6 text-center text-textSecondary">
           <p>
-            Forgot your password?
+            Forgot your password?{" "}
             <a href="#" className="text-blueAccent hover:underline">
               Reset here
             </a>
           </p>
           <p>
-            Don't have an account?
+            Don't have an account?{" "}
             <a href="#" className="text-blueAccent hover:underline">
               Register here
             </a>
