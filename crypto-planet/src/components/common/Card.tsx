@@ -10,7 +10,7 @@ interface CardProps {
 
 const Card = ({ name, price, change, chartData }: CardProps) => {
   return (
-    <div className="bg-[#0A0A0A] rounded-lg px-6 py-4 min-w-[280px] max-w-[300px] flex flex-col gap-4 shadow-md">
+    <div className="flex flex-col gap-4 px-6 py-4 w-full sm:w-[500px] lg:w-[286px] md:w-[300px] bg-[#0A0A0A] rounded-lg shadow-md">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white">
