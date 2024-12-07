@@ -112,7 +112,7 @@ const PortfolioPage = () => {
       <Modal
         isOpen={isPaymentModalOpen}
         onClose={() => setIsPaymentModalOpen(false)}
-        title="Add Money"
+        title=""
       >
         <PaymentForm onSubmit={handleAddMoney} />
       </Modal>
