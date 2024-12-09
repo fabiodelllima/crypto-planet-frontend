@@ -115,7 +115,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
     if (selectedMonth !== "all") {
       filtered = filtered.filter((item) => {
         const date = new Date(item.date);
-        return date.getMonth().toString() === selectedMonth;
+        return (date.getMonth() + 1).toString() === selectedMonth;
       });
     }
 
