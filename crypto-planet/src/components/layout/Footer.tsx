@@ -11,7 +11,7 @@ const Footer = () => {
         <section className="flex flex-col lg:flex-row sm:justify-between lg:justify-evenly gap-8 border-b border-borderGray pb-8">
           <section className="flex flex-col gap-4 lg:w-1/4">
             <h2 className="text-lg font-bold">Crypto Planet</h2>
-            <p className="text-sm text-textSecondary">
+            <p className="text-sm text-greyPrimary">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh
               aenean nisl condimentum. Lorem sed nisl condimentum.
             </p>
@@ -20,7 +20,7 @@ const Footer = () => {
             {footerSections.map((section) => (
               <section key={section.title} className="flex flex-col gap-4">
                 <h3 className="text-sm font-semibold">{section.title}</h3>
-                <ul className="space-y-2 text-textSecondary">
+                <ul className="space-y-2 text-greyPrimary">
                   {section.links.map((link, index) => (
                     <li
                       key={index}
@@ -48,7 +48,7 @@ const Footer = () => {
           ))}
         </section>
         <section className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-8">
-          <span className="text-xs text-textSecondary">
+          <span className="text-xs text-greyPrimary">
             2024 Crypto Planet. All rights reserved.
           </span>
           <div className="flex gap-6 text-xs">
