@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { portfolioData, transactionsData } from "./Data/PortfolioData";
+import { IPortfolioTransaction } from "../../interfaces/portfolio.interfaces";
+import { randomId } from "../../utils/helpers.utils";
+
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import PaymentForm from "../../components/common/PaymentForm";
 import PortfolioTable from "./Table/PortfolioTable";
-import { portfolioData, transactionsData } from "./Data/PortfolioData";
-import { IPortfolioTransaction } from "../../interfaces/portfolio.interfaces";
-import { randomId } from "../../utils/helpers.utils";
 import Container from "../../components/common/Container";
+import EyeHideIcon from "../../assets/icons/eye-hide.svg";
+import EyeShowIcon from "../../assets/icons/eye-show.svg";
 
 const PortfolioPage = () => {
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
@@ -44,10 +47,10 @@ const PortfolioPage = () => {
                   </p>
                 </div>
                 <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
-                  <Button variant="secondary" className="w-full md:w-auto">
+                  <Button styleType="tertiary" className="w-full md:w-auto">
                     Edit
                   </Button>
-                  <Button variant="secondary" className="w-full md:w-auto">
+                  <Button styleType="tertiary" className="w-full md:w-auto">
                     Add New Wallet
                   </Button>
                 </div>
@@ -68,7 +71,11 @@ const PortfolioPage = () => {
                       onClick={() => setHideBalance(!hideBalance)}
                       className="text-gray-400 hover:text-white"
                     >
-                      {hideBalance ? "X" : "X"}
+                      {hideBalance ? (
+                        <img src={EyeShowIcon} />
+                      ) : (
+                        <img src={EyeHideIcon} />
+                      )}
                     </button>
                   </div>
                 </div>
