@@ -53,7 +53,7 @@ const LoginPage = () => {
             required
           />
           {error && <p className="text-red-500 text-sm">{error}</p>}
-          <Button type="submit" className="w-full">
+          <Button styleType="primary" className="w-full">
             Login
           </Button>
         </form>
