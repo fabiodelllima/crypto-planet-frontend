@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import Input from "./Input";
 import Button from "./Button";
-import Container from "./Container";
 
 interface PaymentFormProps {
   onSubmit: (amount: number) => void;
@@ -22,7 +21,7 @@ const PaymentForm = ({ onSubmit }: PaymentFormProps) => {
   };
 
   return (
-    <Container className={`space-y-4 p-0.5`}>
+    <div className={`space-y-4`}>
       <h2 className="text-xl font-bold text-white">
         Select Currency and Payment
       </h2>
@@ -52,7 +51,7 @@ const PaymentForm = ({ onSubmit }: PaymentFormProps) => {
           Add Money
         </Button>
       </form>
-    </Container>
+    </div>
   );
 };
 
