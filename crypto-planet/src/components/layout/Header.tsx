@@ -1,5 +1,6 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+
 import Button from "../../components/common/Button";
 import Select from "../../components/common/Select";
 
@@ -27,11 +28,11 @@ const Header = () => {
   const isPortfolio = location.pathname === "/portfolio";
 
   return (
-    <header className="bg-[#131313] text-white border-b-2 border-borderGray">
-      <div className="max-w-7xl mx-auto px-4 lg:px-6 py-4">
+    <header className="bg-background text-white border-b-2 border-greySecondary">
+      <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <div className="w-9 h-1 bg-blue-600 rounded-full ml-2"></div>
+            <div className="w-9 h-1 bg-bluePrimary rounded-full ml-2"></div>
             <h1 className="text-xl font-bold ml-4">Crypto Planet</h1>
           </div>
           <nav className="hidden lg:flex items-center gap-8 pt-1">
@@ -39,15 +40,17 @@ const Header = () => {
               <Link
                 key={item.name}
                 to={item.href || "#"}
-                className={`relative pb-1 ${
+                className={`${
                   location.pathname === item.href
-                    ? "text-blueAccent"
+                    ? "text-bluePrimary"
                     : item.disabled
                     ? "text-gray-600 pointer-events-none"
-                    : "text-white  hover:text-blueAccent"
+                    : "text-white  hover:text-bluePrimary"
                 }`}
               >
-                {item.name}
+                <div className="py-10 border-b-2 border-transparent hover:border-bluePrimary">
+                  {item.name}
+                </div>
               </Link>
             ))}
           </nav>
@@ -55,21 +58,16 @@ const Header = () => {
             <Select
               options={languageOptions}
               defaultValue="english-usd"
-              onChange={(e) => console.log(e.target.value)}
-              className="bg-[#111] text-gray-400 border border-gray-700 rounded px-3 py-2"
+              className="bg-[#111] text-gray-400 border border-transparent hover:border-gray-700 rounded px-4 py-6"
             />
 
             {isPortfolio ? (
               <>
-                <Button variant="primary" className="flex items-center gap-2">
-                  Wallet
-                </Button>
-                <Button variant="secondary" className="flex items-center gap-2">
-                  Wallet
-                </Button>
+                <Button styleType="primary">Wallet</Button>
+                <Button styleType="secondary">Wallet</Button>
                 <div className="flex items-center gap-2">
                   <div
-                    className="w-10 h-10 border border-blueAccent bg-transparent text-blueAccent font-bold flex items-center justify-center rounded-full"
+                    className="w-10 h-10 border border-bluePrimary bg-transparent text-bluePrimary font-bold flex items-center justify-center rounded-full"
                     title="User Initial"
                   >
                     A
@@ -81,16 +79,15 @@ const Header = () => {
             ) : (
               <>
                 <Button
-                  variant="secondary"
-                  className="hover:bg-white hover:text-black"
+                  styleType="secondary"
                   onClick={() => navigate("/login")}
                 >
                   Sign in
                 </Button>
                 <Button
-                  variant="primary"
+                  styleType="primary"
                   onClick={() => navigate("/register")}
-                  className="bg-blueAccent text-black"
+                  className="bg-bluePrimary text-black"
                 >
                   Register
                 </Button>
@@ -98,9 +95,9 @@ const Header = () => {
             )}
           </div>
           <Button
-            variant="secondary"
+            styleType="tertiary"
             onClick={toggleMenu}
-            className="lg:hidden mr-2"
+            className="lg:hidden mx-2 my-4 px-6 py-2 border border-transparent bg-greySecondary hover:border-greyPrimary rounded-lg"
           >
             {isMenuOpen ? "✕" : "☰"}
           </Button>
@@ -115,7 +112,7 @@ const Header = () => {
                     {!item.disabled && item.href ? (
                       <Link
                         to={item.href}
-                        className="text-white hover:text-blueAccent"
+                        className="text-white hover:text-bluePrimary"
                       >
                         {item.name}
                       </Link>
@@ -130,26 +127,26 @@ const Header = () => {
               <Select options={languageOptions} defaultValue="english-usd" />
               {isPortfolio ? (
                 <>
-                  <Button variant="primary" className="w-full">
+                  <Button styleType="primary" className="w-full">
                     Wallet
                   </Button>
-                  <Button variant="secondary" className="w-full">
+                  <Button styleType="secondary" className="w-full">
                     Wallet
                   </Button>
                 </>
               ) : (
                 <>
                   <Button
-                    variant="secondary"
+                    styleType="secondary"
                     onClick={() => navigate("/login")}
                     className="w-full bg-black hover:bg-white hover:text-black"
                   >
                     Sign in
                   </Button>
                   <Button
-                    variant="primary"
+                    styleType="primary"
                     onClick={() => navigate("/register")}
-                    className="w-full bg-blueAccent text-black"
+                    className="w-full bg-bluePrimary text-black"
                   >
                     Register
                   </Button>
