@@ -57,16 +57,16 @@ const LoginPage = () => {
             Login
           </Button>
         </form>
-        <div className="mt-6 text-center text-textSecondary">
+        <div className="mt-6 text-center text-greyPrimary">
           <p>
             Forgot your password?{" "}
-            <a href="#" className="text-blueAccent hover:underline">
+            <a href="#" className="text-bluePrimary hover:underline">
               Reset here
             </a>
           </p>
           <p>
             Don't have an account?{" "}
-            <a href="#" className="text-blueAccent hover:underline">
+            <a href="#" className="text-bluePrimary hover:underline">
               Register here
             </a>
           </p>
