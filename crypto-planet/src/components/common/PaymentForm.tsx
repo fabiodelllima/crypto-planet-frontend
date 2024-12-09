@@ -22,7 +22,7 @@ const PaymentForm = ({ onSubmit }: PaymentFormProps) => {
   };
 
   return (
-    <Container className={`space-y-4 p-0`}>
+    <Container className={`space-y-4 p-0.5`}>
       <h2 className="text-xl font-bold text-white">
         Select Currency and Payment
       </h2>
