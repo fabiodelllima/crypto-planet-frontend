@@ -1,33 +1,40 @@
 import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary";
+  styleType?: "primary" | "secondary" | "tertiary";
 }
 
 const Button = ({
-  variant = "primary",
-  className = "",
+  styleType,
+  className,
   disabled = false,
   ...props
 }: ButtonProps) => {
+  const getButtonStyles = () => {
+    const defaultButton = "px-10 py-5 rounded-lg font-medium transition";
+    const disabledButton = disabled ? "opacity-50 cursor-not-allowed" : "";
+
+    let buttonStyle = "";
+
+    switch (styleType) {
+      case "primary":
+        buttonStyle = `bg-bluePrimary text-white hover:bg-opacity-80 ${disabledButton}`;
+        break;
+      case "secondary":
+        buttonStyle = `bg-transparent border border-transparent text-bluePrimary hover:border-bluePrimary ${disabledButton}`;
+        break;
+      case "tertiary":
+        buttonStyle = `bg-transparent text-greyPrimary hover:text-white px-2 ${disabledButton}`;
+        break;
+      default:
+        buttonStyle = `bg-transparent text-greyPrimary border border-greySecondary rounded-lg hover:text-bluePrimary hover:border-bluePrimary ${disabledButton}`;
+    }
+
+    return `${defaultButton} ${buttonStyle} ${className}`;
+  };
+
   return (
-    <button
-      {...props}
-      disabled={disabled}
-      className={`
-        px-4 py-2 rounded font-medium transition
-        ${
-          variant === "primary"
-            ? `bg-blueAccent text-textPrimary hover:bg-opacity-80 ${
-                disabled ? "opacity-50 cursor-not-allowed" : ""
-              }`
-            : `border border-borderGray text-textPrimary hover:bg-container ${
-                disabled ? "opacity-50 cursor-not-allowed" : ""
-              }`
-        }
-        ${className}
-      `}
-    />
+    <button {...props} disabled={disabled} className={getButtonStyles()} />
   );
 };
 
