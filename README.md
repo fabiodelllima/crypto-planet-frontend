@@ -1,4 +1,4 @@
-## Crypto
+## Crypto Planet
 > Branch com algumas correções.
 
 Deploy:
