@@ -36,9 +36,9 @@ const PortfolioPage = () => {
   return (
     <section className="min-h-screen bg-[#111] text-white">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-4 lg:p-6 max-w-7xl mx-auto">
-        <div className="lg:col-span-2 space-y-6">
+        <div className="flex flex-col lg:col-span-2 gap-6">
           <Container>
-            <div className="p-6 space-y-6">
+            <div className="p-1 space-y-6">
               <div className="flex flex-col md:flex-row justify-between items-start gap-4">
                 <div>
                   <h2 className="text-xl font-bold">Wallet</h2>
@@ -46,16 +46,16 @@ const PortfolioPage = () => {
                     Updated {portfolioData.lastUpdate}
                   </p>
                 </div>
-                <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
-                  <Button styleType="tertiary" className="w-full md:w-auto">
+                <div className="flex flex-row gap-2 w-full md:w-auto">
+                  <Button styleType="tertiary" className="w-[50%] md:w-auto">
                     Edit
                   </Button>
-                  <Button styleType="tertiary" className="w-full md:w-auto">
+                  <Button styleType="tertiary" className="w-[50%] md:w-auto">
                     Add New Wallet
                   </Button>
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="flex flex-col sm:flex-row justify-between gap-6">
                 <div>
                   <div className="flex items-center gap-2 text-gray-400 mb-2">
                     <span>Wallet Balance</span>
@@ -79,23 +79,24 @@ const PortfolioPage = () => {
                     </button>
                   </div>
                 </div>
-                <div>
-                  <div className="flex items-center gap-2 text-gray-400 mb-2">
-                    <span>↓</span>
-                    <span>Total Deposited</span>
+                <div className="flex justify-between sm:justify-start gap-4">
+                  <div>
+                    <div className="flex items-center gap-2 text-gray-400 mb-2">
+                      <span>↓</span>
+                      <span>Total Deposited</span>
+                    </div>
+                    <span className="text-xl">
+                      ${portfolioData.totalDeposited.toLocaleString()}
+                    </span>
                   </div>
-                  <span className="text-xl">
-                    ${portfolioData.totalDeposited.toLocaleString()}
-                  </span>
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 text-gray-400 mb-2">
-                    <span>↑</span>
-                    <span>Total Withdrawals</span>
+                  <div>
+                    <div className="flex flex-col gap-2 text-gray-400 mb-2">
+                      <span>↑ Total Withdrawals</span>
+                      <span className="text-xl text-white">
+                        ${portfolioData.totalWithdrawn.toLocaleString()}
+                      </span>
+                    </div>
                   </div>
-                  <span className="text-xl">
-                    ${portfolioData.totalWithdrawn.toLocaleString()}
-                  </span>
                 </div>
               </div>
             </div>
