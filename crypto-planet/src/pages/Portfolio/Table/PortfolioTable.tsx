@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { IPortfolioTransaction } from "../../../interfaces/portfolio.interfaces";
 
-import Container from "../../../components/common/Container";
 import Input from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
 import Select from "../../../components/common/Select";
@@ -139,7 +138,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
   });
 
   return (
-    <Container>
+    <section>
       <div className="space-y-6">
         <div className="flex flex-wrap sm:flex-nowrap gap-8 justify-between items-center">
           <h2 className="text-2xl text-white">Transaction History</h2>
@@ -239,7 +238,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
           </div>
         )}
       </div>
-    </Container>
+    </section>
   );
 };
 
