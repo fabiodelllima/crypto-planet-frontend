@@ -1,6 +1,13 @@
-## Crypto Planet
+# Crypto Planet
+> Versão inicial: 
 
-> Instalação e configuração:
+https://cryptoplanet.vercel.app/
+
+> Versão com correções e em desenvolvimento: 
+
+https://cryptoplanet-v2.vercel.app/
+
+## Instalação e configuração:
 
 #### 1. Clone o repositório
 
@@ -17,38 +24,30 @@ cd crypto-planet
 
 #### 3. Instale as dependências
 
-Usando npm:
-
 ```bash
+# Utilizando NPM:
 npm install
-```
 
-Ou usando yarn:
-
-```bash
+# Utilizando Yarn:
 yarn install
 ```
 
 #### 4. Inicie o servidor de desenvolvimento
 
-Com npm:
-
 ```bash
+# Utilizando NPM:
 npm run dev
-```
 
-Ou com yarn:
-
-```bash
+# Utilizando Yarn
 yarn dev
 ```
 
 #### 5. Build para produção
 
-Para criar uma versão de produção:
-
 ```bash
+# Utilizando NPM:
 npm run build
-# ou
+
+# Utilizando Yarn:
 yarn build
 ```
