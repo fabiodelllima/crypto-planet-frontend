@@ -1,7 +1,7 @@
 # Crypto Planet
 > Versão inicial: 
 
-https://cryptoplanet.vercel.app/
+https://kryptoplanet.vercel.app
 
 > Versão com correções e em desenvolvimento: 
 
