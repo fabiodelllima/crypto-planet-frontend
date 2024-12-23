@@ -3,7 +3,7 @@
 
 https://cryptoplanet-v2.vercel.app/
 
-## Pendências
+### Pendências
 | Funcionalidades           | Interface                              |
 |---------------------------|----------------------------------------|
 | Paginação                 | Ícones no footer                       |
