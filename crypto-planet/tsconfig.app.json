@@ -20,7 +20,10 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* Type definitions */
+    "typeRoots": ["./node_modules/@types", "./custom_typings"]
   },
   "include": ["src"]
 }
