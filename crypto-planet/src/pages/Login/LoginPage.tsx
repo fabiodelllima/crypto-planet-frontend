@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom";
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 
-const LoginPage = () => {
+interface LoginPageProps {
+  setIsAuthenticated: (value: boolean) => void;
+}
+
+const LoginPage = ({ setIsAuthenticated }: LoginPageProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -24,6 +28,7 @@ const LoginPage = () => {
       return;
     }
 
+    setIsAuthenticated(true);
     navigate("/portfolio");
   };
 
