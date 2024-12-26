@@ -139,7 +139,7 @@ const Header = () => {
                   <Button
                     styleType="secondary"
                     onClick={() => navigate("/login")}
-                    className="w-full bg-black hover:bg-white hover:text-black"
+                    className="w-full"
                   >
                     Sign in
                   </Button>
