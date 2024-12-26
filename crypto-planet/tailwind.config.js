@@ -6,6 +6,7 @@ export default {
       colors: {
         bluePrimary: "#2563EB",
         background: "#121318",
+        backgroundMain: "#131313",
         container: "#1A1C20",
         white: "#FFFFFF",
         greyPrimary: "#9CA3AF",
