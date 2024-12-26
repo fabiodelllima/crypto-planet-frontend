@@ -8,7 +8,7 @@ export interface IMarket {
   change24h: number;
   highPrice24h: number;
   lowPrice24h: number;
-  chart: number[];
+  chart: { value: number; index: number }[];
 }
 
 export type TQuickFilter =
