@@ -13,8 +13,8 @@ import iconLinkedin from "../../assets/networks/linkedin.svg";
 const Footer = () => {
   return (
     <footer className="bg-container">
-      <section className="p-8 bg-container text-white max-w-7xl mx-auto">
-        <section className="flex flex-col lg:flex-row sm:justify-between lg:justify-evenly gap-8 border-b border-borderGray pb-8">
+      <section className="px-8 pb-8 pt-14 lg:pt-20 bg-container text-white max-w-7xl mx-auto">
+        <section className="flex flex-col pb-6 lg:flex-row sm:justify-between lg:justify-evenly gap-14 lg:gap-8">
           <section className="flex flex-col gap-4 lg:w-1/4">
             <h2 className="text-lg font-bold">Crypto Planet</h2>
             <p className="text-sm text-greyPrimary">
@@ -39,7 +39,7 @@ const Footer = () => {
               </button>
             </div>
           </section>
-          <section className="flex flex-col lg:flex-row lg:gap-12 gap-8">
+          <section className="flex flex-col lg:flex-row lg:gap-12 gap-8 pb-8">
             {footerSections.map((section) => (
               <section key={section.title} className="flex flex-col gap-4">
                 <h3 className="text-sm font-semibold">{section.title}</h3>
@@ -57,33 +57,34 @@ const Footer = () => {
             ))}
           </section>
         </section>
-        <section className="flex flex-wrap justify-center gap-4 py-8 border-b border-borderGray">
-          {downloadButtons.map((button, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-4 px-4 py-2 bg-white text-black rounded-lg"
-            >
-              <div className="flex flex-col">
-                <span className="text-sm font-semibold">{button.title}</span>
-                <span className="text-xs">{button.subtitle}</span>
-              </div>
+        <section className="flex flex-col-reverse gap-8 pt-8 pb-10 lg:pb-8 items-center lg:justify-between lg:flex-row border-t border-borderGray">
+          <section className="flex flex-col justify-between gap-2 lg:gap-2">
+            <span className="text-xs text-greyPrimary">
+              © 2024 Crypto Planet. All rights reserved.
+            </span>
+            <div className="flex gap-6 text-xs justify-center">
+              {footerLinks.map((link, index) => (
+                <span
+                  key={index}
+                  className="text-white hover:opacity-80 cursor-pointer transition-colors"
+                >
+                  {link}
+                </span>
+              ))}
             </div>
-          ))}
-        </section>
-        <section className="flex flex-col lg:flex-row justify-between items-center gap-4 pt-8">
-          <span className="text-xs text-greyPrimary">
-            2024 Crypto Planet. All rights reserved.
-          </span>
-          <div className="flex gap-6 text-xs">
-            {footerLinks.map((link, index) => (
-              <span
+          </section>
+          <section className="flex flex-wrap justify-center lg:justify-end gap-3">
+            {downloadButtons.map((button, index) => (
+              <div
                 key={index}
-                className="hover:text-white cursor-pointer transition-colors"
+                className="flex justify-center bg-black rounded-lg border border-greySecondary hover:border-b-greyPrimary"
               >
-                {link}
-              </span>
+                <button>
+                  <img src={button.icon} className="w-[140px]" />
+                </button>
+              </div>
             ))}
-          </div>
+          </section>
         </section>
       </section>
     </footer>
