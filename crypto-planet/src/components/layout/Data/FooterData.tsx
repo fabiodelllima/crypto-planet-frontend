@@ -1,3 +1,8 @@
+import badgeMicrosoft from "../../../assets/badges/microsoft-badge.svg";
+import badgeMacOs from "../../../assets/badges/apple-macos-badge.svg";
+import badgeAppStore from "../../../assets/badges/apple-app-store-badge.svg";
+import badgeGooglePlay from "../../../assets/badges/google-play-badge.svg";
+
 export const footerSections = [
   {
     title: "Exchange",
@@ -48,24 +53,16 @@ export const footerSections = [
 
 export const downloadButtons = [
   {
-    icon: "PC",
-    title: "Download PC-Client",
-    subtitle: "Windows",
+    icon: badgeMicrosoft,
   },
   {
-    icon: "Mac",
-    title: "Download for the",
-    subtitle: "MacOS",
+    icon: badgeGooglePlay,
   },
   {
-    icon: "App Store",
-    title: "Download on the",
-    subtitle: "App Store",
+    icon: badgeAppStore,
   },
   {
-    icon: "Google Play",
-    title: "Get in on",
-    subtitle: "Google Play",
+    icon: badgeMacOs,
   },
 ];
 
