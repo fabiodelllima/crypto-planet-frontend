@@ -4,6 +4,12 @@ import {
   footerSections,
 } from "./Data/FooterData";
 
+import iconFacebook from "../../assets/networks/facebook.svg";
+import iconInstagram from "../../assets/networks/instagram.svg";
+import iconYoutube from "../../assets/networks/youtube.svg";
+import iconTwitter from "../../assets/networks/twitter.svg";
+import iconLinkedin from "../../assets/networks/linkedin.svg";
+
 const Footer = () => {
   return (
     <footer className="bg-container">
@@ -15,6 +21,23 @@ const Footer = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh
               aenean nisl condimentum. Lorem sed nisl condimentum.
             </p>
+            <div className="flex gap-5 pt-2 items-center">
+              <button className="p-2 bg-transparent hover:bg-greySecondary rounded-lg">
+                <img src={iconFacebook} className="w-5" />
+              </button>
+              <button className="p-2 bg-transparent hover:bg-greySecondary rounded-lg">
+                <img src={iconInstagram} className="w-5" />
+              </button>
+              <button className="p-2 bg-transparent hover:bg-greySecondary rounded-lg">
+                <img src={iconYoutube} className="w-5" />
+              </button>
+              <button className="p-2 bg-transparent hover:bg-greySecondary rounded-lg">
+                <img src={iconTwitter} className="w-5" />
+              </button>
+              <button className="p-1 bg-transparent hover:bg-greySecondary rounded-lg">
+                <img src={iconLinkedin} className="w-7" />
+              </button>
+            </div>
           </section>
           <section className="flex flex-col lg:flex-row lg:gap-12 gap-8">
             {footerSections.map((section) => (
