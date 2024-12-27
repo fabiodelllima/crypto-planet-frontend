@@ -13,7 +13,7 @@ import iconLinkedin from "../../assets/networks/linkedin.svg";
 const Footer = () => {
   return (
     <footer className="bg-container">
-      <section className="px-8 pb-8 pt-14 lg:pt-20 bg-container text-white max-w-7xl mx-auto">
+      <section className="px-8 pt-14 lg:pt-20 bg-container text-white max-w-7xl mx-auto">
         <section className="flex flex-col pb-6 lg:flex-row sm:justify-between lg:justify-evenly gap-14 lg:gap-8">
           <section className="flex flex-col gap-4 lg:w-1/4">
             <h2 className="text-lg font-bold">Crypto Planet</h2>
@@ -57,7 +57,7 @@ const Footer = () => {
             ))}
           </section>
         </section>
-        <section className="flex flex-col-reverse gap-8 pt-8 pb-10 lg:pb-8 items-center lg:justify-between lg:flex-row border-t border-borderGray">
+        <section className="flex flex-col-reverse gap-8 py-12 lg:py-14 items-center lg:justify-between lg:flex-row border-t border-borderGray">
           <section className="flex flex-col justify-between gap-2 lg:gap-2">
             <span className="text-xs text-greyPrimary">
               © 2024 Crypto Planet. All rights reserved.
