@@ -6,12 +6,12 @@ https://cryptoplanet-v2.vercel.app/
 ### Pendências
 | Funcionalidades               | Interface                              |
 |-------------------------------|----------------------------------------|
-| Paginação                     | ~Ícones no footer~  ✔                  |
-| Autenticação                  | Botões no header                       |
+| Paginação                     | ~Ícones no footer~ ✔                   |
+| ~Autenticação~ ✔              | Botões no header                       |
 | Gerar gráficos corretos       | Refatoração do componente Select       |
 | Calcular total                | Refatoração de detalhes nas tabelas    |
 | Validação com Zod no Login    | Correção no logo                       |
-| Validação com Zod em Registro | Página de registro                     |
+| Validação com Zod em Registro | ~Página de registro~ ✔                 |
 
 ## Instalação e configuração:
 
