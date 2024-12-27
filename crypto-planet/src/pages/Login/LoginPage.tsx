@@ -1,35 +1,30 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+
 import Input from "../../components/common/Input";
 import Button from "../../components/common/Button";
 
-interface LoginPageProps {
-  setIsAuthenticated: (value: boolean) => void;
-}
-
-const LoginPage = ({ setIsAuthenticated }: LoginPageProps) => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setIsLoading(true);
 
-    if (!email.includes("@") || email.length < 5) {
-      setError("Insira um email válido.");
-      return;
+    try {
+      await login(email, password);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "Failed to login");
+    } finally {
+      setIsLoading(false);
     }
-
-    if (password.length < 6) {
-      setError("A senha deve ter pelo menos 6 caracteres.");
-      return;
-    }
-
-    setIsAuthenticated(true);
-    navigate("/portfolio");
   };
 
   return (
@@ -38,7 +33,7 @@ const LoginPage = ({ setIsAuthenticated }: LoginPageProps) => {
         <h1 className="text-2xl font-bold text-white text-center mb-6">
           Login to Crypto Planet
         </h1>
-        <form className="space-y-6" onSubmit={handleLogin}>
+        <form className="space-y-6" onSubmit={handleSubmit}>
           <Input
             id="email"
             type="email"
@@ -58,23 +53,22 @@ const LoginPage = ({ setIsAuthenticated }: LoginPageProps) => {
             required
           />
           {error && <p className="text-red-500 text-sm">{error}</p>}
-          <Button styleType="primary" className="w-full">
-            Login
+          <Button
+            styleType="primary"
+            type="submit"
+            disabled={isLoading}
+            className="w-full"
+          >
+            {isLoading ? "Logging in..." : "Login"}
           </Button>
         </form>
         <div className="mt-6 text-center text-greyPrimary">
-          <p>
-            Forgot your password?{" "}
-            <a href="#" className="text-bluePrimary hover:underline">
-              Reset here
-            </a>
-          </p>
-          <p>
+          <span>
             Don't have an account?{" "}
-            <a href="#" className="text-bluePrimary hover:underline">
+            <Link to="/register" className="text-bluePrimary hover:underline">
               Register here
-            </a>
-          </p>
+            </Link>
+          </span>
         </div>
       </div>
     </div>
