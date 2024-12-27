@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 import Button from "../../components/common/Button";
 import Select from "../../components/common/Select";
+import UserInfo from "../common/UserInfo";
 
 const Header = () => {
+  const { user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -14,18 +17,16 @@ const Header = () => {
   };
 
   const navigation = [
-    { name: "Market", href: "/market", disabled: false },
-    { name: "Watchlist", href: null, disabled: true },
-    { name: "Portfolio", href: "/login", disabled: false },
-    { name: "Learn", href: null, disabled: true },
+    { name: "Market", href: "/market" },
+    { name: "Watchlist", href: "#" },
+    { name: "Portfolio", href: "/portfolio" },
+    { name: "Learn", href: "#" },
   ];
 
   const languageOptions = [
     { value: "english-usd", label: "English | USD" },
     { value: "pt-brl", label: "Português | BRL" },
   ];
-
-  const isPortfolio = location.pathname === "/portfolio";
 
   return (
     <header className="bg-background text-white border-b-2 border-greySecondary">
@@ -35,17 +36,16 @@ const Header = () => {
             <div className="w-9 h-1 bg-bluePrimary rounded-full ml-2"></div>
             <h1 className="text-xl font-bold ml-4">Crypto Planet</h1>
           </div>
+
           <nav className="hidden lg:flex items-center gap-8 pt-1">
             {navigation.map((item) => (
               <Link
                 key={item.name}
-                to={item.href || "#"}
+                to={item.href}
                 className={`${
                   location.pathname === item.href
                     ? "text-bluePrimary"
-                    : item.disabled
-                    ? "text-gray-600 pointer-events-none"
-                    : "text-white  hover:text-bluePrimary"
+                    : "text-white hover:text-bluePrimary"
                 }`}
               >
                 <div className="py-10 border-b-2 border-transparent hover:border-bluePrimary">
@@ -54,6 +54,7 @@ const Header = () => {
               </Link>
             ))}
           </nav>
+
           <div className="hidden lg:flex items-center gap-6">
             <Select
               options={languageOptions}
@@ -61,19 +62,12 @@ const Header = () => {
               className="bg-[#111] text-gray-400 border border-transparent hover:border-gray-700 rounded px-4 py-6"
             />
 
-            {isPortfolio ? (
+            {user ? (
               <>
                 <Button styleType="primary">Wallet</Button>
                 <Button styleType="secondary">Wallet</Button>
                 <div className="flex items-center gap-2">
-                  <div
-                    className="w-10 h-10 border border-bluePrimary bg-transparent text-bluePrimary font-bold flex items-center justify-center rounded-full"
-                    title="User Initial"
-                  >
-                    A
-                  </div>
-                  <span>Allie Grater</span>
-                  <button className="text-gray-400 hover:text-white">▼</button>
+                  <UserInfo user={user} />
                 </div>
               </>
             ) : (
@@ -87,13 +81,13 @@ const Header = () => {
                 <Button
                   styleType="primary"
                   onClick={() => navigate("/register")}
-                  className="bg-bluePrimary text-black"
                 >
                   Register
                 </Button>
               </>
             )}
           </div>
+
           <Button
             styleType="tertiary"
             onClick={toggleMenu}
@@ -109,23 +103,20 @@ const Header = () => {
               <ul className="flex flex-col gap-4">
                 {navigation.map((item) => (
                   <li key={item.name}>
-                    {!item.disabled && item.href ? (
-                      <Link
-                        to={item.href}
-                        className="text-white hover:text-bluePrimary"
-                      >
-                        {item.name}
-                      </Link>
-                    ) : (
-                      <span className="text-gray-600">{item.name}</span>
-                    )}
+                    <Link
+                      to={item.href}
+                      className="text-white hover:text-bluePrimary"
+                    >
+                      {item.name}
+                    </Link>
                   </li>
                 ))}
               </ul>
             </nav>
+
             <div className="mt-6 flex flex-col gap-4">
               <Select options={languageOptions} defaultValue="english-usd" />
-              {isPortfolio ? (
+              {user ? (
                 <>
                   <Button styleType="primary" className="w-full">
                     Wallet
@@ -138,15 +129,21 @@ const Header = () => {
                 <>
                   <Button
                     styleType="secondary"
-                    onClick={() => navigate("/login")}
                     className="w-full"
+                    onClick={() => {
+                      navigate("/login");
+                      setIsMenuOpen(false);
+                    }}
                   >
                     Sign in
                   </Button>
                   <Button
                     styleType="primary"
-                    onClick={() => navigate("/register")}
                     className="w-full bg-bluePrimary text-black"
+                    onClick={() => {
+                      navigate("/register");
+                      setIsMenuOpen(false);
+                    }}
                   >
                     Register
                   </Button>
