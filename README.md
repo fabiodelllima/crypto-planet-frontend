@@ -1,7 +1,9 @@
 # Crypto Planet
-> Projeto em desenvolvimento
+Projeto em desenvolvimento :wrench:
 
-https://cryptoplanet-v2.vercel.app/
+> Deploy sem as atualizações recentes: https://cryptoplanet-v2.vercel.app/
+
+> Branch atualizada: https://github.com/fabiodelllima/crypto-planet-frontend/tree/dev
 
 ### Pendências
 | Funcionalidades               | Interface                              |
