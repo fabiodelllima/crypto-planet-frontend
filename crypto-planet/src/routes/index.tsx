@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 
 import DefaultLayout from "../components/layout/DefaultLayout";
+import AuthLayout from "../components/layout/AuthLayout";
 import MarketPage from "../pages/Market/MarketPage";
 import Loading from "../components/common/Loading";
 
@@ -60,26 +61,28 @@ export function Router() {
           }
         />
       </Route>
-      <Route
-        path="/login"
-        element={
-          <PublicRoute>
-            <Suspense fallback={<Loading />}>
-              <LoginPage />
-            </Suspense>
-          </PublicRoute>
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <PublicRoute>
-            <Suspense fallback={<Loading />}>
-              <RegisterPage />
-            </Suspense>
-          </PublicRoute>
-        }
-      />
+      <Route element={<AuthLayout />}>
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Suspense fallback={<Loading />}>
+                <LoginPage />
+              </Suspense>
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Suspense fallback={<Loading />}>
+                <RegisterPage />
+              </Suspense>
+            </PublicRoute>
+          }
+        />
+      </Route>
     </Routes>
   );
 }
