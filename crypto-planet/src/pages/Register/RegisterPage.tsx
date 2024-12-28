@@ -66,74 +66,70 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-container flex items-center justify-center p-6">
-      <div className="w-full max-w-md bg-black rounded-lg shadow-lg p-8">
-        <h1 className="text-2xl font-bold text-white text-center mb-6">
-          Create Your Account
-        </h1>
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            label="Name"
-            placeholder="Enter your name"
-            value={formData.name}
-            onChange={handleChange}
-            disabled={isLoading}
-            required
-          />
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            label="Email"
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleChange}
-            disabled={isLoading}
-            required
-          />
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            label="Password"
-            placeholder="Enter your password"
-            value={formData.password}
-            onChange={handleChange}
-            disabled={isLoading}
-            required
-          />
-          <Input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            label="Confirm Password"
-            placeholder="Confirm your password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            disabled={isLoading}
-            required
-          />
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-          <Button
-            styleType="primary"
-            type="submit"
-            disabled={isLoading}
-            className="w-full"
-          >
-            {isLoading ? "Creating account..." : "Register"}
-          </Button>
-        </form>
-        <div className="mt-6 text-center text-greyPrimary">
-          <span>
-            Already have an account?{" "}
-            <Link to="/login" className="text-bluePrimary hover:underline">
-              Login here
-            </Link>
-          </span>
-        </div>
+    <div className="bg-black rounded-lg shadow-lg p-8">
+      <h1 className="text-2xl font-bold text-white mb-6">
+        Create Your Account
+      </h1>
+      <form className="space-y-6" onSubmit={handleSubmit}>
+        <Input
+          id="name"
+          name="name"
+          type="text"
+          label="Name"
+          placeholder="Enter your name"
+          value={formData.name}
+          onChange={handleChange}
+          disabled={isLoading}
+          required
+        />
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          label="Email"
+          placeholder="Enter your email"
+          value={formData.email}
+          onChange={handleChange}
+          disabled={isLoading}
+          required
+        />
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          label="Password"
+          placeholder="Enter your password"
+          value={formData.password}
+          onChange={handleChange}
+          disabled={isLoading}
+          required
+        />
+        <Input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          label="Confirm Password"
+          placeholder="Confirm your password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          disabled={isLoading}
+          required
+        />
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+        <Button
+          styleType="primary"
+          type="submit"
+          disabled={isLoading}
+          className="w-full"
+        >
+          {isLoading ? "Creating account..." : "Register"}
+        </Button>
+      </form>
+      <div className="flex flex-col mt-6 text-center text-greyPrimary">
+        <span>Already have an account? </span>
+        <Link to="/login" className="text-bluePrimary hover:underline">
+          Login here
+        </Link>
       </div>
     </div>
   );
