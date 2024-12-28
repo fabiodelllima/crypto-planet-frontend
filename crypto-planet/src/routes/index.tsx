@@ -33,7 +33,6 @@ export function Router() {
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<Navigate to="/market" replace />} />
-
         <Route
           path="/market"
           element={
@@ -42,29 +41,6 @@ export function Router() {
             </Suspense>
           }
         />
-
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <Suspense fallback={<Loading />}>
-                <LoginPage />
-              </Suspense>
-            </PublicRoute>
-          }
-        />
-
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <Suspense fallback={<Loading />}>
-                <RegisterPage />
-              </Suspense>
-            </PublicRoute>
-          }
-        />
-
         <Route
           path="/portfolio"
           element={
@@ -75,7 +51,6 @@ export function Router() {
             </PrivateRoute>
           }
         />
-
         <Route
           path="*"
           element={
@@ -85,6 +60,26 @@ export function Router() {
           }
         />
       </Route>
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <Suspense fallback={<Loading />}>
+              <LoginPage />
+            </Suspense>
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <PublicRoute>
+            <Suspense fallback={<Loading />}>
+              <RegisterPage />
+            </Suspense>
+          </PublicRoute>
+        }
+      />
     </Routes>
   );
 }
