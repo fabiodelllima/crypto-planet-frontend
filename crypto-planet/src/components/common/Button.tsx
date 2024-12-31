@@ -1,40 +1,93 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, useEffect, useRef, useState } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  styleType?: "primary" | "secondary" | "tertiary";
+  styleType?: "primary" | "secondary" | "tertiary" | "badge";
+  disabled?: boolean;
+  size?: "badge" | "x-small" | "small" | "medium" | "large";
+  iconSide?: "left" | "right";
+  loading?: boolean;
+  formButton?: boolean;
 }
 
 const Button = ({
-  styleType,
-  className,
+  styleType = "primary",
+  size = "medium",
+  className = "",
   disabled = false,
+  children,
+  iconSide,
+  loading = false,
+  formButton = false,
   ...props
 }: ButtonProps) => {
-  const getButtonStyles = () => {
-    const defaultButton = "px-10 py-5 rounded-lg font-medium transition";
-    const disabledButton = disabled ? "opacity-50 cursor-not-allowed" : "";
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const [style, setStyle] = useState("");
+  const [disabledStyle, setDisabledStyle] = useState("");
+  const [buttonSize, setButtonSize] = useState("");
 
-    let buttonStyle = "";
-
+  useEffect(() => {
     switch (styleType) {
       case "primary":
-        buttonStyle = `bg-bluePrimary text-white hover:bg-opacity-80 ${disabledButton}`;
+        setStyle("bg-bluePrimary text-white hover:bg-opacity-80");
+        setDisabledStyle(
+          "bg-bluePrimary text-white opacity-50 cursor-not-allowed"
+        );
         break;
       case "secondary":
-        buttonStyle = `bg-transparent border border-transparent text-bluePrimary hover:border-bluePrimary ${disabledButton}`;
+        setStyle(
+          "bg-transparent border border-transparent text-bluePrimary hover:border-bluePrimary"
+        );
+        setDisabledStyle(
+          "bg-transparent border border-transparent text-bluePrimary opacity-50 cursor-not-allowed"
+        );
         break;
       case "tertiary":
-        buttonStyle = `bg-transparent text-greyPrimary hover:text-white px-2 ${disabledButton}`;
+        setStyle("bg-transparent text-greyPrimary hover:text-white px-2");
+        setDisabledStyle(
+          "bg-transparent text-greyPrimary px-2 opacity-50 cursor-not-allowed"
+        );
         break;
-      default:
-        buttonStyle = `bg-transparent text-greyPrimary border border-greySecondary rounded-lg hover:text-bluePrimary hover:border-bluePrimary ${disabledButton}`;
+      case "badge":
+        setStyle(
+          "bg-black border border-greySecondary hover:border-b-greyPrimary"
+        );
+        setDisabledStyle(
+          "bg-black border border-greySecondary opacity-50 cursor-not-allowed"
+        );
     }
 
-    return `${defaultButton} ${buttonStyle} ${className}`;
-  };
+    switch (size) {
+      case "large":
+        setButtonSize("px-10 py-5 rounded-lg");
+        break;
+      case "medium":
+        setButtonSize("px-10 py-5 rounded-lg");
+        break;
+      case "small":
+        setButtonSize("px-6 py-3 rounded-lg");
+        break;
+      case "x-small":
+        setButtonSize("px-4 py-2 rounded-lg");
+        break;
+      case "badge":
+        setButtonSize("px-0 py-1 rounded-lg");
+        break;
+    }
+  }, [styleType, size]);
 
   return (
-    <button {...props} disabled={disabled} className={getButtonStyles()} />
+    <button
+      {...props}
+      ref={formButton ? buttonRef : null}
+      disabled={disabled || loading}
+      className={`font-medium transition ${buttonSize} ${className} ${
+        disabled || loading ? disabledStyle : style
+      }`}
+    >
+      {iconSide === "left" && children}
+      {loading ? <div className="loader" /> : children}
+      {iconSide === "right" && children}
+    </button>
   );
 };
 
