@@ -68,20 +68,21 @@ const Footer = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nibh
               aenean nisl condimentum. Lorem sed nisl condimentum.
             </p>
+
             <div className="flex gap-5 pt-2 items-center">
-              <Button className="p-2 bg-transparent hover:bg-greySecondary rounded-lg">
+              <Button styleType="footerIcon" size="footerIcon">
                 <img src={iconFacebook} className="w-5" />
               </Button>
-              <Button className="p-2 bg-transparent hover:bg-greySecondary rounded-lg">
+              <Button styleType="footerIcon" size="footerIcon">
                 <img src={iconInstagram} className="w-5" />
               </Button>
-              <Button className="p-2 bg-transparent hover:bg-greySecondary rounded-lg">
+              <Button styleType="footerIcon" size="footerIcon">
                 <img src={iconYoutube} className="w-5" />
               </Button>
-              <Button className="p-2 bg-transparent hover:bg-greySecondary rounded-lg">
+              <Button styleType="footerIcon" size="footerIcon">
                 <img src={iconTwitter} className="w-5" />
               </Button>
-              <Button className="p-1 bg-transparent hover:bg-greySecondary rounded-lg">
+              <Button styleType="footerIcon" size="footerIcon">
                 <img src={iconLinkedin} className="w-7" />
               </Button>
             </div>

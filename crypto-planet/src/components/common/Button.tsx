@@ -1,9 +1,9 @@
 import { ButtonHTMLAttributes, useEffect, useRef, useState } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  styleType?: "primary" | "secondary" | "tertiary" | "badge";
+  styleType?: "primary" | "secondary" | "tertiary" | "badge" | "footerIcon";
   disabled?: boolean;
-  size?: "badge" | "x-small" | "small" | "medium" | "large";
+  size?: "footerIcon" | "badge" | "x-small" | "small" | "medium" | "large";
   iconSide?: "left" | "right";
   loading?: boolean;
   formButton?: boolean;
@@ -54,6 +54,10 @@ const Button = ({
         setDisabledStyle(
           "bg-black border border-greySecondary opacity-50 cursor-not-allowed"
         );
+        break;
+      case "footerIcon":
+        setStyle("bg-transparent hover:bg-greySecondary");
+        break;
     }
 
     switch (size) {
@@ -71,6 +75,9 @@ const Button = ({
         break;
       case "badge":
         setButtonSize("px-0 py-1 rounded-lg");
+        break;
+      case "footerIcon":
+        setButtonSize("p-2 rounded-lg");
         break;
     }
   }, [styleType, size]);
