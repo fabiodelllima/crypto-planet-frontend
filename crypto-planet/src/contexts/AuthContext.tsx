@@ -1,15 +1,22 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { IUser } from "../interfaces/auth.interface";
-import { StorageUtils } from "../utils/storage.util";
 import { AuthContext } from "./AuthContextInstance";
+import { ADMIN_CREDENTIALS } from "../constants/admin";
+import { IUser } from "../interfaces/auth.interface";
+import {
+  getCurrentUser,
+  getUsers,
+  saveUser,
+  setCurrentUser,
+} from "../utils/storage.util";
+import { randomId } from "../utils/helpers.utils";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<IUser | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const savedUser = StorageUtils.getCurrentUser();
+    const savedUser = getCurrentUser();
     if (savedUser) {
       setUser(savedUser);
     }
@@ -23,7 +30,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string) => {
     try {
-      const users = StorageUtils.getUsers();
+      if (
+        email === ADMIN_CREDENTIALS.email &&
+        password === ADMIN_CREDENTIALS.password
+      ) {
+        setUser(ADMIN_CREDENTIALS);
+        setCurrentUser(ADMIN_CREDENTIALS);
+        navigate("/portfolio");
+        return;
+      }
+
+      const users = getUsers();
       const foundUser = users.find(
         (user) => user.email === email && user.password === password
       );
@@ -33,30 +50,43 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       setUser(foundUser);
-      StorageUtils.setCurrentUser(foundUser);
+      setCurrentUser(foundUser);
       navigate("/portfolio");
     } catch (error) {
       console.log(error);
+      throw error;
     }
   };
 
   const register = async (userData: Omit<IUser, "id">) => {
     try {
-      const users = StorageUtils.getUsers();
+      if (userData.email === ADMIN_CREDENTIALS.email) {
+        throw new Error("This email is not available");
+      }
 
+      const users = getUsers();
       if (users.some((user) => user.email === userData.email)) {
         throw new Error("Email already registered");
       }
 
       const newUser = {
         ...userData,
-        id: crypto.randomUUID(),
+        id: randomId(),
+        isAdmin: false,
+        portfolio: {
+          total: 0,
+          totalDeposited: 0,
+          totalWithdrawn: 0,
+          lastUpdate: new Date().toLocaleDateString(),
+          transactions: [],
+        },
       };
 
-      StorageUtils.saveUser(newUser);
+      saveUser(newUser);
       navigate("/login");
     } catch (error) {
       console.log(error);
+      throw error;
     }
   };
 
@@ -65,6 +95,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       value={{
         user,
         isAuthenticated: !!user,
+        isAdmin: user?.isAdmin || false,
         login,
         register,
       }}
