@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import Button from "../../components/common/Button";
 import Input from "../../components/common/Input";
+import Tooltip from "../../components/common/Tooltip";
 
 const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -67,9 +68,28 @@ const RegisterPage = () => {
 
   return (
     <div className="bg-black rounded-lg shadow-lg p-8">
-      <h1 className="text-2xl font-bold text-white mb-6">
-        Create Your Account
-      </h1>
+      <div className="flex gap-2 justify-between">
+        <h1 className="text-2xl font-bold text-white mb-6">
+          Create Your Account
+        </h1>
+        <Tooltip
+          className="mr-1"
+          text={
+            <div className="flex flex-col space-y-5">
+              <p>O acesso pode ser feito de duas maneiras:</p>
+              <div className="flex flex-col">
+                <strong>1. Conta Admin:</strong>
+                <span>Email: admin@email.com</span>
+                <span>Password: admin</span>
+              </div>
+              <div className="flex flex-col">
+                <strong>2. Conta Pessoal:</strong>
+                <p>Crie uma conta pessoal na página de registro.</p>
+              </div>
+            </div>
+          }
+        />
+      </div>
       <form className="space-y-6" onSubmit={handleSubmit}>
         <Input
           id="name"
@@ -126,7 +146,7 @@ const RegisterPage = () => {
         </Button>
       </form>
       <div className="flex flex-col mt-6 text-center text-greyPrimary">
-        <span>Already have an account? </span>
+        <span>Already have an account?</span>
         <Link to="/login" className="text-bluePrimary hover:underline">
           Login here
         </Link>
