@@ -1,10 +1,23 @@
 import { ButtonHTMLAttributes, useEffect, useRef, useState } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  styleType?: "primary" | "secondary" | "tertiary" | "badge" | "footerIcon";
-  disabled?: boolean;
-  size?: "footerIcon" | "badge" | "x-small" | "small" | "medium" | "large";
+  styleType?:
+    | "primary"
+    | "secondary"
+    | "tertiary"
+    | "badge"
+    | "footerIcon"
+    | "floating";
+  size?:
+    | "footerIcon"
+    | "badge"
+    | "x-small"
+    | "small"
+    | "medium"
+    | "large"
+    | "floating";
   iconSide?: "left" | "right";
+  disabled?: boolean;
   loading?: boolean;
   formButton?: boolean;
 }
@@ -58,6 +71,11 @@ const Button = ({
       case "footerIcon":
         setStyle("bg-transparent hover:bg-greySecondary");
         break;
+      case "floating":
+        setStyle(
+          "fixed right-4 bottom-4 bg-bluePrimary rounded-full flex items-center justify-center text-white shadow-lg lg:hidden hover:bg-opacity-80"
+        );
+        break;
     }
 
     switch (size) {
@@ -78,6 +96,9 @@ const Button = ({
         break;
       case "footerIcon":
         setButtonSize("p-2 rounded-lg");
+        break;
+      case "floating":
+        setButtonSize("w-12 h-12");
         break;
     }
   }, [styleType, size]);
