@@ -1,9 +1,13 @@
 # Crypto Planet
-Projeto em desenvolvimento :wrench:
+> Projeto em desenvolvimento
 
-> Deploy sem as atualizações recentes: https://cryptoplanet-v2.vercel.app/
+> https://cryptoplanet-v2.vercel.app/
 
-> Branch atualizada: https://github.com/fabiodelllima/crypto-planet-frontend/tree/dev
+- Instruções para logar na plataforma em [Autenticação](#autenticação)
+
+<br>
+
+<div align="center">
 
 ### Pendências
 | Funcionalidades               | Interface                              |
@@ -15,8 +19,11 @@ Projeto em desenvolvimento :wrench:
 | Validação com Zod no Login    | Correção no logo                       |
 | Validação com Zod em Registro | ~Página de registro~ ✔                 |
 
-## Instalação e configuração:
+</div>
 
+<br>
+
+## Instalação
 #### 1. Clone o repositório
 
 ```bash
@@ -59,3 +66,13 @@ npm run build
 # Utilizando Yarn:
 yarn build
 ```
+
+## Autenticação
+A plataforma oferece duas maneiras de acesso:
+
+1. **Conta Administrador**:
+   - **Email:** `admin@email.com`
+   - **Senha:** `admin`
+
+2. **Conta Pessoal**:
+   - Criada diretamente na página de registro.
