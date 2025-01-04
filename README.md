@@ -24,48 +24,49 @@
 <br>
 
 ## Instalação
-#### 1. Clone o repositório
 
-```bash
-git clone https://github.com/fabiodelllima/crypto-planet-frontend.git
-```
+1. Clone este repositório:
+   **Via SSH**:
+     ```bash
+     git clone git@github.com:yourusername/update-all-script.git
+     ```
+   **Via HTTPS**:
+     ```bash
+     git clone https://github.com/yourusername/update-all-script.git
+     ```
 
-#### 2. Entre no diretório
+2. Entre no diretório:
+   ```bash
+   cd crypto-planet-frontend
+   cd crypto-planet
+   ```
 
-```bash
-cd crypto-planet-frontend
-cd crypto-planet
-```
+3. Instale as dependências:
+   ```bash
+   # Utilizando NPM:
+   npm install
 
-#### 3. Instale as dependências
+   # Utilizando Yarn:
+   yarn install
+   ```
 
-```bash
-# Utilizando NPM:
-npm install
+4. Inicie o servidor de desenvolvimento:
+   ```bash
+   # Utilizando NPM:
+   npm run dev
 
-# Utilizando Yarn:
-yarn install
-```
+   # Utilizando Yarn:
+   yarn dev
+   ```
 
-#### 4. Inicie o servidor de desenvolvimento
+5. Build para produção:
+   ```bash
+   # Utilizando NPM:
+   npm run build
 
-```bash
-# Utilizando NPM:
-npm run dev
-
-# Utilizando Yarn
-yarn dev
-```
-
-#### 5. Build para produção
-
-```bash
-# Utilizando NPM:
-npm run build
-
-# Utilizando Yarn:
-yarn build
-```
+   # Utilizando Yarn:
+   yarn build
+   ```
 
 ## Autenticação
 A plataforma oferece duas maneiras de acesso:
