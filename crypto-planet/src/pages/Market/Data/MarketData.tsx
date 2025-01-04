@@ -1,5 +1,6 @@
 import { IMarket } from "../../../interfaces/market.interfaces";
-import { generateChartData, randomId } from "../../../utils/helpers.utils";
+import { randomId } from "../../../utils/common/id.utils";
+import { generateChartData } from "../../../utils/domain/chart.utils";
 
 export const cryptoCardsData = [
   {

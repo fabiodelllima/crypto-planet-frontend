@@ -1,9 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { LineChart, Line } from "recharts";
 import { IMarket } from "../../../interfaces/market.interfaces";
-import { formatNumber, generateChartData } from "../../../utils/helpers.utils";
 
 import StarIcon from "../../../assets/icons/star.svg";
+import { formatNumber } from "../../../utils/common/number.utils";
+import { generateChartData } from "../../../utils/domain/chart.utils";
 
 const columns: ColumnDef<IMarket, string | number | boolean>[] = [
   {
