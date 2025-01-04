@@ -2,7 +2,7 @@ import {
   IPortfolioBalance,
   IPortfolioTransaction,
 } from "../../../interfaces/portfolio.interfaces";
-import { randomId } from "../../../utils/helpers.utils";
+import { randomId } from "../../../utils/common/id.utils";
 
 export const transactionsData: IPortfolioTransaction[] = [
   {
