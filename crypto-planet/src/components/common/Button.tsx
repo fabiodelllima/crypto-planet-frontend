@@ -73,7 +73,7 @@ const Button = ({
         break;
       case "floating":
         setStyle(
-          "fixed right-4 bottom-4 bg-bluePrimary rounded-full flex items-center justify-center text-white shadow-lg lg:hidden hover:bg-opacity-80"
+          "fixed right-8 bottom-8 bg-bluePrimary rounded-full flex items-center justify-center text-white shadow-lg lg:hidden hover:bg-opacity-90"
         );
         break;
     }
@@ -98,7 +98,7 @@ const Button = ({
         setButtonSize("p-2 rounded-lg");
         break;
       case "floating":
-        setButtonSize("w-12 h-12");
+        setButtonSize("w-20 h-20 rounded-full");
         break;
     }
   }, [styleType, size]);

@@ -120,7 +120,11 @@ const PortfolioPage = () => {
         </div>
       </div>
 
-      <Button onClick={() => setIsPaymentModalOpen(true)} styleType="floating">
+      <Button
+        onClick={() => setIsPaymentModalOpen(true)}
+        styleType="floating"
+        size="floating"
+      >
         <span className="text-2xl">+</span>
       </Button>
       <Modal
