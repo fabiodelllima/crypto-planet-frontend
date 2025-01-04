@@ -5,8 +5,6 @@
 
 - Instruções para logar na plataforma em [Autenticação](#autenticação)
 
-<br>
-
 <div align="center">
 
 ### Pendências
@@ -20,8 +18,6 @@
 | Validação com Zod em Registro | ~Página de registro~ ✔                 |
 
 </div>
-
-<br>
 
 ## Instalação
 
