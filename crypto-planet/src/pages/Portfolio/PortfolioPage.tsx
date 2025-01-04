@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { IPortfolioTransaction } from "../../interfaces/portfolio.interfaces";
 import { randomId } from "../../utils/common/id.utils";
 import { useAuth } from "../../hooks/useAuth";
@@ -7,10 +7,12 @@ import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import PaymentForm from "../../components/common/PaymentForm";
 import Container from "../../components/common/Container";
-import Loading from "../../components/common/Loading";
 import PortfolioTable from "./Table/PortfolioTable";
 import EyeHideIcon from "../../assets/icons/eye-hide.svg";
 import EyeShowIcon from "../../assets/icons/eye-show.svg";
+
+import { calculatePortfolioTotals } from "../../utils/domain/portfolio.utils";
+import { updateUserTransactions } from "../../utils/storage/auth.storage.utils";
 
 const PortfolioPage = () => {
   const { user } = useAuth();
@@ -19,6 +21,10 @@ const PortfolioPage = () => {
   const [transactions, setTransactions] = useState<IPortfolioTransaction[]>(
     user?.portfolio?.transactions || []
   );
+
+  const portfolioTotals = useMemo(() => {
+    return calculatePortfolioTotals(transactions);
+  }, [transactions]);
 
   const handleAddMoney = (amount: number) => {
     const newTransaction: IPortfolioTransaction = {
@@ -34,12 +40,13 @@ const PortfolioPage = () => {
     };
 
     setTransactions((prev) => [newTransaction, ...prev]);
+
+    if (user?.email) {
+      updateUserTransactions(user.email, [newTransaction, ...transactions]);
+    }
+
     setIsPaymentModalOpen(false);
   };
-
-  if (!user?.portfolio) {
-    return <Loading />;
-  }
 
   return (
     <section className="min-h-screen bg-[#111] text-white">
@@ -51,7 +58,7 @@ const PortfolioPage = () => {
                 <div>
                   <h2 className="text-xl font-bold">Wallet</h2>
                   <p className="text-gray-400 text-sm">
-                    Updated {user.portfolio.lastUpdate}
+                    Updated {user?.portfolio?.lastUpdate}
                   </p>
                 </div>
                 <div className="flex flex-row gap-2 w-full md:w-auto">
@@ -72,8 +79,8 @@ const PortfolioPage = () => {
                     <span className="text-2xl font-bold">
                       $
                       {hideBalance
-                        ? "****"
-                        : user.portfolio.total.toLocaleString()}
+                        ? "******"
+                        : portfolioTotals.total.toLocaleString()}
                     </span>
                     <button
                       onClick={() => setHideBalance(!hideBalance)}
@@ -94,14 +101,14 @@ const PortfolioPage = () => {
                       <span>Total Deposited</span>
                     </div>
                     <span className="text-xl">
-                      ${user.portfolio.totalDeposited.toLocaleString()}
+                      ${portfolioTotals.totalDeposited.toLocaleString()}
                     </span>
                   </div>
                   <div>
                     <div className="flex flex-col gap-2 text-gray-400 mb-2">
                       <span>↑ Total Withdrawals</span>
                       <span className="text-xl text-white">
-                        ${user.portfolio.totalWithdrawn.toLocaleString()}
+                        ${portfolioTotals.totalWithdrawn.toLocaleString()}
                       </span>
                     </div>
                   </div>
