@@ -10,10 +10,7 @@ export const ADMIN_CREDENTIALS: IUser = {
   password: "admin",
   isAdmin: true,
   portfolio: {
-    total: portfolioData.total,
-    totalDeposited: portfolioData.totalDeposited,
-    totalWithdrawn: portfolioData.totalWithdrawn,
-    lastUpdate: portfolioData.lastUpdate,
+    ...portfolioData,
     transactions: transactionsData,
   },
 };

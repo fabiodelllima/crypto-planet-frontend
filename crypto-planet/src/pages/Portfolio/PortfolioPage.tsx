@@ -1,21 +1,24 @@
 import { useState } from "react";
-import { portfolioData, transactionsData } from "./Data/PortfolioData";
 import { IPortfolioTransaction } from "../../interfaces/portfolio.interfaces";
 import { randomId } from "../../utils/helpers.utils";
+import { useAuth } from "../../hooks/useAuth";
 
 import Button from "../../components/common/Button";
 import Modal from "../../components/common/Modal";
 import PaymentForm from "../../components/common/PaymentForm";
-import PortfolioTable from "./Table/PortfolioTable";
 import Container from "../../components/common/Container";
+import Loading from "../../components/common/Loading";
+import PortfolioTable from "./Table/PortfolioTable";
 import EyeHideIcon from "../../assets/icons/eye-hide.svg";
 import EyeShowIcon from "../../assets/icons/eye-show.svg";
 
 const PortfolioPage = () => {
+  const { user } = useAuth();
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [hideBalance, setHideBalance] = useState(false);
-  const [transactions, setTransactions] =
-    useState<IPortfolioTransaction[]>(transactionsData);
+  const [transactions, setTransactions] = useState<IPortfolioTransaction[]>(
+    user?.portfolio?.transactions || []
+  );
 
   const handleAddMoney = (amount: number) => {
     const newTransaction: IPortfolioTransaction = {
@@ -29,9 +32,14 @@ const PortfolioPage = () => {
       }),
       status: "Succesful",
     };
+
     setTransactions((prev) => [newTransaction, ...prev]);
     setIsPaymentModalOpen(false);
   };
+
+  if (!user?.portfolio) {
+    return <Loading />;
+  }
 
   return (
     <section className="min-h-screen bg-[#111] text-white">
@@ -43,7 +51,7 @@ const PortfolioPage = () => {
                 <div>
                   <h2 className="text-xl font-bold">Wallet</h2>
                   <p className="text-gray-400 text-sm">
-                    Updated {portfolioData.lastUpdate}
+                    Updated {user.portfolio.lastUpdate}
                   </p>
                 </div>
                 <div className="flex flex-row gap-2 w-full md:w-auto">
@@ -65,16 +73,16 @@ const PortfolioPage = () => {
                       $
                       {hideBalance
                         ? "****"
-                        : portfolioData.total.toLocaleString()}
+                        : user.portfolio.total.toLocaleString()}
                     </span>
                     <button
                       onClick={() => setHideBalance(!hideBalance)}
                       className="text-gray-400 hover:text-white"
                     >
                       {hideBalance ? (
-                        <img src={EyeShowIcon} />
+                        <img src={EyeShowIcon} alt="Show balance" />
                       ) : (
-                        <img src={EyeHideIcon} />
+                        <img src={EyeHideIcon} alt="Hide balance" />
                       )}
                     </button>
                   </div>
@@ -86,14 +94,14 @@ const PortfolioPage = () => {
                       <span>Total Deposited</span>
                     </div>
                     <span className="text-xl">
-                      ${portfolioData.totalDeposited.toLocaleString()}
+                      ${user.portfolio.totalDeposited.toLocaleString()}
                     </span>
                   </div>
                   <div>
                     <div className="flex flex-col gap-2 text-gray-400 mb-2">
                       <span>↑ Total Withdrawals</span>
                       <span className="text-xl text-white">
-                        ${portfolioData.totalWithdrawn.toLocaleString()}
+                        ${user.portfolio.totalWithdrawn.toLocaleString()}
                       </span>
                     </div>
                   </div>
@@ -111,12 +119,10 @@ const PortfolioPage = () => {
           </Container>
         </div>
       </div>
-      <button
-        onClick={() => setIsPaymentModalOpen(true)}
-        className="fixed right-4 bottom-4 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white shadow-lg lg:hidden"
-      >
+
+      <Button onClick={() => setIsPaymentModalOpen(true)} styleType="floating">
         <span className="text-2xl">+</span>
-      </button>
+      </Button>
       <Modal
         isOpen={isPaymentModalOpen}
         onClose={() => setIsPaymentModalOpen(false)}

@@ -1,18 +1,19 @@
-import { ADMIN_CREDENTIALS } from "../constants/admin";
 import { IUser } from "../interfaces/auth.interface";
+import { ADMIN_CREDENTIALS } from "../constants/admin";
 import { IPortfolioTransaction } from "../interfaces/portfolio.interfaces";
+import { randomId } from "./helpers.utils";
 
 const USERS_KEY = "users";
 const CURRENT_USER_KEY = "currentUser";
 
-export function getCurrentUser(): IUser | null {
-  const userStr = localStorage.getItem(CURRENT_USER_KEY);
-  return userStr ? JSON.parse(userStr) : null;
-}
-
 export function getUsers(): IUser[] {
   const usersStr = localStorage.getItem(USERS_KEY);
   return usersStr ? JSON.parse(usersStr) : [];
+}
+
+export function getCurrentUser(): IUser | null {
+  const userStr = localStorage.getItem(CURRENT_USER_KEY);
+  return userStr ? JSON.parse(userStr) : null;
 }
 
 export function saveUser(user: IUser): void {
@@ -22,18 +23,30 @@ export function saveUser(user: IUser): void {
 
   const users = getUsers();
 
-  const newUser = {
+  const initialTransaction: IPortfolioTransaction = {
+    id: randomId(),
+    action: "Deposited",
+    amount: 100,
+    date: new Date().toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+    }),
+    status: "Succesful",
+  };
+
+  const newUser: IUser = {
     ...user,
     portfolio: {
-      total: 0,
-      totalDeposited: 0,
+      total: 100,
+      totalDeposited: 100,
       totalWithdrawn: 0,
       lastUpdate: new Date().toLocaleDateString("en-US", {
         year: "numeric",
         month: "short",
         day: "2-digit",
       }),
-      transactions: [],
+      transactions: [initialTransaction],
     },
   };
 
