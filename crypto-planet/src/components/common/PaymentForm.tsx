@@ -2,14 +2,13 @@ import { useState } from "react";
 
 import Input from "./Input";
 import Button from "./Button";
-import Container from "./Container";
 
 interface PaymentFormProps {
   onSubmit: (amount: number) => void;
   className?: string;
 }
 
-const PaymentForm = ({ onSubmit, className }: PaymentFormProps) => {
+const PaymentForm = ({ onSubmit }: PaymentFormProps) => {
   const [amount, setAmount] = useState<string>("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -22,8 +21,8 @@ const PaymentForm = ({ onSubmit, className }: PaymentFormProps) => {
   };
 
   return (
-    <Container className={`space-y-4 ${className}`}>
-      <h2 className="text-xl font-bold text-textPrimary">
+    <div className={`space-y-4`}>
+      <h2 className="text-xl font-bold text-white">
         Select Currency and Payment
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -37,7 +36,7 @@ const PaymentForm = ({ onSubmit, className }: PaymentFormProps) => {
           required
         />
         <div>
-          <p className="mb-2 text-textSecondary">Choose Payment method:</p>
+          <p className="mb-2 text-greyPrimary">Choose Payment method:</p>
           <label className="flex items-center gap-2">
             <input type="radio" name="payment" value="card" defaultChecked />
             <span>Credit & Debit Card</span>
@@ -48,11 +47,11 @@ const PaymentForm = ({ onSubmit, className }: PaymentFormProps) => {
           <Input label="Valid" placeholder="MM/YY" required />
           <Input label="CVV" placeholder="123" required />
         </div>
-        <Button type="submit" className="w-full">
+        <Button styleType="primary" type="submit" className="w-full">
           Add Money
         </Button>
       </form>
-    </Container>
+    </div>
   );
 };
 

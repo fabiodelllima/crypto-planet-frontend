@@ -1,16 +1,17 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { LineChart, Line } from "recharts";
 import { IMarket } from "../../../interfaces/market.interfaces";
-import { formatNumber, generateChartData } from "../../../utils/helpers.utils";
 
 import StarIcon from "../../../assets/icons/star.svg";
+import { formatNumber } from "../../../utils/common/number.utils";
+import { generateChartData } from "../../../utils/domain/chart.utils";
 
 const columns: ColumnDef<IMarket, string | number | boolean>[] = [
   {
     accessorKey: "favorite",
     header: "",
     cell: () => (
-      <div className="w-[45px] px-4">
+      <div className="w-[50px] px-4">
         <img src={StarIcon} alt="Favorite" />
       </div>
     ),
@@ -19,7 +20,7 @@ const columns: ColumnDef<IMarket, string | number | boolean>[] = [
     accessorKey: "rank",
     header: "#",
     cell: (info) => (
-      <div className="w-[40px] px-4 text-gray-300">
+      <div className="w-[40px] px-4 text-grey-300">
         {info.getValue() ?? "-"}
       </div>
     ),
@@ -30,9 +31,9 @@ const columns: ColumnDef<IMarket, string | number | boolean>[] = [
     cell: (info) => (
       <div className="min-w-[200px] px-4">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-full bg-blueAccent"></div>
+          <div className="w-6 h-6 rounded-full bg-bluePrimary"></div>
           <span className="text-gray-300">{info.getValue() ?? "-"}</span>
-          <span className="text-blueAccent">
+          <span className="text-bluePrimary">
             {info.row.original.symbol ?? "-"}
           </span>
         </div>

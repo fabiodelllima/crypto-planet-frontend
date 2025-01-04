@@ -1,6 +1,8 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { IPortfolioTransaction } from "../../../interfaces/portfolio.interfaces";
 
+import CreditCard from "../../../assets/icons/credit-card.svg";
+
 const columnHelper = createColumnHelper<IPortfolioTransaction>();
 
 export const columns = [
@@ -8,14 +10,7 @@ export const columns = [
     header: "Action",
     cell: (info) => (
       <div className="flex items-center gap-2">
-        <img
-          src={
-            info.getValue() === "Deposited"
-              ? "/icons/arrow-down.svg"
-              : "/icons/arrow-up.svg"
-          }
-          alt="X"
-        />
+        <img src={CreditCard} />
         <span>{info.getValue()}</span>
       </div>
     ),

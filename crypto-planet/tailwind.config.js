@@ -4,11 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        blueAccent: "#4F46E5",
+        bluePrimary: "#2563EB",
         background: "#121318",
+        backgroundMain: "#131313",
         container: "#1A1C20",
-        textPrimary: "#FFFFFF",
-        textSecondary: "#A1A1A6",
+        white: "#FFFFFF",
+        greyPrimary: "#9CA3AF",
+        greySecondary: "#2A2C30",
         inputBackground: "#1A1C20",
         borderGray: "#A1A1A6",
         positive: "#00FF85",

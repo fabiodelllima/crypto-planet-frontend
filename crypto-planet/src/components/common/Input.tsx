@@ -6,11 +6,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 const Input = ({ label, icon, ...props }: InputProps) => {
   return (
     <div className="flex flex-col gap-2">
-      {label && <label className="text-textSecondary text-sm">{label}</label>}
+      {label && <label className="text-greyPrimary text-sm">{label}</label>}
       <div className="relative">
         <input
           {...props}
-          className="w-full p-3 bg-inputBackground border border-borderGray text-textPrimary rounded-lg placeholder-textSecondary"
+          className="w-full p-3 bg-inputBackground border border-borderGray text-white rounded-lg placeholder-greyPrimary"
         />
         {icon && (
           <img

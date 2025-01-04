@@ -1,6 +1,8 @@
 import { useState } from "react";
+
 import Input from "../../../components/common/Input";
 import Select from "../../../components/common/Select";
+import SearchIcon from "../../../assets/icons/search.svg";
 import {
   IMarketFilters,
   TQuickFilter,
@@ -40,8 +42,8 @@ const MarketTableFilters = ({ onFiltersChange }: MarketTableFiltersProps) => {
 
   return (
     <div className="space-y-4">
-      <div className="hidden md:flex justify-between items-center">
-        <div className="flex gap-2 overflow-x-auto">
+      <div className="hidden md:flex gap-4 justify-between items-center">
+        <div className="flex gap-2 overflow-x-hidden">
           {quickFilters.map((filter) => (
             <button
               key={filter.value}
@@ -51,9 +53,9 @@ const MarketTableFilters = ({ onFiltersChange }: MarketTableFiltersProps) => {
               }}
               className={`px-4 py-2 rounded border ${
                 activeFilter === filter.value
-                  ? "border-blue-500 text-blue-500"
+                  ? "border-bluePrimary text-bluePrimary"
                   : "border-gray-700 text-gray-400"
-              } bg-[#111] whitespace-nowrap hover:border-gray-600 transition-colors`}
+              } bg-[#111] whitespace-nowrap hover:border-bluePrimary hover:text-bluePrimary transition-colors`}
             >
               {filter.label}
             </button>
@@ -75,7 +77,7 @@ const MarketTableFilters = ({ onFiltersChange }: MarketTableFiltersProps) => {
               setSearchTerm(e.target.value);
               updateFilters({ search: e.target.value });
             }}
-            icon="/icons/search.svg"
+            icon={SearchIcon}
           />
         </div>
       </div>
@@ -100,7 +102,7 @@ const MarketTableFilters = ({ onFiltersChange }: MarketTableFiltersProps) => {
             setSearchTerm(e.target.value);
             updateFilters({ search: e.target.value });
           }}
-          icon="/icons/search.svg"
+          icon={SearchIcon}
         />
       </div>
       <div className="hidden md:flex justify-between items-center border-b border-gray-800">
@@ -128,16 +130,16 @@ const MarketTableFilters = ({ onFiltersChange }: MarketTableFiltersProps) => {
               setItemsPerPage(value);
               updateFilters({ itemsPerPage: value });
             }}
-            className="bg-[#111] text-gray-400 border border-gray-700 rounded px-3 py-2"
+            className="bg-[#111] text-gray-400 rounded px-3 py-2"
           >
             <option value={20}>Show 20</option>
             <option value={50}>Show 50</option>
           </select>
           <div className="hidden md:flex items-center gap-2">
-            <button className="p-2 border border-gray-700 rounded">☰</button>
-            <button className="p-2 border border-gray-700 rounded">⊞</button>
+            <button className="p-2 text-greyPrimary">☰</button>
+            <button className="p-2 text-greyPrimary">⊞</button>
           </div>
-          <button className="hidden md:flex items-center gap-2 text-gray-400">
+          <button className="hidden md:flex items-center gap-2 text-greyPrimary">
             Customize
           </button>
           <button
@@ -151,7 +153,7 @@ const MarketTableFilters = ({ onFiltersChange }: MarketTableFiltersProps) => {
                 itemsPerPage: 20,
               });
             }}
-            className="flex items-center gap-2 text-gray-400"
+            className="flex items-center gap-2 text-greyPrimary"
           >
             × Clear Filter
           </button>

@@ -1,74 +1,155 @@
+import { useState } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
+
+import Button from "../../components/common/Button";
+import Input from "../../components/common/Input";
+import Tooltip from "../../components/common/Tooltip";
+
 const RegisterPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const { register } = useAuth();
+
+  const validateForm = () => {
+    if (!formData.name.trim()) {
+      throw new Error("Name is required");
+    }
+    if (formData.name.trim().length < 3) {
+      throw new Error("Name must be at least 3 characters");
+    }
+    if (!formData.email.includes("@")) {
+      throw new Error("Invalid email address");
+    }
+    if (formData.password.length < 6) {
+      throw new Error("Password must be at least 6 characters");
+    }
+    if (formData.password !== formData.confirmPassword) {
+      throw new Error("Passwords don't match");
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setIsLoading(true);
+
+    try {
+      validateForm();
+      await register({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+      });
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Registration failed";
+      setError(message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-container flex items-center justify-center p-6">
-      <div className="w-full max-w-md bg-black rounded-lg shadow-lg p-8">
-        <h1 className="text-2xl font-bold text-white text-center mb-6">
+    <div className="bg-black rounded-lg shadow-lg p-8">
+      <div className="flex gap-2 justify-between">
+        <h1 className="text-2xl font-bold text-white mb-6">
           Create Your Account
         </h1>
-        <form className="space-y-6">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="name" className="text-textSecondary">
-              Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              placeholder="Enter your name"
-              className="w-full px-4 py-2 rounded-lg bg-container text-white border border-borderGray placeholder:text-textSecondary focus:ring-2 focus:ring-blueAccent outline-none"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="email" className="text-textSecondary">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              className="w-full px-4 py-2 rounded-lg bg-container text-white border border-borderGray placeholder:text-textSecondary focus:ring-2 focus:ring-blueAccent outline-none"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="password" className="text-textSecondary">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-              className="w-full px-4 py-2 rounded-lg bg-container text-white border border-borderGray placeholder:text-textSecondary focus:ring-2 focus:ring-blueAccent outline-none"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-2">
-            <label htmlFor="confirmPassword" className="text-textSecondary">
-              Confirm Password
-            </label>
-            <input
-              id="confirmPassword"
-              type="password"
-              placeholder="Confirm your password"
-              className="w-full px-4 py-2 rounded-lg bg-container text-white border border-borderGray placeholder:text-textSecondary focus:ring-2 focus:ring-blueAccent outline-none"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full py-2 bg-blueAccent text-white rounded-lg font-semibold hover:bg-opacity-80 transition"
-          >
-            Register
-          </button>
-        </form>
-        <div className="mt-6 text-center text-textSecondary">
-          <p>
-            Already have an account?{" "}
-            <a href="#" className="text-blueAccent hover:underline">
-              Login here
-            </a>
-          </p>
-        </div>
+        <Tooltip
+          className="mr-1"
+          text={
+            <div className="flex flex-col space-y-5">
+              <p>O acesso pode ser feito de duas maneiras:</p>
+              <div className="flex flex-col">
+                <strong>1. Conta Admin:</strong>
+                <span>Email: admin@email.com</span>
+                <span>Password: admin</span>
+              </div>
+              <div className="flex flex-col">
+                <strong>2. Conta Pessoal:</strong>
+                <p>Crie uma conta pessoal na página de registro.</p>
+              </div>
+            </div>
+          }
+        />
+      </div>
+      <form className="space-y-6" onSubmit={handleSubmit}>
+        <Input
+          id="name"
+          name="name"
+          type="text"
+          label="Name"
+          placeholder="Enter your name"
+          value={formData.name}
+          onChange={handleChange}
+          disabled={isLoading}
+          required
+        />
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          label="Email"
+          placeholder="Enter your email"
+          value={formData.email}
+          onChange={handleChange}
+          disabled={isLoading}
+          required
+        />
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          label="Password"
+          placeholder="Enter your password"
+          value={formData.password}
+          onChange={handleChange}
+          disabled={isLoading}
+          required
+        />
+        <Input
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          label="Confirm Password"
+          placeholder="Confirm your password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+          disabled={isLoading}
+          required
+        />
+        {error && <p className="text-red-500 text-sm">{error}</p>}
+        <Button
+          styleType="primary"
+          type="submit"
+          disabled={isLoading}
+          className="w-full"
+        >
+          {isLoading ? "Creating account..." : "Register"}
+        </Button>
+      </form>
+      <div className="flex flex-col mt-6 text-center text-greyPrimary">
+        <span>Already have an account?</span>
+        <Link to="/login" className="text-bluePrimary hover:underline">
+          Login here
+        </Link>
       </div>
     </div>
   );

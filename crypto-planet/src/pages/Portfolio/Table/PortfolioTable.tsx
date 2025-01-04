@@ -1,10 +1,11 @@
 import { useMemo, useState } from "react";
 import { IPortfolioTransaction } from "../../../interfaces/portfolio.interfaces";
 
-import Container from "../../../components/common/Container";
 import Input from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
 import Select from "../../../components/common/Select";
+import SearchIcon from "../../../assets/icons/search.svg";
+import CreditCardIcon from "../../../assets/icons/credit-card.svg";
 import {
   flexRender,
   getCoreRowModel,
@@ -58,8 +59,8 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
         </div>
       ),
       cell: (info: Info) => (
-        <div className="flex items-center gap-3">
-          <span>X</span>
+        <div className="flex w-[110px] items-center gap-3">
+          <img src={CreditCardIcon} />
           <span className="text-gray-300">{info.getValue()}</span>
         </div>
       ),
@@ -67,7 +68,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
     {
       accessorKey: "amount",
       header: () => (
-        <div className="flex items-center gap-1 cursor-pointer text-gray-400">
+        <div className="flex w-[80px] items-center gap-1 cursor-pointer text-gray-400">
           Amount ▲
         </div>
       ),
@@ -78,7 +79,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
     {
       accessorKey: "date",
       header: () => (
-        <div className="flex items-center gap-1 cursor-pointer text-gray-400">
+        <div className="flex w-[120px] items-center gap-1 cursor-pointer text-gray-400">
           Date/Time ▲
         </div>
       ),
@@ -114,7 +115,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
     if (selectedMonth !== "all") {
       filtered = filtered.filter((item) => {
         const date = new Date(item.date);
-        return date.getMonth().toString() === selectedMonth;
+        return (date.getMonth() + 1).toString() === selectedMonth;
       });
     }
 
@@ -137,23 +138,23 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
   });
 
   return (
-    <Container>
+    <section>
       <div className="space-y-6">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-wrap sm:flex-nowrap gap-8 justify-between items-center">
           <h2 className="text-2xl text-white">Transaction History</h2>
-          <div className="w-64">
+          <div className="w-full sm:w-64">
             <Input
               placeholder="Search by date"
               value={searchDate}
               onChange={(e) => setSearchDate(e.target.value)}
-              icon="/icons/search.svg"
+              icon={SearchIcon}
             />
           </div>
         </div>
-        <div className="flex justify-between items-center border-b border-gray-800">
+        <div className="flex flex-wrap sm:flex-nowrap justify-between items-center border-b border-gray-800">
           <div className="flex gap-6">
             <Button
-              variant="secondary"
+              styleType="secondary"
               onClick={() => setActiveTab("history")}
               className={`py-2 relative bg-transparent border-none shadow-none ${
                 activeTab === "history" ? "text-blue-500" : "text-gray-400"
@@ -165,7 +166,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
               )}
             </Button>
             <Button
-              variant="secondary"
+              styleType="secondary"
               onClick={() => setActiveTab("coin")}
               className={`py-2 relative bg-transparent border-none shadow-none ${
                 activeTab === "coin" ? "text-blue-500" : "text-gray-400"
@@ -183,17 +184,12 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
                 options={months}
                 value={selectedMonth}
                 onChange={(e) => setSelectedMonth(e.target.value)}
-                className="appearance-none bg-transparent border border-gray-700 rounded-lg px-4 py-2 pr-8 text-gray-400 cursor-pointer focus:outline-none hover:border-gray-600 min-w-[120px]"
               />
-              <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
+              <span className="bg-[#111] absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
                 ▼
               </span>
             </div>
-            <Button
-              variant="secondary"
-              onClick={handleClearFilters}
-              className="px-4 py-2 text-gray-400 hover:text-gray-300 bg-transparent border border-gray-700 rounded-lg"
-            >
+            <Button styleType="tertiary" onClick={handleClearFilters}>
               × Clear Filter
             </Button>
           </div>
@@ -242,7 +238,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
           </div>
         )}
       </div>
-    </Container>
+    </section>
   );
 };
 

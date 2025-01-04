@@ -1,10 +1,11 @@
 import { IMarket } from "../../../interfaces/market.interfaces";
-import { generateChartData, randomId } from "../../../utils/helpers.utils";
+import { randomId } from "../../../utils/common/id.utils";
+import { generateChartData } from "../../../utils/domain/chart.utils";
 
 export const cryptoCardsData = [
   {
     id: randomId(),
-    icon: "X",
+    icon: "E",
     name: "Ethereum",
     price: 38405.4,
     change: 7.65,
@@ -12,7 +13,7 @@ export const cryptoCardsData = [
   },
   {
     id: randomId(),
-    icon: "X",
+    icon: "B",
     name: "Binance",
     price: 38405.4,
     change: -5.12,
@@ -28,7 +29,7 @@ export const cryptoCardsData = [
   },
   {
     id: randomId(),
-    icon: "X",
+    icon: "P",
     name: "Polygon",
     price: 1.88,
     change: -2.78,
