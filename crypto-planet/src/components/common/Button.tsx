@@ -7,7 +7,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | "tertiary"
     | "badge"
     | "footerIcon"
-    | "floating";
+    | "floating"
+    | "pagination";
   size?:
     | "footerIcon"
     | "badge"
@@ -15,11 +16,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | "small"
     | "medium"
     | "large"
-    | "floating";
+    | "floating"
+    | "pagination";
   iconSide?: "left" | "right";
   disabled?: boolean;
   loading?: boolean;
   formButton?: boolean;
+  active?: boolean;
 }
 
 const Button = ({
@@ -31,6 +34,7 @@ const Button = ({
   iconSide,
   loading = false,
   formButton = false,
+  active = false,
   ...props
 }: ButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -76,6 +80,21 @@ const Button = ({
           "fixed right-8 bottom-8 bg-bluePrimary rounded-full flex items-center justify-center text-white shadow-lg lg:hidden hover:bg-opacity-90"
         );
         break;
+      case "pagination":
+        if (active) {
+          setStyle("bg-bluePrimary text-white border border-bluePrimary");
+          setDisabledStyle(
+            "bg-bluePrimary text-white border border-bluePrimary"
+          );
+        } else {
+          setStyle(
+            "bg-transparent border border-transparent text-greyPrimary hover:text-bluePrimary hover:border-bluePrimary"
+          );
+          setDisabledStyle(
+            "bg-transparent border border-transparent text-greySecondary"
+          );
+        }
+        break;
     }
 
     switch (size) {
@@ -100,8 +119,11 @@ const Button = ({
       case "floating":
         setButtonSize("w-20 h-20 rounded-full");
         break;
+      case "pagination":
+        setButtonSize("w-8 h-8 rounded-lg");
+        break;
     }
-  }, [styleType, size]);
+  }, [styleType, size, active]);
 
   return (
     <button

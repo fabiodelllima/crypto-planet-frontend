@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { IPortfolioTransaction } from "../../interfaces/portfolio.interfaces";
 import { randomId } from "../../utils/common/id.utils";
 import { useAuth } from "../../hooks/useAuth";
@@ -21,6 +21,10 @@ const PortfolioPage = () => {
   const [transactions, setTransactions] = useState<IPortfolioTransaction[]>(
     user?.portfolio?.transactions || []
   );
+
+  useEffect(() => {
+    setTransactions(user?.portfolio?.transactions || []);
+  }, [user?.portfolio?.transactions]);
 
   const portfolioTotals = useMemo(() => {
     return calculatePortfolioTotals(transactions);

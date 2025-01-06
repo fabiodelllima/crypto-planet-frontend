@@ -6,12 +6,15 @@ import Button from "../../../components/common/Button";
 import Select from "../../../components/common/Select";
 import SearchIcon from "../../../assets/icons/search.svg";
 import CreditCardIcon from "../../../assets/icons/credit-card.svg";
+import TablePagination from "../../../components/common/TablePagination";
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
   getSortedRowModel,
   SortingState,
+  PaginationState,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 
 interface Info {
@@ -43,6 +46,10 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
   const [searchDate, setSearchDate] = useState("");
   const [activeTab, setActiveTab] = useState<"history" | "coin">("history");
   const [selectedMonth, setSelectedMonth] = useState("all");
+  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 10,
+  });
 
   const handleClearFilters = () => {
     setSearchDate("");
@@ -131,10 +138,15 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
   const table = useReactTable({
     data: filteredData,
     columns,
-    state: { sorting },
+    state: {
+      sorting,
+      pagination: { pageIndex, pageSize },
+    },
     onSortingChange: setSorting,
+    onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
@@ -196,42 +208,54 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
         </div>
 
         {activeTab === "history" ? (
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr>
-                  {table.getHeaderGroups().map((headerGroup) =>
-                    headerGroup.headers.map((header) => (
-                      <th
-                        key={header.id}
-                        onClick={header.column.getToggleSortingHandler()}
-                        className="text-left p-4 font-normal"
-                      >
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                      </th>
-                    ))
-                  )}
-                </tr>
-              </thead>
-              <tbody>
-                {table.getRowModel().rows.map((row) => (
-                  <tr key={row.id} className="border-t border-gray-800">
-                    {row.getVisibleCells().map((cell) => (
-                      <td key={cell.id} className="p-4">
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    ))}
+          <>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr>
+                    {table.getHeaderGroups().map((headerGroup) =>
+                      headerGroup.headers.map((header) => (
+                        <th
+                          key={header.id}
+                          onClick={header.column.getToggleSortingHandler()}
+                          className="text-left p-4 font-normal"
+                        >
+                          {flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                        </th>
+                      ))
+                    )}
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {table.getRowModel().rows.map((row) => (
+                    <tr key={row.id} className="border-t border-gray-800">
+                      {row.getVisibleCells().map((cell) => (
+                        <td key={cell.id} className="p-4">
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            <TablePagination
+              table={table}
+              totalItems={filteredData.length}
+              pageSize={pageSize}
+              pageIndex={pageIndex}
+              pageSizeOptions={[5, 10, 20, 30]}
+              showPageSize={true}
+              showPageNumbers={true}
+            />
+          </>
         ) : (
           <div className="py-16 text-center text-gray-400">
             Coin Wallet feature is under development.
