@@ -1,8 +1,12 @@
 import { IUser } from "../interfaces/auth.interface";
+import { transactionsData } from "../pages/Portfolio/Data/PortfolioData";
 import {
-  portfolioData,
-  transactionsData,
-} from "../pages/Portfolio/Data/PortfolioData";
+  calculatePortfolioTotals,
+  getLastUpdateFromTransactions,
+} from "../utils/domain/portfolio.utils";
+
+const totals = calculatePortfolioTotals(transactionsData);
+const lastUpdate = getLastUpdateFromTransactions(transactionsData);
 
 export const ADMIN_CREDENTIALS: IUser = {
   email: "admin@email.com",
@@ -10,7 +14,8 @@ export const ADMIN_CREDENTIALS: IUser = {
   password: "admin",
   isAdmin: true,
   portfolio: {
-    ...portfolioData,
+    ...totals,
+    lastUpdate,
     transactions: transactionsData,
   },
 };
