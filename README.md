@@ -8,14 +8,14 @@
 <div align="center">
 
 ### Pendências
-| Funcionalidades               | Interface                              |
-|-------------------------------|----------------------------------------|
-| Paginação                     | ~Ícones no footer~ ✔                   |
-| ~Autenticação~ ✔              | Botões no header                       |
-| Gerar gráficos corretos       | Refatoração do componente Select       |
-| ~Calcular total~ ✔            | Refatoração de detalhes nas tabelas    |
-| Validação com Zod no Login    | Correção no logo                       |
-| Validação com Zod em Registro | ~Página de registro~ ✔                 |
+| Funcionalidades               | Status  | Interface                           | Status  |
+|-------------------------------|---------|-------------------------------------|---------|
+| ~Paginação~                   | ✔       | ~Ícones no footer~                  | ✔       |
+| ~Autenticação~                | ✔       | Botões no header                    | ·       |
+| Gerar gráficos corretos       | ·       | Refatoração do componente Select    | ·       |
+| ~Calcular total~              | ✔       | Refatoração de detalhes nas tabelas | ·       |
+| Validação com Zod no Login    | ·       | Correção no logo                    | ·       |
+| Validação com Zod em Registro | ·       | ~Página de registro~                | ✔       |
 
 </div>
 
