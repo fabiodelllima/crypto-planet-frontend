@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { randomId } from "../utils/common/id.utils";
 import { AuthContext } from "./AuthContextInstance";
 import { ADMIN_CREDENTIALS } from "../constants/admin";
 import { IUser } from "../interfaces/auth.interface";
@@ -9,7 +10,6 @@ import {
   saveUser,
   setCurrentUser,
 } from "../utils/storage/auth.storage.utils";
-import { randomId } from "../utils/common/id.utils";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<IUser | null>(null);
@@ -41,7 +41,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      const users = getUsers();
       const foundUser = users.find(
         (user) => user.email === email && user.password === password
       );
@@ -65,7 +64,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         throw new Error("This email is not available");
       }
 
-      const users = getUsers();
       if (users.some((user) => user.email === userData.email)) {
         throw new Error("Email already registered");
       }
@@ -91,6 +89,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("currentUser");
+    navigate("/market");
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -99,6 +103,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isAdmin: user?.isAdmin || false,
         login,
         register,
+        logout,
       }}
     >
       {children}

@@ -6,4 +6,5 @@ export type AuthContextData = {
   isAdmin: boolean;
   login: (email: string, password: string) => Promise<void>;
   register: (userData: Omit<IUser, "id">) => Promise<void>;
+  logout: () => void;
 };
