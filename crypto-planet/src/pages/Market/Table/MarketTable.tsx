@@ -11,7 +11,7 @@ import {
   getPaginationRowModel,
 } from "@tanstack/react-table";
 
-import columns from "./MarketTableCols";
+import marketTableColumns from "./MarketTableCols";
 import TablePagination from "../../../components/common/TablePagination";
 
 interface MarketTableProps {
@@ -55,7 +55,7 @@ const MarketTable = ({ filters }: MarketTableProps) => {
 
   const table = useReactTable({
     data: filteredData,
-    columns,
+    columns: marketTableColumns,
     state: {
       sorting,
       pagination: { pageIndex, pageSize },

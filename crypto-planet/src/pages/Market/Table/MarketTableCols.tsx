@@ -1,33 +1,31 @@
-import { ColumnDef } from "@tanstack/react-table";
+import { createColumnHelper } from "@tanstack/react-table";
 import { LineChart, Line } from "recharts";
 import { IMarket } from "../../../interfaces/market.interfaces";
-
-import StarIcon from "../../../assets/icons/star.svg";
 import { formatNumber } from "../../../utils/common/number.utils";
 import { generateChartData } from "../../../utils/domain/chart.utils";
+import StarIcon from "../../../assets/icons/star.svg";
 
-const columns: ColumnDef<IMarket, string | number | boolean>[] = [
-  {
-    accessorKey: "favorite",
-    header: "",
+const columnHelper = createColumnHelper<IMarket>();
+
+export const marketTableColumns = [
+  columnHelper.accessor("favorite", {
+    header: () => "",
     cell: () => (
       <div className="w-[50px] px-4">
         <img src={StarIcon} alt="Favorite" />
       </div>
     ),
-  },
-  {
-    accessorKey: "rank",
-    header: "#",
+  }),
+  columnHelper.accessor("rank", {
+    header: () => "#",
     cell: (info) => (
       <div className="w-[40px] px-4 text-grey-300">
         {info.getValue() ?? "-"}
       </div>
     ),
-  },
-  {
-    accessorKey: "name",
-    header: "Coin Name",
+  }),
+  columnHelper.accessor("name", {
+    header: () => "Coin Name",
     cell: (info) => (
       <div className="min-w-[200px] px-4">
         <div className="flex items-center gap-2">
@@ -39,9 +37,8 @@ const columns: ColumnDef<IMarket, string | number | boolean>[] = [
         </div>
       </div>
     ),
-  },
-  {
-    accessorKey: "price",
+  }),
+  columnHelper.accessor("price", {
     header: () => (
       <div className="flex items-center gap-1 text-gray-400">
         Coin Price <span>▲</span>
@@ -49,19 +46,18 @@ const columns: ColumnDef<IMarket, string | number | boolean>[] = [
     ),
     cell: (info) => (
       <div className="min-w-[120px] px-4 text-gray-300">
-        ${formatNumber(info.getValue() as number)}
+        ${formatNumber(info.getValue())} // Não precisamos mais do type casting
       </div>
     ),
-  },
-  {
-    accessorKey: "change24h",
+  }),
+  columnHelper.accessor("change24h", {
     header: () => (
       <div className="flex items-center gap-1 text-gray-400">
         24h <span>▲</span>
       </div>
     ),
     cell: (info) => {
-      const value = info.getValue() as number;
+      const value = info.getValue();
       if (value === undefined) return "-";
       return (
         <div className="min-w-[100px] px-4">
@@ -72,9 +68,8 @@ const columns: ColumnDef<IMarket, string | number | boolean>[] = [
         </div>
       );
     },
-  },
-  {
-    accessorKey: "highPrice24h",
+  }),
+  columnHelper.accessor("highPrice24h", {
     header: () => (
       <div className="flex items-center gap-1 text-gray-400">
         24h High Price <span>▲</span>
@@ -82,12 +77,11 @@ const columns: ColumnDef<IMarket, string | number | boolean>[] = [
     ),
     cell: (info) => (
       <div className="min-w-[120px] px-4 text-gray-300">
-        ${formatNumber(info.getValue() as number)}
+        ${formatNumber(info.getValue())}
       </div>
     ),
-  },
-  {
-    accessorKey: "lowPrice24h",
+  }),
+  columnHelper.accessor("lowPrice24h", {
     header: () => (
       <div className="flex items-center gap-1 text-gray-400">
         24h Low Price <span>▲</span>
@@ -95,19 +89,18 @@ const columns: ColumnDef<IMarket, string | number | boolean>[] = [
     ),
     cell: (info) => (
       <div className="min-w-[120px] px-4 text-gray-300">
-        ${formatNumber(info.getValue() as number)}
+        ${formatNumber(info.getValue())}
       </div>
     ),
-  },
-  {
-    accessorKey: "chart",
+  }),
+  columnHelper.accessor("chart", {
     header: () => (
       <div className="flex items-center gap-1 text-gray-400">
         Chart <span>▲</span>
       </div>
     ),
     cell: (info) => {
-      const chartData = info.getValue() as unknown as number[];
+      const chartData = info.getValue();
       if (!Array.isArray(chartData) || !chartData.length) return null;
 
       const data = generateChartData(
@@ -132,7 +125,7 @@ const columns: ColumnDef<IMarket, string | number | boolean>[] = [
         </div>
       );
     },
-  },
+  }),
 ];
 
-export default columns;
+export default marketTableColumns;
