@@ -8,7 +8,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | "badge"
     | "footerIcon"
     | "floating"
-    | "pagination";
+    | "pagination"
+    | "logout";
   size?:
     | "footerIcon"
     | "badge"
@@ -94,6 +95,14 @@ const Button = ({
             "bg-transparent border border-transparent text-greySecondary"
           );
         }
+        break;
+      case "logout":
+        setStyle(
+          "w-full text-left px-4 py-2 text-white hover:bg-greySecondary transition-colors"
+        );
+        setDisabledStyle(
+          "w-full text-left px-4 py-2 text-greyPrimary opacity-50 cursor-not-allowed"
+        );
         break;
     }
 
