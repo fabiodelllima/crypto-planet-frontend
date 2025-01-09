@@ -14,6 +14,7 @@ import { randomId } from "../utils/common/id.utils";
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<IUser | null>(null);
   const navigate = useNavigate();
+  const users = getUsers();
 
   useEffect(() => {
     const savedUser = getCurrentUser();

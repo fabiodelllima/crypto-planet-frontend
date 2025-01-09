@@ -17,11 +17,11 @@ export function getCurrentUser(): IUser | null {
 }
 
 export function saveUser(user: IUser): void {
+  const users = getUsers();
+
   if (user.email === ADMIN_CREDENTIALS.email) {
     throw new Error("This email is not available");
   }
-
-  const users = getUsers();
 
   const initialTransaction: IPortfolioTransaction = {
     id: randomId(),
