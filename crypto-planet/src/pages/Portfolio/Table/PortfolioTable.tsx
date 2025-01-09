@@ -16,26 +16,11 @@ import Select from "../../../components/common/Select";
 import SearchIcon from "../../../assets/icons/search.svg";
 import TablePagination from "../../../components/common/TablePagination";
 import portfolioTableColumns from "./PortfolioTableCols";
+import months from "../../../constants/dates";
 
 interface PortfolioTableProps {
   data: IPortfolioTransaction[];
 }
-
-const months = [
-  { value: "all", label: "Month" },
-  { value: "1", label: "January" },
-  { value: "2", label: "February" },
-  { value: "3", label: "March" },
-  { value: "4", label: "April" },
-  { value: "5", label: "May" },
-  { value: "6", label: "June" },
-  { value: "7", label: "July" },
-  { value: "8", label: "August" },
-  { value: "9", label: "September" },
-  { value: "10", label: "October" },
-  { value: "11", label: "November" },
-  { value: "12", label: "December" },
-];
 
 const PortfolioTable = ({ data }: PortfolioTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
