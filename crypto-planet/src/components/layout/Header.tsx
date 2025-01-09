@@ -4,7 +4,7 @@ import { useAuth } from "../../hooks/useAuth";
 
 import Button from "../../components/common/Button";
 import Select from "../../components/common/Select";
-import UserInfo from "../common/UserInfo";
+import UserMenu from "../common/UserMenu";
 
 const Header = () => {
   const { user } = useAuth();
@@ -67,7 +67,7 @@ const Header = () => {
                 <Button styleType="primary">Wallet</Button>
                 <Button styleType="secondary">Wallet</Button>
                 <div className="flex items-center gap-2">
-                  <UserInfo user={user} />
+                  <UserMenu user={user} />
                 </div>
               </>
             ) : (
