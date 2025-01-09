@@ -7,9 +7,12 @@ import {
   useReactTable,
   getSortedRowModel,
   SortingState,
+  PaginationState,
+  getPaginationRowModel,
 } from "@tanstack/react-table";
 
 import columns from "./MarketTableCols";
+import TablePagination from "../../../components/common/TablePagination";
 
 interface MarketTableProps {
   filters: IMarketFilters;
@@ -17,6 +20,10 @@ interface MarketTableProps {
 
 const MarketTable = ({ filters }: MarketTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 20,
+  });
 
   const filteredData = useMemo(() => {
     let data = [...tableData];
@@ -49,10 +56,15 @@ const MarketTable = ({ filters }: MarketTableProps) => {
   const table = useReactTable({
     data: filteredData,
     columns,
-    state: { sorting },
+    state: {
+      sorting,
+      pagination: { pageIndex, pageSize },
+    },
     onSortingChange: setSorting,
+    onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
@@ -91,6 +103,15 @@ const MarketTable = ({ filters }: MarketTableProps) => {
           ))}
         </tbody>
       </table>
+      <TablePagination
+        table={table}
+        totalItems={filteredData.length}
+        pageSize={pageSize}
+        pageIndex={pageIndex}
+        pageSizeOptions={[5, 10, 20, 30]}
+        showPageSize={true}
+        showPageNumbers={true}
+      />
     </div>
   );
 };
