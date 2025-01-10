@@ -46,7 +46,7 @@ export const marketTableColumns = [
     ),
     cell: (info) => (
       <div className="min-w-[120px] px-4 text-gray-300">
-        ${formatNumber(info.getValue())} // Não precisamos mais do type casting
+        ${formatNumber(info.getValue())}
       </div>
     ),
   }),
