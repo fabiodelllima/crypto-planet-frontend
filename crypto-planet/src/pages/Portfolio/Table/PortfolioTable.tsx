@@ -1,45 +1,26 @@
 import { useMemo, useState } from "react";
 import { IPortfolioTransaction } from "../../../interfaces/portfolio.interfaces";
+import {
+  useReactTable,
+  SortingState,
+  PaginationState,
+  getCoreRowModel,
+  getSortedRowModel,
+  getPaginationRowModel,
+  flexRender,
+} from "@tanstack/react-table";
 
 import Input from "../../../components/common/Input";
 import Button from "../../../components/common/Button";
 import Select from "../../../components/common/Select";
 import SearchIcon from "../../../assets/icons/search.svg";
-import CreditCardIcon from "../../../assets/icons/credit-card.svg";
 import TablePagination from "../../../components/common/TablePagination";
-import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-  getSortedRowModel,
-  SortingState,
-  PaginationState,
-  getPaginationRowModel,
-} from "@tanstack/react-table";
-
-interface Info {
-  getValue(): string;
-}
+import portfolioTableColumns from "./PortfolioTableCols";
+import months from "../../../constants/dates";
 
 interface PortfolioTableProps {
   data: IPortfolioTransaction[];
 }
-
-const months = [
-  { value: "all", label: "Month" },
-  { value: "1", label: "January" },
-  { value: "2", label: "February" },
-  { value: "3", label: "March" },
-  { value: "4", label: "April" },
-  { value: "5", label: "May" },
-  { value: "6", label: "June" },
-  { value: "7", label: "July" },
-  { value: "8", label: "August" },
-  { value: "9", label: "September" },
-  { value: "10", label: "October" },
-  { value: "11", label: "November" },
-  { value: "12", label: "December" },
-];
 
 const PortfolioTable = ({ data }: PortfolioTableProps) => {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -56,65 +37,6 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
     setSelectedMonth("all");
     setSorting([]);
   };
-
-  const columns = [
-    {
-      accessorKey: "action",
-      header: () => (
-        <div className="flex items-center gap-1 cursor-pointer text-gray-400">
-          Action ▲
-        </div>
-      ),
-      cell: (info: Info) => (
-        <div className="flex w-[110px] items-center gap-3">
-          <img src={CreditCardIcon} />
-          <span className="text-gray-300">{info.getValue()}</span>
-        </div>
-      ),
-    },
-    {
-      accessorKey: "amount",
-      header: () => (
-        <div className="flex w-[80px] items-center gap-1 cursor-pointer text-gray-400">
-          Amount ▲
-        </div>
-      ),
-      cell: (info: Info) => (
-        <div className="text-gray-300">${info.getValue().toLocaleString()}</div>
-      ),
-    },
-    {
-      accessorKey: "date",
-      header: () => (
-        <div className="flex w-[120px] items-center gap-1 cursor-pointer text-gray-400">
-          Date/Time ▲
-        </div>
-      ),
-      cell: (info: Info) => (
-        <div className="text-gray-300">{info.getValue()}</div>
-      ),
-    },
-    {
-      accessorKey: "status",
-      header: () => (
-        <div className="flex items-center gap-1 cursor-pointer text-gray-400">
-          Status ▲
-        </div>
-      ),
-      cell: (info: Info) => (
-        <div
-          className={`px-3 py-1 rounded text-sm inline-block
-            ${
-              info.getValue() === "Succesful"
-                ? "bg-[#1a2b1a] text-green-500"
-                : "bg-[#2b1a1a] text-red-500"
-            }`}
-        >
-          {info.getValue()}
-        </div>
-      ),
-    },
-  ];
 
   const filteredData = useMemo(() => {
     let filtered = [...data];
@@ -137,7 +59,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
 
   const table = useReactTable({
     data: filteredData,
-    columns,
+    columns: portfolioTableColumns,
     state: {
       sorting,
       pagination: { pageIndex, pageSize },

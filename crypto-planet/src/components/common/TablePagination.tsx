@@ -1,8 +1,7 @@
 import { Table } from "@tanstack/react-table";
 import { usePagination } from "../../hooks/usePagination";
-
-import Button from "./Button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Button from "./Button";
 
 interface TablePaginationProps<T> {
   table: Table<T>;
@@ -29,6 +28,8 @@ const TablePagination = <T,>({
     totalPages,
   });
 
+  const isNavigationDisabled = totalPages <= 1;
+
   return (
     <div className="border-t border-greySecondary">
       <div className="flex items-center justify-between pt-6">
@@ -36,16 +37,16 @@ const TablePagination = <T,>({
         <div className="flex gap-2 items-center">
           <Button
             onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
+            disabled={!table.getCanPreviousPage() || isNavigationDisabled}
             styleType="pagination"
             size="pagination"
             className="flex items-center justify-center group"
           >
             <ChevronLeft
               className={`text-greyPrimary transition-colors ${
-                table.getCanPreviousPage()
-                  ? "group-hover:text-bluePrimary"
-                  : "text-greySecondary"
+                !table.getCanPreviousPage() || isNavigationDisabled
+                  ? "text-greySecondary"
+                  : "group-hover:text-bluePrimary"
               }`}
               size={20}
             />
@@ -76,13 +77,17 @@ const TablePagination = <T,>({
 
           <Button
             onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
+            disabled={!table.getCanNextPage() || isNavigationDisabled}
             styleType="pagination"
             size="pagination"
             className="flex items-center justify-center group"
           >
             <ChevronRight
-              className="text-greyPrimary transition-colors group-hover:text-bluePrimary"
+              className={`text-greyPrimary transition-colors ${
+                !table.getCanNextPage() || isNavigationDisabled
+                  ? "text-greySecondary"
+                  : "group-hover:text-bluePrimary"
+              }`}
               size={20}
             />
           </Button>

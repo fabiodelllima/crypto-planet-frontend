@@ -4,17 +4,13 @@ import { useAuth } from "../../hooks/useAuth";
 
 import Button from "../../components/common/Button";
 import Select from "../../components/common/Select";
-import UserInfo from "../common/UserInfo";
+import UserMenu from "../common/UserMenu";
 
 const Header = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const toggleMenu = () => {
-    setIsMenuOpen((prev) => !prev);
-  };
 
   const navigation = [
     { name: "Market", href: "/market" },
@@ -27,6 +23,10 @@ const Header = () => {
     { value: "english-usd", label: "English | USD" },
     { value: "pt-brl", label: "Português | BRL" },
   ];
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
 
   return (
     <header className="bg-background text-white border-b-2 border-greySecondary">
@@ -66,9 +66,7 @@ const Header = () => {
               <>
                 <Button styleType="primary">Wallet</Button>
                 <Button styleType="secondary">Wallet</Button>
-                <div className="flex items-center gap-2">
-                  <UserInfo user={user} />
-                </div>
+                <UserMenu user={user} />
               </>
             ) : (
               <>
@@ -98,14 +96,28 @@ const Header = () => {
         </div>
 
         {isMenuOpen && (
-          <div className="mt-6 lg:hidden">
+          <div className="lg:hidden mt-6 mb-4">
+            {user && (
+              <div className="flex flex-col justify-center items-center gap-1 mb-6">
+                <div className="flex w-14 h-14 rounded-full bg-bluePrimary items-center justify-center text-white">
+                  <span className="text-2xl font-semibold">
+                    {user.name.charAt(0).toUpperCase()}
+                  </span>
+                </div>
+                <span className="text-white text-lg font-semibold">
+                  {user.name}
+                </span>
+              </div>
+            )}
+
             <nav>
-              <ul className="flex flex-col gap-4">
+              <ul className="flex flex-col gap-4 pb-4">
                 {navigation.map((item) => (
                   <li key={item.name}>
                     <Link
                       to={item.href}
                       className="text-white hover:text-bluePrimary"
+                      onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
                     </Link>
@@ -116,13 +128,27 @@ const Header = () => {
 
             <div className="mt-6 flex flex-col gap-4">
               <Select options={languageOptions} defaultValue="english-usd" />
+
               {user ? (
                 <>
                   <Button styleType="primary" className="w-full">
                     Wallet
                   </Button>
-                  <Button styleType="secondary" className="w-full">
+                  <Button
+                    styleType="secondary"
+                    className="w-full border !border-bluePrimary hover:bg-bluePrimary hover:text-white"
+                  >
                     Wallet
+                  </Button>
+                  <Button
+                    styleType="logout"
+                    onClick={() => {
+                      logout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full pt-4 rounded-lg bg-greySecondary border border-transparent hover:opacity-80"
+                  >
+                    <span className="flex justify-center">Logout</span>
                   </Button>
                 </>
               ) : (
@@ -139,7 +165,7 @@ const Header = () => {
                   </Button>
                   <Button
                     styleType="primary"
-                    className="w-full bg-bluePrimary text-black"
+                    className="w-full"
                     onClick={() => {
                       navigate("/register");
                       setIsMenuOpen(false);
