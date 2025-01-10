@@ -80,3 +80,5 @@ A plataforma oferece duas maneiras de acesso:
 
 2. **Conta Pessoal**:
    - Criada diretamente na página de registro.
+
+<br>
