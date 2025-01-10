@@ -11,11 +11,17 @@
 | Funcionalidades               | Status  | Interface                           | Status  |
 |-------------------------------|---------|-------------------------------------|---------|
 | ~Paginação~                   | ✔       | ~Ícones no footer~                  | ✔       |
-| ~Autenticação~                | ✔       | Botões no header                    | ·       |
-| Gerar gráficos corretos       | ·       | Refatoração do componente Select    | ·       |
-| ~Calcular total~              | ✔       | Refatoração de detalhes nas tabelas | ·       |
-| Validação com Zod no Login    | ·       | Correção no logo                    | ·       |
-| Validação com Zod em Registro | ·       | ~Página de registro~                | ✔       |
+| ~Autenticação~                | ✔       | Botões no header                    |         |
+| Gerar gráficos corretos       |         | Refinamento do componente Select    |         |
+| ~Calcular total~              | ✔       | Refinamento de detalhes nas tabelas |         |
+| Validação com Zod no Login    |         | Correção no logo                    |         |
+| Validação com Zod em Registro |         | ~Página de registro~                | ✔       |
+| ~Logout~                      | ✔       | ~Dados do usuário no menu mobile~   | ✔       |
+
+| Revisões                                                  | Status  | 
+|-----------------------------------------------------------|---------|
+| Revisar o uso de arrow functions e function declarations  |         |
+| Revisar a estrutura e arquitetura do projeto              |         |
 
 </div>
 
