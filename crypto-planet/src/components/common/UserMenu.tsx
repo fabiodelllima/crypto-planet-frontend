@@ -31,12 +31,15 @@ const UserMenu = ({ user }: UserMenuProps) => {
   return (
     <div className="relative" ref={menuRef}>
       <div
-        className="flex items-center gap-2 cursor-pointer"
+        className="flex items-center gap-2 cursor-pointer pr-3"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <span className="text-white">{user.name}</span>
+        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-bluePrimary text-white">
+          {user.name.charAt(0).toUpperCase()}
+        </div>
+        <span className="hidden xl:block text-white">{user.name}</span>
         <span
-          className={`transition-transform duration-200 ${
+          className={`hidden xl:block transition-transform duration-200 ${
             isOpen ? "rotate-180" : ""
           }`}
         >
@@ -46,6 +49,9 @@ const UserMenu = ({ user }: UserMenuProps) => {
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-background border border-greySecondary">
+          <div className="xl:hidden px-4 py-2 border-b border-greySecondary">
+            <span className="text-white">{user.name}</span>
+          </div>
           <div className="py-1">
             <Button styleType="logout" onClick={handleLogout}>
               Logout
