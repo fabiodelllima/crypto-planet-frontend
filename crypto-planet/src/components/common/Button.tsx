@@ -1,7 +1,7 @@
-import { ButtonHTMLAttributes, useEffect, useRef, useState } from "react";
+import { ButtonHTMLAttributes, useRef } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  styleType?:
+  buttonType:
     | "primary"
     | "secondary"
     | "tertiary"
@@ -10,10 +10,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     | "floating"
     | "pagination"
     | "logout";
-  size?:
+  buttonSize:
     | "footerIcon"
     | "badge"
-    | "x-small"
+    | "xSmall"
     | "small"
     | "medium"
     | "large"
@@ -26,9 +26,76 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   active?: boolean;
 }
 
+type StyleFunction = (active: boolean) => string;
+
+interface StyleVariant {
+  default: string | StyleFunction;
+  disabled: string | StyleFunction;
+}
+
+const STYLE_VARIANTS: Record<ButtonProps["buttonType"], StyleVariant> = {
+  primary: {
+    default: "bg-bluePrimary text-white hover:bg-opacity-80",
+    disabled: "bg-bluePrimary text-white opacity-50 cursor-not-allowed",
+  },
+  secondary: {
+    default:
+      "bg-transparent border border-transparent text-bluePrimary hover:border-bluePrimary",
+    disabled:
+      "bg-transparent border border-transparent text-bluePrimary opacity-50 cursor-not-allowed",
+  },
+  tertiary: {
+    default: "bg-transparent text-greyPrimary hover:text-white px-2",
+    disabled:
+      "bg-transparent text-greyPrimary px-2 opacity-50 cursor-not-allowed",
+  },
+  badge: {
+    default: "bg-black border border-greySecondary hover:border-b-greyPrimary",
+    disabled:
+      "bg-black border border-greySecondary opacity-50 cursor-not-allowed",
+  },
+  footerIcon: {
+    default: "bg-transparent hover:bg-greySecondary",
+    disabled: "bg-transparent opacity-50 cursor-not-allowed",
+  },
+  floating: {
+    default:
+      "fixed right-8 bottom-8 bg-bluePrimary rounded-full flex items-center justify-center text-white shadow-lg lg:hidden hover:bg-opacity-90",
+    disabled:
+      "fixed right-8 bottom-8 bg-bluePrimary rounded-full flex items-center justify-center text-white shadow-lg lg:hidden opacity-50 cursor-not-allowed",
+  },
+  pagination: {
+    default: (active: boolean) =>
+      active
+        ? "bg-bluePrimary text-white border border-bluePrimary"
+        : "bg-transparent border border-transparent text-greyPrimary hover:text-bluePrimary hover:border-bluePrimary",
+    disabled: (active: boolean) =>
+      active
+        ? "bg-bluePrimary text-white border border-bluePrimary"
+        : "bg-transparent border border-transparent text-greySecondary",
+  },
+  logout: {
+    default:
+      "w-full text-left px-4 py-2 text-white hover:bg-greySecondary transition-colors",
+    disabled:
+      "w-full text-left px-4 py-2 text-greyPrimary opacity-50 cursor-not-allowed",
+  },
+} as const;
+
+const SIZE_VARIANTS: Record<ButtonProps["buttonSize"], string> = {
+  large: "px-10 py-5 rounded-lg",
+  medium: "px-10 py-5 rounded-lg",
+  small: "px-6 py-3 rounded-lg",
+  xSmall: "px-4 py-2 rounded-lg",
+  badge: "px-0 py-1 rounded-lg",
+  footerIcon: "p-2 rounded-lg",
+  floating: "w-20 h-20 rounded-full",
+  pagination: "w-8 h-8 rounded-lg",
+} as const;
+
 const Button = ({
-  styleType = "primary",
-  size = "medium",
+  buttonType = "primary",
+  buttonSize = "medium",
   className = "",
   disabled = false,
   children,
@@ -39,109 +106,21 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [style, setStyle] = useState("");
-  const [disabledStyle, setDisabledStyle] = useState("");
-  const [buttonSize, setButtonSize] = useState("");
+  const size = SIZE_VARIANTS[buttonSize];
 
-  useEffect(() => {
-    switch (styleType) {
-      case "primary":
-        setStyle("bg-bluePrimary text-white hover:bg-opacity-80");
-        setDisabledStyle(
-          "bg-bluePrimary text-white opacity-50 cursor-not-allowed"
-        );
-        break;
-      case "secondary":
-        setStyle(
-          "bg-transparent border border-transparent text-bluePrimary hover:border-bluePrimary"
-        );
-        setDisabledStyle(
-          "bg-transparent border border-transparent text-bluePrimary opacity-50 cursor-not-allowed"
-        );
-        break;
-      case "tertiary":
-        setStyle("bg-transparent text-greyPrimary hover:text-white px-2");
-        setDisabledStyle(
-          "bg-transparent text-greyPrimary px-2 opacity-50 cursor-not-allowed"
-        );
-        break;
-      case "badge":
-        setStyle(
-          "bg-black border border-greySecondary hover:border-b-greyPrimary"
-        );
-        setDisabledStyle(
-          "bg-black border border-greySecondary opacity-50 cursor-not-allowed"
-        );
-        break;
-      case "footerIcon":
-        setStyle("bg-transparent hover:bg-greySecondary");
-        break;
-      case "floating":
-        setStyle(
-          "fixed right-8 bottom-8 bg-bluePrimary rounded-full flex items-center justify-center text-white shadow-lg lg:hidden hover:bg-opacity-90"
-        );
-        break;
-      case "pagination":
-        if (active) {
-          setStyle("bg-bluePrimary text-white border border-bluePrimary");
-          setDisabledStyle(
-            "bg-bluePrimary text-white border border-bluePrimary"
-          );
-        } else {
-          setStyle(
-            "bg-transparent border border-transparent text-greyPrimary hover:text-bluePrimary hover:border-bluePrimary"
-          );
-          setDisabledStyle(
-            "bg-transparent border border-transparent text-greySecondary"
-          );
-        }
-        break;
-      case "logout":
-        setStyle(
-          "w-full text-left px-4 py-2 text-white hover:bg-greySecondary transition-colors"
-        );
-        setDisabledStyle(
-          "w-full text-left px-4 py-2 text-greyPrimary opacity-50 cursor-not-allowed"
-        );
-        break;
-    }
-
-    switch (size) {
-      case "large":
-        setButtonSize("px-10 py-5 rounded-lg");
-        break;
-      case "medium":
-        setButtonSize("px-10 py-5 rounded-lg");
-        break;
-      case "small":
-        setButtonSize("px-6 py-3 rounded-lg");
-        break;
-      case "x-small":
-        setButtonSize("px-4 py-2 rounded-lg");
-        break;
-      case "badge":
-        setButtonSize("px-0 py-1 rounded-lg");
-        break;
-      case "footerIcon":
-        setButtonSize("p-2 rounded-lg");
-        break;
-      case "floating":
-        setButtonSize("w-20 h-20 rounded-full");
-        break;
-      case "pagination":
-        setButtonSize("w-8 h-8 rounded-lg");
-        break;
-    }
-  }, [styleType, size, active]);
+  const getStyle = () => {
+    const variant = STYLE_VARIANTS[buttonType];
+    const state = disabled || loading ? "disabled" : "default";
+    const style = variant[state];
+    return typeof style === "function" ? style(active) : style;
+  };
 
   return (
     <button
       {...props}
       ref={formButton ? buttonRef : null}
       disabled={disabled || loading}
-      className={`font-medium transition ${buttonSize} ${className} ${
-        disabled || loading ? disabledStyle : style
-      }`}
+      className={`font-medium transition ${getStyle()} ${size} ${className}`}
     >
       {iconSide === "left" && children}
       {loading ? <div className="loader" /> : children}

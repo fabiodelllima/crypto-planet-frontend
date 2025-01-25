@@ -11,13 +11,7 @@ export interface IMarket {
   chart: { value: number; index: number }[];
 }
 
-export type TQuickFilter =
-  | "gainers"
-  | "losers"
-  | "new"
-  | "trading"
-  | "volume"
-  | "all";
+export type TQuickFilter = "gainers" | "losers" | "all";
 
 export interface IMarketFilters {
   quickFilter: TQuickFilter;

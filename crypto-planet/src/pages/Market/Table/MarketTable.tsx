@@ -1,6 +1,10 @@
 import { useState, useMemo } from "react";
 import { tableData } from "../Data/MarketData";
-import { IMarketFilters } from "../../../interfaces/market.interfaces";
+import {
+  IMarketFilters,
+  IMarket,
+  TQuickFilter,
+} from "../../../interfaces/market.interfaces";
 import {
   flexRender,
   getCoreRowModel,
@@ -9,6 +13,7 @@ import {
   SortingState,
   PaginationState,
   getPaginationRowModel,
+  Column,
 } from "@tanstack/react-table";
 
 import marketTableColumns from "./MarketTableCols";
@@ -18,40 +23,56 @@ interface MarketTableProps {
   filters: IMarketFilters;
 }
 
-const MarketTable = ({ filters }: MarketTableProps) => {
+function applySearchFilter(data: IMarket[], searchTerm: string) {
+  const searchLower = searchTerm.toLowerCase();
+  return data.filter(
+    (item) =>
+      item.name.toLowerCase().includes(searchLower) ||
+      item.symbol.toLowerCase().includes(searchLower)
+  );
+}
+
+const filterStrategies: Record<TQuickFilter, (data: IMarket[]) => IMarket[]> = {
+  gainers: function sortByGainers(data: IMarket[]) {
+    return data
+      .sort((a, b) => (b.change24h || 0) - (a.change24h || 0))
+      .slice(0, 20);
+  },
+
+  losers: function sortByLosers(data: IMarket[]) {
+    return data
+      .sort((a, b) => (a.change24h || 0) - (b.change24h || 0))
+      .slice(0, 20);
+  },
+
+  all: (data: IMarket[]) => data,
+};
+
+function MarketTable({ filters }: MarketTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [{ pageIndex, pageSize }, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 20,
   });
 
-  const filteredData = useMemo(() => {
-    let data = [...tableData];
+  const filteredData = useMemo(
+    function computeFilteredData() {
+      let data = [...tableData];
 
-    switch (filters.quickFilter) {
-      case "gainers":
-        data = data
-          .sort((a, b) => (b.change24h || 0) - (a.change24h || 0))
-          .slice(0, 20);
-        break;
-      case "losers":
-        data = data
-          .sort((a, b) => (a.change24h || 0) - (b.change24h || 0))
-          .slice(0, 20);
-        break;
-    }
+      data = filterStrategies[filters.quickFilter](data);
 
-    if (filters.search) {
-      const searchLower = filters.search.toLowerCase();
-      data = data.filter(
-        (item) =>
-          item.name.toLowerCase().includes(searchLower) ||
-          item.symbol.toLowerCase().includes(searchLower)
-      );
-    }
+      if (filters.search) {
+        data = applySearchFilter(data, filters.search);
+      }
 
-    return data.slice(0, filters.itemsPerPage);
-  }, [filters]);
+      return data.slice(0, filters.itemsPerPage);
+    },
+    [filters]
+  );
+
+  const handleSortChange = (column: Column<IMarket>) => {
+    column.getToggleSortingHandler?.();
+  };
 
   const table = useReactTable({
     data: filteredData,
@@ -76,7 +97,7 @@ const MarketTable = ({ filters }: MarketTableProps) => {
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
-                  onClick={header.column.getToggleSortingHandler()}
+                  onClick={() => handleSortChange(header.column)}
                   className="py-3 px-4 text-left text-sm font-normal cursor-pointer"
                 >
                   {flexRender(
@@ -114,6 +135,6 @@ const MarketTable = ({ filters }: MarketTableProps) => {
       />
     </div>
   );
-};
+}
 
 export default MarketTable;
