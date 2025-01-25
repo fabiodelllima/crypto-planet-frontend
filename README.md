@@ -7,12 +7,14 @@
 
 <div align="center">
 
+<br>
+
 ### Pendências
 | Funcionalidades               | Status  | Interface                           | Status  |
 |-------------------------------|---------|-------------------------------------|---------|
 | ~Paginação~                   | ✔       | ~Ícones no footer~                  | ✔       |
 | ~Autenticação~                | ✔       | Botões no header                    |         |
-| Gerar gráficos corretos       |         | Refinamento do componente Select    |         |
+| Gerar gráficos corretos       |         | ~Refinamento do componente Select~  | ✔       |
 | ~Calcular total~              | ✔       | Refinamento de detalhes nas tabelas |         |
 | Validação com Zod no Login    |         | Correção no logo                    |         |
 | Validação com Zod em Registro |         | ~Página de registro~                | ✔       |
@@ -24,6 +26,8 @@
 | Revisar a estrutura e arquitetura do projeto              |         |
 
 </div>
+
+<br>
 
 ## Instalação
 
