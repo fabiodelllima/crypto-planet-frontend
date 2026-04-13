@@ -3,27 +3,28 @@
 
 version: 2
 updates:
-  # Frontend (React + Vite + TypeScript) - npm
+  # Frontend (React + Vite + TypeScript)
   - package-ecosystem: "npm"
     directory: "/crypto-planet"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
     commit-message:
-      prefix: "chore(deps)"
-      prefix-development: "chore(deps-dev)"
+      prefix: "chore"
       include: "scope"
+    labels:
+      - "dependencies"
     groups:
       frontend-minor-patch:
-        update-types:
-          - "minor"
-          - "patch"
+        update-types: ["minor", "patch"]
 
-  # GitHub Actions workflows
+  # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
     commit-message:
-      prefix: "chore(ci)"
+      prefix: "chore"
       include: "scope"
+    labels:
+      - "dependencies"
