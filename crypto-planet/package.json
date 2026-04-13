@@ -14,7 +14,7 @@
     "@tanstack/react-table": "^8.20.5",
     "lucide-react": "^0.469.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react-dom": "^19.2.5",
     "react-router-dom": "^7.13.1",
     "recharts": "^2.14.1"
   },
@@ -22,7 +22,7 @@
     "@eslint/js": "^9.15.0",
     "@types/babel__core": "^7.20.5",
     "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/react-dom": "^19.2.3",
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
