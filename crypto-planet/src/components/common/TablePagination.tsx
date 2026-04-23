@@ -38,8 +38,8 @@ const TablePagination = <T,>({
           <Button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage() || isNavigationDisabled}
-            styleType="pagination"
-            size="pagination"
+            buttonType="pagination"
+            buttonSize="pagination"
             className="flex items-center justify-center group"
           >
             <ChevronLeft
@@ -63,8 +63,8 @@ const TablePagination = <T,>({
                   <Button
                     key={page}
                     onClick={() => table.setPageIndex(page)}
-                    styleType="pagination"
-                    size="pagination"
+                    buttonType="pagination"
+                    buttonSize="pagination"
                     active={pageIndex === page}
                     disabled={pageIndex === page}
                   >
@@ -78,8 +78,8 @@ const TablePagination = <T,>({
           <Button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage() || isNavigationDisabled}
-            styleType="pagination"
-            size="pagination"
+            buttonType="pagination"
+            buttonSize="pagination"
             className="flex items-center justify-center group"
           >
             <ChevronRight

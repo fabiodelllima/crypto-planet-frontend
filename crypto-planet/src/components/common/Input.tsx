@@ -1,20 +1,23 @@
 type BaseInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">;
 
+type InputType = "primary" | "secondary";
+type InputSize = "small" | "medium" | "large";
+
 interface InputProps extends BaseInputProps {
-  inputType: "primary" | "secondary";
-  inputSize: "small" | "medium" | "large";
+  inputType?: InputType;
+  inputSize?: InputSize;
   label?: string;
   icon?: string;
 }
 
-const STYLE_VARIANTS: Record<InputProps["inputType"], string> = {
+const STYLE_VARIANTS: Record<InputType, string> = {
   primary:
     "bg-inputBackground border-borderGray text-white hover:border-bluePrimary",
   secondary:
     "bg-black border-greySecondary text-white hover:border-greyPrimary",
 } as const;
 
-const SIZE_VARIANTS: Record<InputProps["inputSize"], string> = {
+const SIZE_VARIANTS: Record<InputSize, string> = {
   large: "px-10 py-5",
   medium: "px-6 py-3",
   small: "px-4 py-2",

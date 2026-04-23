@@ -64,20 +64,20 @@ const Header = () => {
 
             {user ? (
               <>
-                <Button styleType="primary">Wallet</Button>
-                <Button styleType="secondary">Wallet</Button>
+                <Button buttonType="primary">Wallet</Button>
+                <Button buttonType="secondary">Wallet</Button>
                 <UserMenu user={user} />
               </>
             ) : (
               <>
                 <Button
-                  styleType="secondary"
+                  buttonType="secondary"
                   onClick={() => navigate("/login")}
                 >
                   Sign in
                 </Button>
                 <Button
-                  styleType="primary"
+                  buttonType="primary"
                   onClick={() => navigate("/register")}
                 >
                   Register
@@ -87,7 +87,7 @@ const Header = () => {
           </div>
 
           <Button
-            styleType="tertiary"
+            buttonType="tertiary"
             onClick={toggleMenu}
             className="lg:hidden mx-2 my-4 px-6 py-2 border border-transparent bg-greySecondary hover:border-greyPrimary rounded-lg"
           >
@@ -131,17 +131,17 @@ const Header = () => {
 
               {user ? (
                 <>
-                  <Button styleType="primary" className="w-full">
+                  <Button buttonType="primary" className="w-full">
                     Wallet
                   </Button>
                   <Button
-                    styleType="secondary"
+                    buttonType="secondary"
                     className="w-full border !border-bluePrimary hover:bg-bluePrimary hover:text-white"
                   >
                     Wallet
                   </Button>
                   <Button
-                    styleType="logout"
+                    buttonType="logout"
                     onClick={() => {
                       logout();
                       setIsMenuOpen(false);
@@ -154,7 +154,7 @@ const Header = () => {
               ) : (
                 <>
                   <Button
-                    styleType="secondary"
+                    buttonType="secondary"
                     className="w-full"
                     onClick={() => {
                       navigate("/login");
@@ -164,7 +164,7 @@ const Header = () => {
                     Sign in
                   </Button>
                   <Button
-                    styleType="primary"
+                    buttonType="primary"
                     className="w-full"
                     onClick={() => {
                       navigate("/register");

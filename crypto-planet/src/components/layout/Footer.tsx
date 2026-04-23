@@ -70,19 +70,19 @@ const Footer = () => {
             </p>
 
             <div className="flex gap-5 pt-2 items-center">
-              <Button styleType="footerIcon" size="footerIcon">
+              <Button buttonType="footerIcon" buttonSize="footerIcon">
                 <img src={iconFacebook} className="w-5" />
               </Button>
-              <Button styleType="footerIcon" size="footerIcon">
+              <Button buttonType="footerIcon" buttonSize="footerIcon">
                 <img src={iconInstagram} className="w-5" />
               </Button>
-              <Button styleType="footerIcon" size="footerIcon">
+              <Button buttonType="footerIcon" buttonSize="footerIcon">
                 <img src={iconYoutube} className="w-5" />
               </Button>
-              <Button styleType="footerIcon" size="footerIcon">
+              <Button buttonType="footerIcon" buttonSize="footerIcon">
                 <img src={iconTwitter} className="w-5" />
               </Button>
-              <Button styleType="footerIcon" size="footerIcon">
+              <Button buttonType="footerIcon" buttonSize="footerIcon">
                 <img src={iconLinkedin} className="w-7" />
               </Button>
             </div>
@@ -126,24 +126,24 @@ const Footer = () => {
           </section>
 
           <section className="flex flex-wrap justify-center lg:justify-end gap-3">
-            <Button styleType="badge" size="badge">
+            <Button buttonType="badge" buttonSize="badge">
               <img
                 src={badgeMicrosoft}
                 className="w-[140px]"
                 alt="Microsoft Store"
               />
             </Button>
-            <Button styleType="badge" size="badge">
+            <Button buttonType="badge" buttonSize="badge">
               <img
                 src={badgeGooglePlay}
                 className="w-[140px]"
                 alt="Google Play"
               />
             </Button>
-            <Button styleType="badge" size="badge">
+            <Button buttonType="badge" buttonSize="badge">
               <img src={badgeAppStore} className="w-[140px]" alt="App Store" />
             </Button>
-            <Button styleType="badge" size="badge">
+            <Button buttonType="badge" buttonSize="badge">
               <img src={badgeMacOs} className="w-[140px]" alt="MacOS" />
             </Button>
           </section>

@@ -27,7 +27,7 @@ const PortfolioTableFilters = ({
       <h2 className="text-2xl text-white">Transaction History</h2>
       <div className="hidden md:flex gap-2 border-b border-borderGray">
         <Button
-          styleType="secondary"
+          buttonType="secondary"
           className={`p-2 rounded-none border-0 ${
             activeTab === "history"
               ? "border-b-2 border-bluePrimary text-white"
@@ -38,7 +38,7 @@ const PortfolioTableFilters = ({
           Wallet History
         </Button>
         <Button
-          styleType="secondary"
+          buttonType="secondary"
           className={`p-2 rounded-none border-0 ${
             activeTab === "coin"
               ? "border-b-2 border-bluePrimary text-white"
@@ -82,7 +82,7 @@ const PortfolioTableFilters = ({
             className="w-full md:w-auto appearance-none bg-[#111] text-gray-400 border border-gray-700 rounded-lg px-4 py-2 pr-8 focus:outline-none hover:border-gray-600"
           />
           <Button
-            styleType="secondary"
+            buttonType="secondary"
             onClick={() => {
               setSelectedMonth("all");
               onMonthChange("all");
