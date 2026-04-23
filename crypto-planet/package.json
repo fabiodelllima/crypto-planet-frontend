@@ -13,7 +13,7 @@
     "@tailwindcss/forms": "^0.5.11",
     "@tanstack/react-table": "^8.21.3",
     "lucide-react": "^1.8.0",
-    "react": "^18.3.1",
+    "react": "^19.2.5",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.14.1",
     "recharts": "^2.14.1"
@@ -21,7 +21,7 @@
   "devDependencies": {
     "@eslint/js": "^9.15.0",
     "@types/babel__core": "^7.20.5",
-    "@types/react": "^18.3.12",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^18.3.1",
     "@types/react-router-dom": "^5.3.3",
     "@vitejs/plugin-react": "^4.3.4",
