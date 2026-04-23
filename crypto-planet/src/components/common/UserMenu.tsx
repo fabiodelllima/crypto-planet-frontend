@@ -53,7 +53,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
             <span className="text-white">{user.name}</span>
           </div>
           <div className="py-1">
-            <Button styleType="logout" onClick={handleLogout}>
+            <Button buttonType="logout" onClick={handleLogout}>
               Logout
             </Button>
           </div>

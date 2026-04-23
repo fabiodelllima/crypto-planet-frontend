@@ -1,24 +1,28 @@
 import { ButtonHTMLAttributes, useRef } from "react";
 
+type ButtonType =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "badge"
+  | "footerIcon"
+  | "floating"
+  | "pagination"
+  | "logout";
+
+type ButtonSize =
+  | "footerIcon"
+  | "badge"
+  | "xSmall"
+  | "small"
+  | "medium"
+  | "large"
+  | "floating"
+  | "pagination";
+
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  buttonType:
-    | "primary"
-    | "secondary"
-    | "tertiary"
-    | "badge"
-    | "footerIcon"
-    | "floating"
-    | "pagination"
-    | "logout";
-  buttonSize:
-    | "footerIcon"
-    | "badge"
-    | "xSmall"
-    | "small"
-    | "medium"
-    | "large"
-    | "floating"
-    | "pagination";
+  buttonType?: ButtonType;
+  buttonSize?: ButtonSize;
   iconSide?: "left" | "right";
   disabled?: boolean;
   loading?: boolean;
@@ -33,7 +37,7 @@ interface StyleVariant {
   disabled: string | StyleFunction;
 }
 
-const STYLE_VARIANTS: Record<ButtonProps["buttonType"], StyleVariant> = {
+const STYLE_VARIANTS: Record<ButtonType, StyleVariant> = {
   primary: {
     default: "bg-bluePrimary text-white hover:bg-opacity-80",
     disabled: "bg-bluePrimary text-white opacity-50 cursor-not-allowed",
@@ -82,7 +86,7 @@ const STYLE_VARIANTS: Record<ButtonProps["buttonType"], StyleVariant> = {
   },
 } as const;
 
-const SIZE_VARIANTS: Record<ButtonProps["buttonSize"], string> = {
+const SIZE_VARIANTS: Record<ButtonSize, string> = {
   large: "px-10 py-5 rounded-lg",
   medium: "px-10 py-5 rounded-lg",
   small: "px-6 py-3 rounded-lg",

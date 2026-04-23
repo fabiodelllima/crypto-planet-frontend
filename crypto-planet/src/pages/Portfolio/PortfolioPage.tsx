@@ -66,10 +66,10 @@ const PortfolioPage = () => {
                   </p>
                 </div>
                 <div className="flex flex-row gap-2 w-full md:w-auto">
-                  <Button styleType="tertiary" className="w-[50%] md:w-auto">
+                  <Button buttonType="tertiary" className="w-[50%] md:w-auto">
                     Edit
                   </Button>
-                  <Button styleType="tertiary" className="w-[50%] md:w-auto">
+                  <Button buttonType="tertiary" className="w-[50%] md:w-auto">
                     Add New Wallet
                   </Button>
                 </div>
@@ -133,8 +133,8 @@ const PortfolioPage = () => {
 
       <Button
         onClick={() => setIsPaymentModalOpen(true)}
-        styleType="floating"
-        size="floating"
+        buttonType="floating"
+        buttonSize="floating"
       >
         <span className="text-2xl">+</span>
       </Button>

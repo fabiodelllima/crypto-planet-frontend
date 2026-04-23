@@ -71,7 +71,7 @@ const LoginPage = () => {
         />
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <Button
-          styleType="primary"
+          buttonType="primary"
           type="submit"
           disabled={isLoading}
           className="w-full"

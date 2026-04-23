@@ -47,7 +47,7 @@ const PaymentForm = ({ onSubmit }: PaymentFormProps) => {
           <Input label="Valid" placeholder="MM/YY" required />
           <Input label="CVV" placeholder="123" required />
         </div>
-        <Button styleType="primary" type="submit" className="w-full">
+        <Button buttonType="primary" type="submit" className="w-full">
           Add Money
         </Button>
       </form>

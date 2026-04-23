@@ -10,21 +10,24 @@ type BaseSelectProps = Omit<
   "size"
 >;
 
+type SelectType = "primary" | "secondary";
+type SelectSize = "small" | "medium" | "large";
+
 interface SelectProps extends BaseSelectProps {
-  selectType: "primary" | "secondary";
-  selectSize: "small" | "medium" | "large";
+  selectType?: SelectType;
+  selectSize?: SelectSize;
   label?: string;
   options: Option[];
 }
 
-const STYLE_VARIANTS: Record<SelectProps["selectType"], string> = {
+const STYLE_VARIANTS: Record<SelectType, string> = {
   primary:
     "bg-inputBackground border-borderGray text-white hover:border-bluePrimary appearance-none cursor-pointer",
   secondary:
     "bg-black border-greySecondary text-white hover:border-greyPrimary appearance-none cursor-pointer",
 } as const;
 
-const SIZE_VARIANTS: Record<SelectProps["selectSize"], string> = {
+const SIZE_VARIANTS: Record<SelectSize, string> = {
   large: "px-10 py-5",
   medium: "px-6 py-3",
   small: "px-4 py-2",

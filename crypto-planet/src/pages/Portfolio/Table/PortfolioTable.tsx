@@ -88,7 +88,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
         <div className="flex flex-wrap sm:flex-nowrap justify-between items-center border-b border-gray-800">
           <div className="flex gap-6">
             <Button
-              styleType="secondary"
+              buttonType="secondary"
               onClick={() => setActiveTab("history")}
               className={`py-2 relative bg-transparent border-none shadow-none ${
                 activeTab === "history" ? "text-blue-500" : "text-gray-400"
@@ -100,7 +100,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
               )}
             </Button>
             <Button
-              styleType="secondary"
+              buttonType="secondary"
               onClick={() => setActiveTab("coin")}
               className={`py-2 relative bg-transparent border-none shadow-none ${
                 activeTab === "coin" ? "text-blue-500" : "text-gray-400"
@@ -123,7 +123,7 @@ const PortfolioTable = ({ data }: PortfolioTableProps) => {
                 ▼
               </span>
             </div>
-            <Button styleType="tertiary" onClick={handleClearFilters}>
+            <Button buttonType="tertiary" onClick={handleClearFilters}>
               × Clear Filter
             </Button>
           </div>
