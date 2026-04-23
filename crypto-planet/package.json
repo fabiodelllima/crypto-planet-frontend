@@ -12,7 +12,7 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.5.11",
     "@tanstack/react-table": "^8.21.3",
-    "lucide-react": "^0.469.0",
+    "lucide-react": "^1.8.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.14.1",
