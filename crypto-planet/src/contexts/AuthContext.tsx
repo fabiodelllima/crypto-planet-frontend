@@ -12,16 +12,12 @@ import {
 } from "../utils/storage/auth.storage.utils";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<IUser | null>(null);
+  // Lazy initializer reads localStorage exactly once before the first render,
+  // avoiding the cascading-render anti-pattern that an effect-based hydration
+  // would create. See: https://react.dev/reference/react/useState\#avoiding-recreating-the-initial-state
+  const [user, setUser] = useState<IUser | null>(() => getCurrentUser());
   const navigate = useNavigate();
   const users = getUsers();
-
-  useEffect(() => {
-    const savedUser = getCurrentUser();
-    if (savedUser) {
-      setUser(savedUser);
-    }
-  }, []);
 
   useEffect(() => {
     if (user && window.location.pathname === "/login") {
