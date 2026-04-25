@@ -25,13 +25,13 @@ const PortfolioTableFilters = ({
   return (
     <div className="flex flex-col gap-6 border border-red-500">
       <h2 className="text-2xl text-white">Transaction History</h2>
-      <div className="hidden md:flex gap-2 border-b border-borderGray">
+      <div className="hidden md:flex gap-2 border-b border-divider">
         <Button
           buttonType="secondary"
           className={`p-2 rounded-none border-0 ${
             activeTab === "history"
-              ? "border-b-2 border-bluePrimary text-white"
-              : "text-greyPrimary"
+              ? "border-b-2 border-blue-primary text-white"
+              : "text-grey-primary"
           }`}
           onClick={() => setActiveTab("history")}
         >
@@ -41,8 +41,8 @@ const PortfolioTableFilters = ({
           buttonType="secondary"
           className={`p-2 rounded-none border-0 ${
             activeTab === "coin"
-              ? "border-b-2 border-bluePrimary text-white"
-              : "text-greyPrimary"
+              ? "border-b-2 border-blue-primary text-white"
+              : "text-grey-primary"
           }`}
           onClick={() => setActiveTab("coin")}
         >
@@ -62,14 +62,14 @@ const PortfolioTableFilters = ({
         <input
           type="text"
           placeholder="Search by date"
-          className="w-full p-3 bg-[#111] border border-gray-700 text-gray-400 rounded-lg placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-bluePrimary"
+          className="w-full p-3 bg-[#111] border border-gray-700 text-gray-400 rounded-lg placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-primary"
         />
       </div>
       <div className="hidden md:block w-64">
         <input
           type="text"
           placeholder="Search by date"
-          className="w-full p-3 bg-[#111] border border-gray-700 text-gray-400 rounded-lg placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-bluePrimary"
+          className="w-full p-3 bg-[#111] border border-gray-700 text-gray-400 rounded-lg placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-primary"
         />
       </div>
 
@@ -94,7 +94,7 @@ const PortfolioTableFilters = ({
         </div>
       ) : (
         <div className="flex justify-center items-center w-full py-8">
-          <p className="text-greyPrimary text-center">
+          <p className="text-grey-primary text-center">
             Coin Wallet feature is under development.
           </p>
         </div>

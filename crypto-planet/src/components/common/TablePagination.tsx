@@ -31,9 +31,9 @@ const TablePagination = <T,>({
   const isNavigationDisabled = totalPages <= 1;
 
   return (
-    <div className="border-t border-greySecondary">
+    <div className="border-t border-grey-secondary">
       <div className="flex items-center justify-between pt-6">
-        <div className="text-greyPrimary">{totalItems} assets</div>
+        <div className="text-grey-primary">{totalItems} assets</div>
         <div className="flex gap-2 items-center">
           <Button
             onClick={() => table.previousPage()}
@@ -43,10 +43,10 @@ const TablePagination = <T,>({
             className="flex items-center justify-center group"
           >
             <ChevronLeft
-              className={`text-greyPrimary transition-colors ${
+              className={`text-grey-primary transition-colors ${
                 !table.getCanPreviousPage() || isNavigationDisabled
-                  ? "text-greySecondary"
-                  : "group-hover:text-bluePrimary"
+                  ? "text-grey-secondary"
+                  : "group-hover:text-blue-primary"
               }`}
               size={20}
             />
@@ -56,7 +56,7 @@ const TablePagination = <T,>({
             <div className="flex items-center gap-1 mx-2">
               {visiblePages.map((page, index) =>
                 page === "..." ? (
-                  <span key={`dots-${index}`} className="text-greyPrimary px-2">
+                  <span key={`dots-${index}`} className="text-grey-primary px-2">
                     ...
                   </span>
                 ) : (
@@ -83,10 +83,10 @@ const TablePagination = <T,>({
             className="flex items-center justify-center group"
           >
             <ChevronRight
-              className={`text-greyPrimary transition-colors ${
+              className={`text-grey-primary transition-colors ${
                 !table.getCanNextPage() || isNavigationDisabled
-                  ? "text-greySecondary"
-                  : "group-hover:text-bluePrimary"
+                  ? "text-grey-secondary"
+                  : "group-hover:text-blue-primary"
               }`}
               size={20}
             />

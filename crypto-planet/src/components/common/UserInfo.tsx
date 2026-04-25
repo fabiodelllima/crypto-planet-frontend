@@ -9,7 +9,7 @@ const UserInfo = ({ user, className = "" }: UserInfoProps) => {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <div
-        className="w-10 h-10 border border-bluePrimary bg-transparent text-bluePrimary font-bold flex items-center justify-center rounded-full"
+        className="w-10 h-10 border border-blue-primary bg-transparent text-blue-primary font-bold flex items-center justify-center rounded-full"
         title={user?.name}
       >
         {user?.name.charAt(0).toUpperCase()}

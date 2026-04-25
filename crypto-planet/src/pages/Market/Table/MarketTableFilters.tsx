@@ -53,9 +53,9 @@ const MarketTableFilters = ({ onFiltersChange }: MarketTableFiltersProps) => {
               }}
               className={`px-4 py-2 rounded border ${
                 activeFilter === filter.value
-                  ? "border-bluePrimary text-bluePrimary"
+                  ? "border-blue-primary text-blue-primary"
                   : "border-gray-700 text-gray-400"
-              } bg-[#111] whitespace-nowrap hover:border-bluePrimary hover:text-bluePrimary transition-colors`}
+              } bg-[#111] whitespace-nowrap hover:border-blue-primary hover:text-blue-primary transition-colors`}
             >
               {filter.label}
             </button>
@@ -136,10 +136,10 @@ const MarketTableFilters = ({ onFiltersChange }: MarketTableFiltersProps) => {
             <option value={50}>Show 50</option>
           </select>
           <div className="hidden md:flex items-center gap-2">
-            <button className="p-2 text-greyPrimary">☰</button>
-            <button className="p-2 text-greyPrimary">⊞</button>
+            <button className="p-2 text-grey-primary">☰</button>
+            <button className="p-2 text-grey-primary">⊞</button>
           </div>
-          <button className="hidden md:flex items-center gap-2 text-greyPrimary">
+          <button className="hidden md:flex items-center gap-2 text-grey-primary">
             Customize
           </button>
           <button
@@ -153,7 +153,7 @@ const MarketTableFilters = ({ onFiltersChange }: MarketTableFiltersProps) => {
                 itemsPerPage: 20,
               });
             }}
-            className="flex items-center gap-2 text-greyPrimary"
+            className="flex items-center gap-2 text-grey-primary"
           >
             × Clear Filter
           </button>

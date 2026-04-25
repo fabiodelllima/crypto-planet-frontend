@@ -34,7 +34,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
         className="flex items-center gap-2 cursor-pointer pr-3"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-bluePrimary text-white">
+        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-primary text-white">
           {user.name.charAt(0).toUpperCase()}
         </div>
         <span className="hidden xl:block text-white">{user.name}</span>
@@ -48,8 +48,8 @@ const UserMenu = ({ user }: UserMenuProps) => {
       </div>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-background border border-greySecondary">
-          <div className="xl:hidden px-4 py-2 border-b border-greySecondary">
+        <div className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-background border border-grey-secondary">
+          <div className="xl:hidden px-4 py-2 border-b border-grey-secondary">
             <span className="text-white">{user.name}</span>
           </div>
           <div className="py-1">
