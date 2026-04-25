@@ -1,11 +1,9 @@
-# Dependabot configuration
-# Docs: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
 version: 2
 updates:
   # Frontend (React + Vite + TypeScript)
   - package-ecosystem: "npm"
     directory: "/crypto-planet"
+    target-branch: "develop"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 10
@@ -21,6 +19,7 @@ updates:
   # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
+    target-branch: "develop"
     schedule:
       interval: "weekly"
     commit-message:
