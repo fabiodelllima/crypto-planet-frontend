@@ -29,9 +29,9 @@ export const marketTableColumns = [
     cell: (info) => (
       <div className="min-w-[200px] px-4">
         <div className="flex items-center gap-2">
-          <div className="w-6 h-6 rounded-full bg-bluePrimary"></div>
+          <div className="w-6 h-6 rounded-full bg-blue-primary"></div>
           <span className="text-gray-300">{info.getValue() ?? "-"}</span>
-          <span className="text-bluePrimary">
+          <span className="text-blue-primary">
             {info.row.original.symbol ?? "-"}
           </span>
         </div>

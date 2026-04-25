@@ -29,11 +29,11 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-background text-white border-b-2 border-greySecondary">
+    <header className="bg-background text-white border-b-2 border-grey-secondary">
       <div className="max-w-7xl mx-auto px-4 lg:px-6">
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <div className="w-9 h-1 bg-bluePrimary rounded-full ml-2"></div>
+            <div className="w-9 h-1 bg-blue-primary rounded-full ml-2"></div>
             <h1 className="text-xl font-bold ml-4">Crypto Planet</h1>
           </div>
 
@@ -44,11 +44,11 @@ const Header = () => {
                 to={item.href}
                 className={`${
                   location.pathname === item.href
-                    ? "text-bluePrimary"
-                    : "text-white hover:text-bluePrimary"
+                    ? "text-blue-primary"
+                    : "text-white hover:text-blue-primary"
                 }`}
               >
-                <div className="py-10 border-b-2 border-transparent hover:border-bluePrimary">
+                <div className="py-10 border-b-2 border-transparent hover:border-blue-primary">
                   {item.name}
                 </div>
               </Link>
@@ -89,7 +89,7 @@ const Header = () => {
           <Button
             buttonType="tertiary"
             onClick={toggleMenu}
-            className="lg:hidden mx-2 my-4 px-6 py-2 border border-transparent bg-greySecondary hover:border-greyPrimary rounded-lg"
+            className="lg:hidden mx-2 my-4 px-6 py-2 border border-transparent bg-grey-secondary hover:border-grey-primary rounded-lg"
           >
             {isMenuOpen ? "✕" : "☰"}
           </Button>
@@ -99,7 +99,7 @@ const Header = () => {
           <div className="lg:hidden mt-6 mb-4">
             {user && (
               <div className="flex flex-col justify-center items-center gap-1 mb-6">
-                <div className="flex w-14 h-14 rounded-full bg-bluePrimary items-center justify-center text-white">
+                <div className="flex w-14 h-14 rounded-full bg-blue-primary items-center justify-center text-white">
                   <span className="text-2xl font-semibold">
                     {user.name.charAt(0).toUpperCase()}
                   </span>
@@ -116,7 +116,7 @@ const Header = () => {
                   <li key={item.name}>
                     <Link
                       to={item.href}
-                      className="text-white hover:text-bluePrimary"
+                      className="text-white hover:text-blue-primary"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
@@ -136,7 +136,7 @@ const Header = () => {
                   </Button>
                   <Button
                     buttonType="secondary"
-                    className="w-full border !border-bluePrimary hover:bg-bluePrimary hover:text-white"
+                    className="w-full border border-blue-primary! hover:bg-blue-primary hover:text-white"
                   >
                     Wallet
                   </Button>
@@ -146,7 +146,7 @@ const Header = () => {
                       logout();
                       setIsMenuOpen(false);
                     }}
-                    className="w-full pt-4 rounded-lg bg-greySecondary border border-transparent hover:opacity-80"
+                    className="w-full pt-4 rounded-lg bg-grey-secondary border border-transparent hover:opacity-80"
                   >
                     <span className="flex justify-center">Logout</span>
                   </Button>

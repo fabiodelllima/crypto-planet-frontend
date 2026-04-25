@@ -1,9 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-blue-primary: #2563EB;
+  --color-background: #121318;
+  --color-background-main: #131313;
+  --color-container: #1A1C20;
+  --color-grey-primary: #9CA3AF;
+  --color-grey-secondary: #2A2C30;
+  --color-input-background: #1A1C20;
+  --color-divider: #2A2C30;
+  --color-text-gray: #A1A1A6;
+  --color-positive: #00FF85;
+
+  --font-sans: "Inter", sans-serif;
+}
 
 @layer base {
   html {
-    @apply bg-[#131313] text-white font-sans;
+    @apply bg-background-main text-white font-sans;
   }
 }

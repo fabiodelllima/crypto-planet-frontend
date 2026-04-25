@@ -29,8 +29,8 @@ const Tooltip = ({ text, className = "" }: TooltipProps) => {
       <img src={TooltipIcon} alt="Help" />
 
       {isVisible && (
-        <div className="absolute z-50 p-8 right-full mr-3 top-1/4 -translate-y-1/2 w-[370px] bg-zinc-800 text-white rounded-lg shadow-lg text-sm border border-bluePrimary">
-          <div className="absolute w-2 h-2 bg-zinc-800 transform rotate-45 right-[-5px] top-1/2 -translate-y-1/2 border-r border-t border-bluePrimary" />
+        <div className="absolute z-50 p-8 right-full mr-3 top-1/4 -translate-y-1/2 w-[370px] bg-zinc-800 text-white rounded-lg shadow-lg text-sm border border-blue-primary">
+          <div className="absolute w-2 h-2 bg-zinc-800 transform rotate-45 right-[-5px] top-1/2 -translate-y-1/2 border-r border-t border-blue-primary" />
           <div className="relative z-10">{text}</div>
         </div>
       )}

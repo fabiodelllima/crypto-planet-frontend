@@ -12,9 +12,9 @@ interface InputProps extends BaseInputProps {
 
 const STYLE_VARIANTS: Record<InputType, string> = {
   primary:
-    "bg-inputBackground border-borderGray text-white hover:border-bluePrimary",
+    "bg-input-background border-divider text-white hover:border-blue-primary",
   secondary:
-    "bg-black border-greySecondary text-white hover:border-greyPrimary",
+    "bg-black border-grey-secondary text-white hover:border-grey-primary",
 } as const;
 
 const SIZE_VARIANTS: Record<InputSize, string> = {
@@ -36,11 +36,11 @@ const Input = ({
 
   return (
     <div className="flex flex-col gap-2">
-      {label && <label className="text-greyPrimary text-sm">{label}</label>}
+      {label && <label className="text-grey-primary text-sm">{label}</label>}
       <div className="relative">
         <input
           {...props}
-          className={`w-full rounded-lg transition-colors focus:outline-none focus:ring-1 focus:ring-bluePrimary ${type} ${size} ${className}`}
+          className={`w-full rounded-lg transition-colors focus:outline-none focus:ring-1 focus:ring-blue-primary ${type} ${size} ${className}`}
         />
         {icon && (
           <img
