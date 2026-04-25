@@ -1,88 +1,80 @@
 # Crypto Planet
-> Projeto em desenvolvimento
 
-> https://cryptoplanet-v2.vercel.app/
+> SPA para monitoramento de criptomoedas e gestão simulada de portfólio. 
 
-- InstruÃ§Ãµes para logar na plataforma em [AutenticaÃ§Ã£o](#autenticaÃ§Ã£o)
+- **Demo:** [`kryptoplanet.vercel.app`](https://kryptoplanet.vercel.app)
+- **Credenciais:** `admin@email.com` / `admin`
 
-<div align="center">
+---
 
-<br>
+## Estado atual
 
-### PendÃªncias
-| Funcionalidades               | Status  | Interface                           | Status  |
-|-------------------------------|---------|-------------------------------------|---------|
-| ~PaginaÃ§Ã£o~                   | âœ”       | ~Ãcones no footer~                  | âœ”       |
-| ~AutenticaÃ§Ã£o~                | âœ”       | BotÃµes no header                    |         |
-| Gerar grÃ¡ficos corretos       |         | ~Refinamento do componente Select~  | âœ”       |
-| ~Calcular total~              | âœ”       | Refinamento de detalhes nas tabelas |         |
-| ValidaÃ§Ã£o com Zod no Login    |         | CorreÃ§Ã£o no logo                    |         |
-| ValidaÃ§Ã£o com Zod em Registro |         | ~PÃ¡gina de registro~                | âœ”       |
-| ~Logout~                      | âœ”       | ~Dados do usuÃ¡rio no menu mobile~   | âœ”       |
+A persistência ocorre em `localStorage`, com a camada `auth.storage.utils` isolando o acesso. Trata-se de decisão de fase, não permanente: enquanto o frontend é estabilizado, a ausência de backend permite tratar com profundidade temas que costumam ficar superficiais em projetos _full-stack_ — gerenciamento de estado em React, padrões de derivação versus espelhamento, separação entre contexto de autenticação e estado de página, e testes que travam contrato comportamental sem acoplar implementação.
 
-| RevisÃµes                                                  | Status  | 
-|-----------------------------------------------------------|---------|
-| Revisar o uso de arrow functions e function declarations  |         |
-| Revisar a estrutura e arquitetura do projeto              |         |
+O ciclo recente de manutenção endereçou as quatro violações do `eslint-plugin-react-hooks` 7.x (PRs #54, #55 e #56), todas protegidas por suíte de regressão introduzida em #53. Nenhum teste precisou ser alterado durante as três refatorações consecutivas.
 
-</div>
+## Arquitetura
 
-<br>
+Topologia ainda em definição. Backend pode usar FastAPI ou Django; banco e infraestrutura serão decididos ao iniciar a fase de implementação. O escopo inicial cobre autenticação real (substituindo `localStorage`), persistência de portfólio em banco relacional, e proxy com cache para APIs públicas de mercado de criptomoedas.
 
-## InstalaÃ§Ã£o
+```
+                                        &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+                                        &#9474;  APIs externas      &#9474;
+                                        &#9474;  (CoinGecko, etc.)  &#9474;
+                                        &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+                                                   &#9474; HTTPS
+                                                   &#9474;
+&#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;    HTTPS    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9524;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+&#9474;           &#9474; &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9658; &#9474;   Vercel    &#9474;    &#9474;             &#9474;    &#9474;              &#9474;
+&#9474;  Usuário  &#9474;             &#9474;   (CDN +    &#9474;    &#9474;  Backend    &#9474; &#9668;&#9472;&#9472;&#9508;  Auth (JWT)  &#9474;
+&#9474;           &#9474; &#9668;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; &#9474;  SPA React) &#9474; &#9668;&#9472;&#9472;&#9508;  Python     &#9474;    &#9474;              &#9474;
+&#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;             &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;    &#9474;  (FastAPI)  &#9474;    &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+                                             &#9474;             &#9474;
+                                             &#9492;&#9472;&#9472;&#9516;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9516;&#9472;&#9472;&#9496;
+                                                &#9474;       &#9474;
+                                        &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;       &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+                                        &#9660;                       &#9660;
+                                &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;    &#9484;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9488;
+                                &#9474;   PostgreSQL    &#9474;    &#9474;   Redis (cache)   &#9474;
+                                &#9474;  (users, txns)  &#9474;    &#9474;  (market quotes)  &#9474;
+                                &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;    &#9492;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9496;
+```
 
-1. Clone este repositÃ³rio:
-   
-   **Via SSH**
-     ```bash
-     git clone git@github.com:yourusername/update-all-script.git
-     ```
-   **Via HTTPS**
-     ```bash
-     git clone https://github.com/yourusername/update-all-script.git
-     ```
+---
 
-3. Entre no diretÃ³rio:
-   ```bash
-   cd crypto-planet-frontend
-   cd crypto-planet
-   ```
+## Stack
 
-4. Instale as dependÃªncias:
-   ```bash
-   # Utilizando NPM:
-   npm install
+React 19, React Router 7, TypeScript 5.6 em modo `strict`, Vite 6, Tailwind CSS 3.4, TanStack Table 8, Recharts 2.15, Vitest com Testing Library e jsdom, ESLint 9, Vercel.
 
-   # Utilizando Yarn:
-   yarn install
-   ```
+---
 
-5. Inicie o servidor de desenvolvimento:
-   ```bash
-   # Utilizando NPM:
-   npm run dev
+## Fluxo de Trabalho
 
-   # Utilizando Yarn:
-   yarn dev
-   ```
+O projeto adota Gitflow. As branches `main` e `develop` são de longa duração; as `feature/*` partem de `develop` e nela são integradas via PR; as `release/*` e `hotfix/*` são reservadas para os fluxos canônicos. Os merges utilizam commit dedicado (`--no-ff`) para preservar o contexto da feature branch.
 
-6. Build para produÃ§Ã£o:
-   ```bash
-   # Utilizando NPM:
-   npm run build
+> Os commits seguem [Conventional Commits](https://www.conventionalcommits.org/).
 
-   # Utilizando Yarn:
-   yarn build
-   ```
+---
 
-## AutenticaÃ§Ã£o
-A plataforma oferece duas maneiras de acesso:
+## Setup
 
-1. **Conta Administrador**:
-   - **Email:** `admin@email.com`
-   - **Senha:** `admin`
+```bash
+git clone git@github.com:fabiodelllima/crypto-planet-frontend.git
+cd crypto-planet-frontend/crypto-planet
+npm install && npm run dev
+```
 
-2. **Conta Pessoal**:
-   - Criada diretamente na pÃ¡gina de registro.
+Requer Node 22.x (ver `.nvmrc`).
 
-<br>
+---
+
+## Roadmap
+
+1. **Tailwind CSS 4.x.** Migração manual: atualização do PostCSS, troca dos imports de _core_ e revisão de `@apply`.
+2. **CI no GitHub Actions.** Executar `test:run` e `build` em cada PR.
+3. **Backend Python.** Implementação do escopo descrito acima.
+4. **Refatoração do `AuthContext`.** Expor `refreshUser` para eliminar o slot otimista do `PortfolioPage`.
+5. **Validação de schema.** Zod no frontend, alinhado com Pydantic do backend.
+6. **Cobertura de testes dos componentes-base.** `Button`, `Input` e `Select`.
+7. **`npm audit`.** Quatro vulnerabilidades pendentes (duas _low_, duas _moderate_).
+8. **Code-splitting.** _Bundle_ principal ultrapassa 500 kB; avaliar `manualChunks`.
