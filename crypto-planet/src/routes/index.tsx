@@ -12,24 +12,27 @@ const LoginPage = lazy(() => import("../pages/Login/LoginPage"));
 const RegisterPage = lazy(() => import("../pages/Register/RegisterPage"));
 const NotFoundPage = lazy(() => import("../pages/Error/NotFoundPage"));
 
-interface PrivateRouteProps {
+interface GuardProps {
   children: React.ReactNode;
 }
 
-const PrivateRoute = ({ children }: PrivateRouteProps) => {
+// Both guards live at module scope so React keeps a stable component identity
+// across renders. Declaring them inside Router would create a new component
+// type on every render, forcing React to unmount and remount the subtree,
+// resetting any state the children hold.
+const PrivateRoute = ({ children }: GuardProps) => {
   const { isAuthenticated } = useAuth();
   if (!isAuthenticated) return <Navigate to={"/login"} replace />;
   return <>{children}</>;
 };
 
-export function Router() {
+const PublicRoute = ({ children }: GuardProps) => {
   const { isAuthenticated } = useAuth();
+  if (isAuthenticated) return <Navigate to={"/portfolio"} replace />;
+  return <>{children}</>;
+};
 
-  const PublicRoute = ({ children }: { children: React.ReactNode }) => {
-    if (isAuthenticated) return <Navigate to={"/portfolio"} replace />;
-    return <>{children}</>;
-  };
-
+export function Router() {
   return (
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
