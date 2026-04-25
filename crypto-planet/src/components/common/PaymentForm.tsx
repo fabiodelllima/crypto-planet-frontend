@@ -36,7 +36,7 @@ const PaymentForm = ({ onSubmit }: PaymentFormProps) => {
           required
         />
         <div>
-          <p className="mb-2 text-greyPrimary">Choose Payment method:</p>
+          <p className="mb-2 text-grey-primary">Choose Payment method:</p>
           <label className="flex items-center gap-2">
             <input type="radio" name="payment" value="card" defaultChecked />
             <span>Credit & Debit Card</span>

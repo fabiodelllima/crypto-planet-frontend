@@ -145,9 +145,9 @@ const RegisterPage = () => {
           {isLoading ? "Creating account..." : "Register"}
         </Button>
       </form>
-      <div className="flex flex-col mt-6 text-center text-greyPrimary">
+      <div className="flex flex-col mt-6 text-center text-grey-primary">
         <span>Already have an account?</span>
-        <Link to="/login" className="text-bluePrimary hover:underline">
+        <Link to="/login" className="text-blue-primary hover:underline">
           Login here
         </Link>
       </div>

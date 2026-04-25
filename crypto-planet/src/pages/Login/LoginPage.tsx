@@ -79,9 +79,9 @@ const LoginPage = () => {
           {isLoading ? "Logging in..." : "Login"}
         </Button>
       </form>
-      <div className="flex flex-col mt-6 text-center text-greyPrimary">
+      <div className="flex flex-col mt-6 text-center text-grey-primary">
         <span>Don't have an account?</span>
-        <Link to="/register" className="text-bluePrimary hover:underline">
+        <Link to="/register" className="text-blue-primary hover:underline">
           Register here
         </Link>
       </div>

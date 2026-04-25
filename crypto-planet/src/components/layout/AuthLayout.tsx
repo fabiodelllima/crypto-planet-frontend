@@ -5,7 +5,7 @@ const AuthLayout = () => {
     <div className="min-h-screen w-full bg-container">
       <div className="w-full bg-[#131313] pb-44 pt-16 md:pt-20">
         <div className="flex items-center justify-center gap-2">
-          <div className="w-9 h-1 bg-bluePrimary rounded-full"></div>
+          <div className="w-9 h-1 bg-blue-primary rounded-full"></div>
           <h1 className="text-2xl font-bold text-white">Crypto Planet</h1>
         </div>
       </div>

@@ -39,50 +39,50 @@ interface StyleVariant {
 
 const STYLE_VARIANTS: Record<ButtonType, StyleVariant> = {
   primary: {
-    default: "bg-bluePrimary text-white hover:bg-opacity-80",
-    disabled: "bg-bluePrimary text-white opacity-50 cursor-not-allowed",
+    default: "bg-blue-primary text-white hover:bg-opacity-80",
+    disabled: "bg-blue-primary text-white opacity-50 cursor-not-allowed",
   },
   secondary: {
     default:
-      "bg-transparent border border-transparent text-bluePrimary hover:border-bluePrimary",
+      "bg-transparent border border-transparent text-blue-primary hover:border-blue-primary",
     disabled:
-      "bg-transparent border border-transparent text-bluePrimary opacity-50 cursor-not-allowed",
+      "bg-transparent border border-transparent text-blue-primary opacity-50 cursor-not-allowed",
   },
   tertiary: {
-    default: "bg-transparent text-greyPrimary hover:text-white px-2",
+    default: "bg-transparent text-grey-primary hover:text-white px-2",
     disabled:
-      "bg-transparent text-greyPrimary px-2 opacity-50 cursor-not-allowed",
+      "bg-transparent text-grey-primary px-2 opacity-50 cursor-not-allowed",
   },
   badge: {
-    default: "bg-black border border-greySecondary hover:border-b-greyPrimary",
+    default: "bg-black border border-grey-secondary hover:border-b-grey-primary",
     disabled:
-      "bg-black border border-greySecondary opacity-50 cursor-not-allowed",
+      "bg-black border border-grey-secondary opacity-50 cursor-not-allowed",
   },
   footerIcon: {
-    default: "bg-transparent hover:bg-greySecondary",
+    default: "bg-transparent hover:bg-grey-secondary",
     disabled: "bg-transparent opacity-50 cursor-not-allowed",
   },
   floating: {
     default:
-      "fixed right-8 bottom-8 bg-bluePrimary rounded-full flex items-center justify-center text-white shadow-lg lg:hidden hover:bg-opacity-90",
+      "fixed right-8 bottom-8 bg-blue-primary rounded-full flex items-center justify-center text-white shadow-lg lg:hidden hover:bg-opacity-90",
     disabled:
-      "fixed right-8 bottom-8 bg-bluePrimary rounded-full flex items-center justify-center text-white shadow-lg lg:hidden opacity-50 cursor-not-allowed",
+      "fixed right-8 bottom-8 bg-blue-primary rounded-full flex items-center justify-center text-white shadow-lg lg:hidden opacity-50 cursor-not-allowed",
   },
   pagination: {
     default: (active: boolean) =>
       active
-        ? "bg-bluePrimary text-white border border-bluePrimary"
-        : "bg-transparent border border-transparent text-greyPrimary hover:text-bluePrimary hover:border-bluePrimary",
+        ? "bg-blue-primary text-white border border-blue-primary"
+        : "bg-transparent border border-transparent text-grey-primary hover:text-blue-primary hover:border-blue-primary",
     disabled: (active: boolean) =>
       active
-        ? "bg-bluePrimary text-white border border-bluePrimary"
-        : "bg-transparent border border-transparent text-greySecondary",
+        ? "bg-blue-primary text-white border border-blue-primary"
+        : "bg-transparent border border-transparent text-grey-secondary",
   },
   logout: {
     default:
-      "w-full text-left px-4 py-2 text-white hover:bg-greySecondary transition-colors",
+      "w-full text-left px-4 py-2 text-white hover:bg-grey-secondary transition-colors",
     disabled:
-      "w-full text-left px-4 py-2 text-greyPrimary opacity-50 cursor-not-allowed",
+      "w-full text-left px-4 py-2 text-grey-primary opacity-50 cursor-not-allowed",
   },
 } as const;
 

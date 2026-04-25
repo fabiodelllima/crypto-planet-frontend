@@ -22,9 +22,9 @@ interface SelectProps extends BaseSelectProps {
 
 const STYLE_VARIANTS: Record<SelectType, string> = {
   primary:
-    "bg-inputBackground border-borderGray text-white hover:border-bluePrimary appearance-none cursor-pointer",
+    "bg-input-background border-divider text-white hover:border-blue-primary appearance-none cursor-pointer",
   secondary:
-    "bg-black border-greySecondary text-white hover:border-greyPrimary appearance-none cursor-pointer",
+    "bg-black border-grey-secondary text-white hover:border-grey-primary appearance-none cursor-pointer",
 } as const;
 
 const SIZE_VARIANTS: Record<SelectSize, string> = {
@@ -46,24 +46,24 @@ const Select = ({
 
   return (
     <div className="flex flex-col gap-2">
-      {label && <label className="text-greyPrimary text-sm">{label}</label>}
+      {label && <label className="text-grey-primary text-sm">{label}</label>}
       <div className="relative">
         <select
-          className={`w-full rounded-lg transition-colors focus:outline-none focus:ring-1 focus:ring-bluePrimary ${type} ${size} ${className}`}
+          className={`w-full rounded-lg transition-colors focus:outline-none focus:ring-1 focus:ring-blue-primary ${type} ${size} ${className}`}
           {...props}
         >
           {options.map((option) => (
             <option
               key={option.value}
               value={option.value}
-              className="bg-inputBackground text-white"
+              className="bg-input-background text-white"
             >
               {option.label}
             </option>
           ))}
         </select>
         <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-          <ChevronDown className="text-greyPrimary" size={20} />
+          <ChevronDown className="text-grey-primary" size={20} />
         </div>
       </div>
     </div>
