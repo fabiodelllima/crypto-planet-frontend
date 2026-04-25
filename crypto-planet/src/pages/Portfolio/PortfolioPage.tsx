@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { IPortfolioTransaction } from "../../interfaces/portfolio.interfaces";
 import { randomId } from "../../utils/common/id.utils";
 import { useAuth } from "../../hooks/useAuth";
@@ -18,13 +18,29 @@ const PortfolioPage = () => {
   const { user } = useAuth();
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
   const [hideBalance, setHideBalance] = useState(false);
-  const [transactions, setTransactions] = useState<IPortfolioTransaction[]>(
-    user?.portfolio?.transactions || []
-  );
 
-  useEffect(() => {
-    setTransactions(user?.portfolio?.transactions || []);
-  }, [user?.portfolio?.transactions]);
+  // Optimistic-update slot: holds transactions added in this session that
+  // have not yet propagated back through the auth context. The slot is
+  // keyed on the source reference so that any external change (re-login,
+  // hydration) discards the local override automatically. This is the
+  // React-recommended pattern for adjusting state based on external
+  // changes during render, replacing the previous effect-based mirroring.
+  // See: https://react.dev/learn/you-might-not-need-an-effect#adjusting-some-state-when-a-prop-changes
+  const sourceTransactions = user?.portfolio?.transactions;
+  const [optimisticTransactions, setOptimisticTransactions] = useState<
+    IPortfolioTransaction[] | null
+  >(null);
+  const [trackedSource, setTrackedSource] = useState(sourceTransactions);
+
+  if (sourceTransactions !== trackedSource) {
+    setTrackedSource(sourceTransactions);
+    setOptimisticTransactions(null);
+  }
+
+  const transactions = useMemo(
+    () => optimisticTransactions ?? sourceTransactions ?? [],
+    [optimisticTransactions, sourceTransactions]
+  );
 
   const portfolioTotals = useMemo(() => {
     return calculatePortfolioTotals(transactions);
@@ -43,10 +59,11 @@ const PortfolioPage = () => {
       status: "Succesful",
     };
 
-    setTransactions((prev) => [newTransaction, ...prev]);
+    const next = [newTransaction, ...transactions];
+    setOptimisticTransactions(next);
 
     if (user?.email) {
-      updateUserTransactions(user.email, [newTransaction, ...transactions]);
+      updateUserTransactions(user.email, next);
     }
 
     setIsPaymentModalOpen(false);
