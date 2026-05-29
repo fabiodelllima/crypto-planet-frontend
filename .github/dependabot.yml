@@ -12,10 +12,14 @@ updates:
       include: "scope"
     labels:
       - "dependencies"
+    cooldown:
+      default-days: 7
+      semver-patch-days: 7
+      semver-minor-days: 14
+      semver-major-days: 30
     groups:
       frontend-minor-patch:
         update-types: ["minor", "patch"]
-
   # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -27,3 +31,8 @@ updates:
       include: "scope"
     labels:
       - "dependencies"
+    cooldown:
+      default-days: 7
+      semver-patch-days: 7
+      semver-minor-days: 14
+      semver-major-days: 30
