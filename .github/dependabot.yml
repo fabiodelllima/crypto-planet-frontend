@@ -2,7 +2,7 @@ version: 2
 updates:
   # Frontend (React + Vite + TypeScript)
   - package-ecosystem: "npm"
-    directory: "/crypto-planet/frontend"
+    directory: "/frontend"
     target-branch: "develop"
     schedule:
       interval: "weekly"
