@@ -20,6 +20,12 @@ updates:
     groups:
       frontend-minor-patch:
         update-types: ["minor", "patch"]
+    ignore:
+      # typescript-eslint 8.67.0 (latest) declares peer typescript >=4.8.4 <6.1.0,
+      # so typescript 7.x cannot be installed. No typescript-eslint release
+      # accepts it yet. Revisit when typescript-eslint ships support for 7.x.
+      - dependency-name: "typescript"
+        versions: [">=7.0.0"]
   # GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
